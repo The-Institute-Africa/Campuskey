@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="976e61a7-d16e-48f3-84d4-39a9be55b025" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/authentication/JwtService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/authentication/LoginResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/configuration/CustomUserDetailsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/configuration/JwtFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/configuration/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/AmenityController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/AuthenticationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/PropertyImageController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/RuleController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/StudentController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/UtilityController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/VideoController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/LandlordDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/LoginRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/LoginUserDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/PropertyAmenityDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/PropertyDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/PropertyImageDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/PropertyRuleDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/PropertyUtilityDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/PropertyVideoDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/RegisterUserDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/StudentDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/UserDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/PropertyImage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/PropertyRule.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/PropertyUtility.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/exceptions/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/repositories/PropertyAmenityRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/repositories/PropertyImageRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/repositories/PropertyRuleRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/repositories/PropertyUtilityRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/repositories/PropertyVideoRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/repositories/StudentRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/repositories/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/AuthenticationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/PropertyAmenityService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/PropertyImageService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/PropertyRuleService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/PropertyUtilityService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/PropertyVideoService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/StudentService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/specification/PropertySpecification.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/campuskey-backend.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/campuskey-backend.main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/src/main/java/com/campuskey/backend/CampuskeyBackendApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/src/main/java/com/campuskey/backend/controllers/landlordController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/src/main/java/com/campuskey/backend/controllers/propertyController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/src/main/java/com/campuskey/backend/entities/Amenity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/src/main/java/com/campuskey/backend/entities/Image.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/src/main/java/com/campuskey/backend/entities/Landlord.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/src/main/java/com/campuskey/backend/entities/Property.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/src/main/java/com/campuskey/backend/entities/Student.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/src/main/java/com/campuskey/backend/entities/Video.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/src/main/java/com/campuskey/backend/repositories/landlordRepositories.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/src/main/java/com/campuskey/backend/repositories/propertyRepositories.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/src/main/java/com/campuskey/backend/services/landlordService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/src/main/java/com/campuskey/backend/services/propertyService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/src/test/java/com/campuskey/backend/CampuskeyBackendApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/components/listing-detail/PropertyInfo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/components/listing-detail/PropertyInfo.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/components/listings/ListingCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/components/listings/ListingCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/components/student-guide/StepByStepGuide.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/components/student-guide/StepByStepGuide.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/pages/HelpCenterPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/pages/HelpCenterPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/pages/ListingDetailPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/pages/ListingDetailPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/pages/ListingsPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/pages/ListingsPage.jsx" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/backend/campuskey-backend">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="campuskey-backend" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Exception" />
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Terryktee&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/NeoAIT/Campuskey.git&quot;,
+    &quot;accountId&quot;: &quot;82b8040e-b838-4f85-ab04-ad99697abd84&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="32AByupdd0WUUEKdhwf3Iz2PuC9" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.campuskey-backend [:com.campuskey.backend.CampuskeyBackendApplication.main()].executor": "Debug",
+    "Gradle.campuskey-backend [test].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.campuskey.backend.configuration" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.CampuskeyBackendApplication">
+    <configuration name="CampuskeyBackendApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.campuskey.backend.CampuskeyBackendApplication" />
+      <module name="campuskey-backend.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.campuskey.backend.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="campuskey-backend [test]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/backend/campuskey-backend" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.campuskey-backend [test]" />
+        <item itemvalue="Application.CampuskeyBackendApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="976e61a7-d16e-48f3-84d4-39a9be55b025" name="Changes" comment="" />
+      <created>1756853756195</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1756853756195</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/authentication/LoginResponse.java</url>
+          <line>10</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

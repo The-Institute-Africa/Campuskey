@@ -66,12 +66,12 @@ const PropertyInfo = ({ listing }) => {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {listing.amenities.map((amenity) => {
-              const Icon = amenityIcons[amenity];
+            {listing.amenities.map((propertyAmenity) => {
+              const Icon = amenityIcons[propertyAmenity];
               return (
-                <div key={amenity} className="flex items-center gap-2">
+                <div key={propertyAmenity} className="flex items-center gap-2">
                   <Icon className="h-5 w-5 text-green-600" />
-                  <span>{amenityLabels[amenity]}</span>
+                  <span>{amenityLabels[propertyAmenity]}</span>
                 </div>
               );
             })}
@@ -101,10 +101,10 @@ const PropertyInfo = ({ listing }) => {
         </CardHeader>
         <CardContent>
           <div className="space-y-3">
-            {listing.rules.map((rule, index) => (
+            {listing.propertyRules.map((propertyRule, index) => (
               <div key={index} className="flex items-start gap-2">
                 <AlertCircle className="h-4 w-4 text-[hsl(var(--alert-main))] mt-0.5" />
-                <span>{rule}</span>
+                <span>{propertyRule}</span>
               </div>
             ))}
           </div>

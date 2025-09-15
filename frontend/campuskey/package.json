@@ -20,6 +20,7 @@
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-tabs": "^1.0.4",
     "@radix-ui/react-toast": "^1.1.5",
+    "axios": "^1.12.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "framer-motion": "^10.16.4",
@@ -31,7 +32,7 @@
     "react-router-dom": "^6.16.0",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7",
-    "vite": "^4.4.5"
+    "vite": "^7.1.4"
   },
   "devDependencies": {
     "@babel/generator": "^7.27.0",
@@ -45,7 +46,7 @@
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.0.3",
     "autoprefixer": "^10.4.16",
-    "eslint": "^9.34.0",
+    "eslint": "^8.57.1",
     "eslint-config-react-app": "^7.0.1",
     "glob": "^11.0.3",
     "postcss": "^8.4.31",

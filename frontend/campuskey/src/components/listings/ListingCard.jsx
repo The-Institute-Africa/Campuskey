@@ -71,12 +71,12 @@ const ListingCard = ({ listing }) => {
           </p>
           
           <div className="flex flex-wrap gap-2 mb-4">
-            {listing.amenities.slice(0, 3).map((amenity) => {
-              const Icon = amenityIcons[amenity];
+            {listing.amenities.slice(0, 3).map((propertyAmenity) => {
+              const Icon = amenityIcons[propertyAmenity];
               return (
-                <Badge key={amenity} variant="outline" className="text-xs flex items-center gap-1">
+                <Badge key={propertyAmenity} variant="outline" className="text-xs flex items-center gap-1">
                   {Icon && <Icon className="h-3 w-3" />}
-                  {amenityLabels[amenity]}
+                  {amenityLabels[propertyAmenity]}
                 </Badge>
               );
             })}

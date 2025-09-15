@@ -31,7 +31,7 @@ const stepsData = [
     title: "Contact & View",
     description: "Contact the landlord to arrange a viewing. Always view the property in person before making any commitments.",
     tips: [
-      "Ask questions about utilities, internet, and house rules",
+      "Ask questions about utilities, internet, and house propertyRules",
       "Take photos during your visit",
       "Bring a friend for safety and a second opinion"
     ]

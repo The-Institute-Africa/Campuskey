@@ -1,11 +1,30 @@
-import React from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
-import { useAuth } from '@/contexts/AuthContext';
-import { toast } from '@/components/ui/use-toast';
+import React, { useEffect } from "react";
+import { Navigate, useLocation } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
+import { toast } from "@/components/ui/use-toast";
 
 const ProtectedRoute = ({ children, role }) => {
   const { user, loading } = useAuth();
   const location = useLocation();
+
+  // show toast only when user or role is invalid
+  useEffect(() => {
+    if (!loading) {
+      if (!user) {
+        toast({
+          title: "Authentication Required",
+          description: "Please log in to view this page.",
+          variant: "destructive",
+        });
+      } else if (role && user.role !== role) {
+        toast({
+          title: "Access Denied",
+          description: "You do not have permission to view this page.",
+          variant: "destructive",
+        });
+      }
+    }
+  }, [loading, user, role]);
 
   if (loading) {
     return (
@@ -16,22 +35,12 @@ const ProtectedRoute = ({ children, role }) => {
   }
 
   if (!user) {
-    toast({
-      title: "Authentication Required",
-      description: "Please log in to view this page.",
-      variant: "destructive",
-    });
     return <Navigate to="/student/login" state={{ from: location }} replace />;
   }
 
   if (role && user.role !== role) {
-    toast({
-      title: "Access Denied",
-      description: "You do not have permission to view this page.",
-      variant: "destructive",
-    });
     // Redirect to a relevant dashboard or home page
-    const homePath = user.role === 'student' ? '/student/dashboard' : '/';
+    const homePath = user.role === "Student" ? "/student/dashboard" : "/";
     return <Navigate to={homePath} replace />;
   }
 
