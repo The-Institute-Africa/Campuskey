@@ -43,7 +43,7 @@ const Footer = () => {
                         <p className="font-semibold text-gray-800 dark:text-white">For Landlords</p>
                         <ul className="mt-4 space-y-2">
                             <li><a href="#" onClick={showToast} className={footerLinkClasses}>List a Property</a></li>
-                            <li><a href="#" onClick={showToast} className={footerLinkClasses}>Landlord Login</a></li>
+                            <li><a href="#" onClick={showToast} className={footerLinkClasses}>Login</a></li>
                             <li><a href="#" onClick={showToast} className={footerLinkClasses}>Agent Login</a></li>
                         </ul>
                     </div>

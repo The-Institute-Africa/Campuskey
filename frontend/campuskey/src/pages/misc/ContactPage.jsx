@@ -26,7 +26,7 @@ const ContactPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     if (!formData.name || !formData.email || !formData.message) {
       toast({
         title: "Please fill in all required fields",
@@ -59,7 +59,7 @@ const ContactPage = () => {
     {
       icon: Phone,
       title: "Phone",
-      details: ["+263 77 123 4567", "+263 71 987 6543"],
+      details: ["+263 77 459 2474", "+263 71 987 6543"],
       description: "Call us Monday to Friday, 8AM - 6PM"
     },
     {
@@ -71,7 +71,7 @@ const ContactPage = () => {
     {
       icon: MapPin,
       title: "Office",
-      details: ["123 University Avenue", "Harare, Zimbabwe"],
+      details: ["National University of Science and Technology", "Bulawayo, Zimbabwe"],
       description: "Visit us during business hours"
     },
     {
@@ -83,8 +83,8 @@ const ContactPage = () => {
   ];
 
   const handleWhatsAppContact = () => {
-    const phoneNumber = "263771234567"; // Remove + and spaces
-    const message = "Hi! I'm interested in Campus Key Zimbabwe services.";
+    const phoneNumber = "+263774592474"; // Remove + and spaces
+    const message = "Hi! I'm interested in CampusKey Zimbabwe services.";
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
@@ -200,7 +200,7 @@ const ContactPage = () => {
                           />
                         </div>
                       </div>
-                      
+
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
                           Subject
@@ -212,7 +212,7 @@ const ContactPage = () => {
                           placeholder="What is this about?"
                         />
                       </div>
-                      
+
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
                           Message *
@@ -227,9 +227,9 @@ const ContactPage = () => {
                           required
                         />
                       </div>
-                      
-                      <Button 
-                        type="submit" 
+
+                      <Button
+                        type="submit"
                         className="w-full bg-blue-800 hover:bg-blue-900"
                         size="lg"
                       >
@@ -264,7 +264,7 @@ const ContactPage = () => {
                         <p className="text-gray-600">Get instant help via WhatsApp</p>
                       </div>
                     </div>
-                    <Button 
+                    <Button
                       onClick={handleWhatsAppContact}
                       className="w-full bg-green-600 hover:bg-green-700"
                     >
@@ -283,13 +283,13 @@ const ContactPage = () => {
                         <p className="text-gray-600">Speak with our support team</p>
                       </div>
                     </div>
-                    <Button 
-                      onClick={() => window.location.href = 'tel:+263771234567'}
+                    <Button
+                      onClick={() => window.location.href = 'tel:+263774592474'}
                       variant="outline"
                       className="w-full border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
                     >
                       <Phone className="h-5 w-5 mr-2" />
-                      Call +263 77 123 4567
+                      Call +263 77 459 2474
                     </Button>
                   </CardContent>
                 </Card>
@@ -303,7 +303,7 @@ const ContactPage = () => {
                         <p className="text-gray-600">Send us an email directly</p>
                       </div>
                     </div>
-                    <Button 
+                    <Button
                       onClick={() => window.location.href = 'mailto:info@campuskeyzim.com'}
                       variant="outline"
                       className="w-full border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white"
@@ -355,7 +355,7 @@ const ContactPage = () => {
                   </CardHeader>
                   <CardContent>
                     <p className="text-gray-600">
-                      Sign up as a landlord, verify your phone number, and submit your property details. 
+                      Sign up as a landlord, verify your phone number, and submit your property details.
                       Our team will review and approve your listing within 24 hours.
                     </p>
                   </CardContent>
@@ -373,7 +373,7 @@ const ContactPage = () => {
                   </CardHeader>
                   <CardContent>
                     <p className="text-gray-600">
-                      Yes! Students can search, view listings, and contact landlords completely free. 
+                      Yes! Students can search, view listings, and contact landlords completely free.
                       We only charge landlords a small fee for listing their properties.
                     </p>
                   </CardContent>
@@ -391,7 +391,7 @@ const ContactPage = () => {
                   </CardHeader>
                   <CardContent>
                     <p className="text-gray-600">
-                      Our team physically inspects properties, verifies landlord credentials, 
+                      Our team physically inspects properties, verifies landlord credentials,
                       and ensures all listings meet our safety and quality standards.
                     </p>
                   </CardContent>
@@ -409,7 +409,7 @@ const ContactPage = () => {
                   </CardHeader>
                   <CardContent>
                     <p className="text-gray-600">
-                      Contact our support team immediately. We mediate between students and landlords 
+                      Contact our support team immediately. We mediate between students and landlords
                       to resolve issues quickly and fairly.
                     </p>
                   </CardContent>

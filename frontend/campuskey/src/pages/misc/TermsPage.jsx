@@ -138,15 +138,15 @@ const TermsPage = () => {
               </h2>
               <div className="prose prose-lg mx-auto text-gray-700">
                 <p>
-                  These Terms and Conditions ("Terms", "Terms and Conditions") govern your relationship 
+                  These Terms and Conditions ("Terms", "Terms and Conditions") govern your relationship
                   with Campus Key Zimbabwe website and services (the "Service") operated by Campus Key Zimbabwe ("us", "we", or "our").
                 </p>
                 <p>
-                  Your access to and use of the Service is conditioned on your acceptance of and compliance 
+                  Your access to and use of the Service is conditioned on your acceptance of and compliance
                   with these Terms. These Terms apply to all visitors, users and others who access or use the Service.
                 </p>
                 <p>
-                  By accessing or using our Service you agree to be bound by these Terms. If you disagree 
+                  By accessing or using our Service you agree to be bound by these Terms. If you disagree
                   with any part of these terms then you may not access the Service.
                 </p>
               </div>
@@ -213,9 +213,9 @@ const TermsPage = () => {
                       Termination
                     </h3>
                     <p className="text-gray-700 leading-relaxed">
-                      We may terminate or suspend your account and bar access to the Service immediately, 
-                      without prior notice or liability, under our sole discretion, for any reason whatsoever 
-                      and without limitation, including but not limited to a breach of the Terms. If you wish 
+                      We may terminate or suspend your account and bar access to the Service immediately,
+                      without prior notice or liability, under our sole discretion, for any reason whatsoever
+                      and without limitation, including but not limited to a breach of the Terms. If you wish
                       to terminate your account, you may simply discontinue using the Service.
                     </p>
                   </div>
@@ -225,8 +225,8 @@ const TermsPage = () => {
                       Governing Law
                     </h3>
                     <p className="text-gray-700 leading-relaxed">
-                      These Terms shall be interpreted and governed by the laws of Zimbabwe, without regard 
-                      to its conflict of law provisions. Our failure to enforce any right or provision of 
+                      These Terms shall be interpreted and governed by the laws of Zimbabwe, without regard
+                      to its conflict of law provisions. Our failure to enforce any right or provision of
                       these Terms will not be considered a waiver of those rights.
                     </p>
                   </div>
@@ -236,8 +236,8 @@ const TermsPage = () => {
                       Changes to Terms
                     </h3>
                     <p className="text-gray-700 leading-relaxed">
-                      We reserve the right, at our sole discretion, to modify or replace these Terms at any time. 
-                      If a revision is material, we will provide at least 30 days notice prior to any new terms 
+                      We reserve the right, at our sole discretion, to modify or replace these Terms at any time.
+                      If a revision is material, we will provide at least 30 days notice prior to any new terms
                       taking effect. What constitutes a material change will be determined at our sole discretion.
                     </p>
                   </div>
@@ -251,8 +251,8 @@ const TermsPage = () => {
                     </p>
                     <div className="mt-3 space-y-1 text-gray-700">
                       <p>Email: legal@campuskeyzim.com</p>
-                      <p>Phone: +263 77 123 4567</p>
-                      <p>Address: 123 University Avenue, Harare, Zimbabwe</p>
+                      <p>Phone: +263 77 459 2474</p>
+                      <p>Address: National University of Science and Technology, Bulawayo, Zimbabwe</p>
                     </div>
                   </div>
 
@@ -261,8 +261,8 @@ const TermsPage = () => {
                       Agreement Acknowledgment
                     </h3>
                     <p className="text-blue-700">
-                      By using Campus Key Zimbabwe, you acknowledge that you have read these Terms and Conditions, 
-                      understand them, and agree to be bound by them. If you do not agree to these Terms and Conditions, 
+                      By using Campus Key Zimbabwe, you acknowledge that you have read these Terms and Conditions,
+                      understand them, and agree to be bound by them. If you do not agree to these Terms and Conditions,
                       you are not authorized to use our Service.
                     </p>
                   </div>

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Set;
 
 @RestController
-@RequestMapping("api/v1/campuskey")
+@RequestMapping("/api/v1/campuskey/public/")
 public class UtilityController {
 
     private final PropertyUtilityService propertyUtilityService;

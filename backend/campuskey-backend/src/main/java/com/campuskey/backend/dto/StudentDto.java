@@ -1,28 +1,42 @@
 package com.campuskey.backend.dto;
 
-public class StudentDto {
+import java.math.BigInteger;
 
-    private Long id;
+public class StudentDto{
+
+    private Long Id;
+    private String StudentName ;
     private String StudentNumber;
-    private Boolean Status;
+    private BigInteger StudentContact;
+    private String address;
 
     public StudentDto() {
     }
 
-    public StudentDto(Long id, String studentNumber, Boolean status) {
-        this.id = id;
+    public StudentDto(Long Id , String StudentName, String studentNumber,
+                      BigInteger studentContact ,String address) {
+        this.Id=Id;
+        this.StudentName=StudentName;
         this.StudentNumber = studentNumber;
-        this.Status = status;
+        this.StudentContact=studentContact;
+        this.address=address;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long Id) {
+        this.Id  = Id;
     }
 
-    public Long getId() {
-        return id;
+    public Long getId(){
+        return Id;
     }
 
+    public void setName(String StudentName) {
+        this.StudentName = StudentName;
+    }
+
+    public String getStudentName(){
+        return StudentName;
+    }
     public void setStudentNumber(String studentNumber) {
         this.StudentNumber = studentNumber;
     }
@@ -31,11 +45,21 @@ public class StudentDto {
         return StudentNumber;
     }
 
-    public void setStatus(Boolean status) {
-        this.Status = status;
+    public BigInteger getStudentContact() {
+        return StudentContact;
     }
 
-    public Boolean getStatus() {
-        return Status;
+    public void setStudentContact(BigInteger StudentContact) {
+        this.StudentContact = StudentContact;
     }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address= address;
+    }
+
+
 }

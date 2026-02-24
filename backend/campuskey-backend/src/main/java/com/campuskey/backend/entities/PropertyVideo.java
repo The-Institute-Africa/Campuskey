@@ -17,12 +17,15 @@ public class PropertyVideo {
     public PropertyVideo(){}
 
     public PropertyVideo(String video_url , Property property){
-
+        this.video_url=video_url;
+        this.property=property;
     }
+
     public PropertyVideo(Long id, String video_url){
         this.id=id;
         this.video_url=video_url;
     }
+
     public void setId(Long id) {
         this.id = id;
     }

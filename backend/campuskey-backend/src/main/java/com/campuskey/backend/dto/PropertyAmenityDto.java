@@ -7,7 +7,7 @@ public class PropertyAmenityDto {
 
     private Long id;
     private String name;
-    private List<PropertyDto> properties = new ArrayList<>();
+    private PropertyDto propertyDto;
 
     public PropertyAmenityDto(){}
 
@@ -34,11 +34,11 @@ public class PropertyAmenityDto {
         return name;
     }
 
-    public void setProperty(List<PropertyDto> properties){
-        this.properties = properties;
+    public void setProperty(PropertyDto propertyDto){
+        this.propertyDto = propertyDto;
     }
 
-    public List<PropertyDto> getProperties(){
-        return properties;
+    public PropertyDto  getProperty(){
+        return propertyDto;
     }
 }

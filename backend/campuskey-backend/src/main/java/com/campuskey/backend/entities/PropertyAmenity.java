@@ -19,15 +19,16 @@ public class PropertyAmenity {
 
     private String name;
 
-    @ManyToMany(mappedBy = "amenities")
-    private  List<Property> properties = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "property_id")
+    private  Property property ;
 
     public PropertyAmenity() {}
 
-    public PropertyAmenity(Long id, String name, List<Property> properties){
+    public PropertyAmenity(Long id, String name, Property property){
         this.id=id;
         this.name=name;
-        this.properties = properties;
+        this.property = property;
     }
 
     public Long getId(){
@@ -44,11 +45,11 @@ public class PropertyAmenity {
         this.name=name;
     }
 
-    public void setProperty(List<Property> properties){
-        this.properties = properties;
+    public void setProperty(Property property){
+        this.property = property;
     }
-    public List<Property> getProperties(){
-        return properties;
+    public Property getProperty(){
+        return property;
     }
     @Override
     public String toString(){

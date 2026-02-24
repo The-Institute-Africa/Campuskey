@@ -18,13 +18,18 @@ public class PropertyImage {
     private Property property ;
 
     public PropertyImage(){}
+
+    public PropertyImage(String image_url, Property property) {
+        this.image_url = image_url;
+        this.property = property;
+    }
+
+
     public PropertyImage(Long id, String image_url){
         this.id=id;
         this.image_url=image_url;
     }
 
-    public PropertyImage(String image_url, Property property) {
-    }
 
     public void setId(Long id) {
 

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { 
-  Search, ChevronDown, ChevronUp, MessageCircle, Phone, Mail, 
+import {
+  Search, ChevronDown, ChevronUp, MessageCircle, Phone, Mail,
   HelpCircle, Users, Home, Shield, DollarSign, FileText, Key
 } from 'lucide-react';
 import Header from '@/components/Layout/Header';
@@ -79,7 +79,7 @@ const HelpCenterPage = () => {
     {
       category: "Payments & Pricing",
       question: "How much deposit do I need to pay?",
-      answer: "Deposits typically range from 1-2 months' rent, depending on the property and landlord. This information is clearly stated in each listing. Never pay deposits without a proper receipt and lease agreement."
+      answer: "The deposit amount depends on the property owner and usually serves to secure your accommodation. Always ensure you  read lease agreement before making any payment."
     },
     {
       category: "Payments & Pricing",
@@ -118,7 +118,7 @@ const HelpCenterPage = () => {
     }
   ];
 
-  const filteredFaqs = faqs.filter(faq => 
+  const filteredFaqs = faqs.filter(faq =>
     faq.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
     faq.answer.toLowerCase().includes(searchQuery.toLowerCase()) ||
     faq.category.toLowerCase().includes(searchQuery.toLowerCase())
@@ -260,7 +260,7 @@ const HelpCenterPage = () => {
                   transition={{ duration: 0.5, delay: index * 0.05 }}
                 >
                   <Card className="overflow-hidden">
-                    <CardHeader 
+                    <CardHeader
                       className="cursor-pointer hover:bg-gray-50 transition-colors"
                       onClick={() => toggleFaq(index)}
                     >
@@ -280,7 +280,7 @@ const HelpCenterPage = () => {
                         )}
                       </div>
                     </CardHeader>
-                    
+
                     {expandedFaq === index && (
                       <motion.div
                         initial={{ opacity: 0, height: 0 }}
@@ -351,10 +351,10 @@ const HelpCenterPage = () => {
                     <p className="text-gray-600 mb-4">
                       Get instant help via WhatsApp. Usually respond within minutes.
                     </p>
-                    <Button 
+                    <Button
                       className="w-full bg-green-600 hover:bg-green-700"
                       onClick={() => {
-                        const phoneNumber = "263771234567";
+                        const phoneNumber = "263774592474";
                         const message = "Hi! I need help with Campus Key Zimbabwe.";
                         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
                         window.open(whatsappUrl, '_blank');
@@ -383,13 +383,13 @@ const HelpCenterPage = () => {
                     <p className="text-gray-600 mb-4">
                       Call us directly for immediate assistance. Available 8AM - 6PM.
                     </p>
-                    <Button 
+                    <Button
                       variant="outline"
                       className="w-full border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
-                      onClick={() => window.location.href = 'tel:+263771234567'}
+                      onClick={() => window.location.href = 'tel:+263774592474'}
                     >
                       <Phone className="h-4 w-4 mr-2" />
-                      Call +263 77 123 4567
+                      Call +263 77 459 2474
                     </Button>
                   </CardContent>
                 </Card>
@@ -411,7 +411,7 @@ const HelpCenterPage = () => {
                     <p className="text-gray-600 mb-4">
                       Send us a detailed message. We respond within 24 hours.
                     </p>
-                    <Button 
+                    <Button
                       variant="outline"
                       className="w-full border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white"
                       onClick={() => window.location.href = '/contact'}
@@ -483,8 +483,8 @@ const HelpCenterPage = () => {
                       </div>
                       <h3 className="font-semibold mb-2">{link.title}</h3>
                       <p className="text-sm text-gray-600 mb-4">{link.description}</p>
-                      <Button 
-                        variant="outline" 
+                      <Button
+                        variant="outline"
                         size="sm"
                         onClick={() => window.location.href = link.link}
                       >

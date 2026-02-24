@@ -1,8 +1,10 @@
 package com.campuskey.backend.services;
 
 
+import com.campuskey.backend.dto.PropertyAmenityDto;
 import com.campuskey.backend.dto.PropertyDto;
 import com.campuskey.backend.dto.PropertyUtilityDto;
+import com.campuskey.backend.entities.PropertyAmenity;
 import com.campuskey.backend.entities.PropertyUtility;
 import com.campuskey.backend.repositories.PropertyUtilityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,11 +36,12 @@ public class PropertyUtilityService {
         dto.setId(propertyUtility.getId());
         dto.setName(propertyUtility.getName());
 
-        List<PropertyDto> PropertyDTOs = propertyUtility.getProperties().stream()
-                .map(PropertyDto::new)
-                .toList();
+        if (propertyUtility.getProperty() != null) {
+            dto.setProperty(new PropertyDto(propertyUtility.getProperty()));
+        }
 
-        dto.setProperty(PropertyDTOs);
         return dto;
     }
+
+
 }

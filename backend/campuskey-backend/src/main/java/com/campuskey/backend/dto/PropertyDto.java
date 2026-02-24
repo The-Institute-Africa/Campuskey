@@ -1,12 +1,12 @@
 package com.campuskey.backend.dto;
 
 import com.campuskey.backend.entities.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class PropertyDto {
@@ -19,17 +19,27 @@ public class PropertyDto {
     private String propertyType;
     private String slug;
     private String university ;
+
+
     private LandlordDto landlord;
+
     private List<Integer> studentsPerRoom = new ArrayList<>();
+
     private List<PropertyImageDto> images = new ArrayList<>();
+
+    @JsonIgnore
     private List<PropertyVideoDto> videos = new ArrayList<>();
-    private Set<PropertyAmenityDto> amenities = new HashSet<>();
-    private Set<PropertyUtilityDto> utilities = new HashSet<>();
+
+    private List<PropertyAmenityDto> amenities = new ArrayList<>();
+    private List<PropertyUtilityDto> utilities = new ArrayList<>();
     private List<PropertyRuleDto> rules = new ArrayList<>();
     private BigDecimal propertyDeposit;
-    private BigDecimal distanceFromCampus;
-    // Constructors
+    private String distanceFromCampus;
+    private LocalDateTime createdAt = LocalDateTime.now();
+    private PropertyVerificationDto verification;
+
     public PropertyDto() {}
+
     public PropertyDto(Long id , String name , String location){
         this.id=id;
         this.name=name;
@@ -47,46 +57,62 @@ public class PropertyDto {
         this.university = property.getUniversity();
         this.distanceFromCampus = property.getDistanceFromCampus();
         this.propertyDeposit = property.getPropertyDeposit();
+        this.createdAt = property.getCreatedAt();
+
+
         if (property.getStudentsPerRoom() != null) {
             this.studentsPerRoom = new ArrayList<>(property.getStudentsPerRoom());
         }
-
-        if (property.getLandlord() != null) {
-            this.landlord = new LandlordDto(
-                    property.getLandlord().getId(),
-                    property.getLandlord().getName(),
-                    property.getLandlord().getContact()
+        PropertyVerification verificationEntity = property.getVerification();
+        if (verificationEntity != null) {
+            this.verification = new PropertyVerificationDto(
+                    verificationEntity.getId(),
+                    property.getId(),
+                    verificationEntity.getStatus().name(),
+                    verificationEntity.getInspector(),
+                    verificationEntity.getSubmittedAt(),
+                    verificationEntity.getVerifiedAt(),
+                    verificationEntity.getNotes(),
+                    verificationEntity.getDocumentPath()
             );
         }
+
+
+
+        Landlord landlord = property.getLandlord();
+        if (landlord == null) {
+            throw new IllegalStateException("Property " + property.getId() + " has no landlord!");
+        }
+        this.landlord = new LandlordDto(
+                landlord.getId(),
+                landlord.getName(),
+                landlord.getContact()
+        );
+
 
         if (property.getPropertyRules() != null) {
             this.rules = property.getPropertyRules().stream()
                     .map(r -> new PropertyRuleDto(r.getId(), r.getDescription()))
                     .collect(Collectors.toList());
         }
-
         if (property.getImages() != null) {
-            this.images = property.getImages().stream()
-                    .map(i -> new PropertyImageDto(i.getId(), i.getImageUrl()))
-                    .collect(Collectors.toList());
+            property.getImages().forEach(img -> this.images.add(new PropertyImageDto(img.getId(), img.getImageUrl())));
         }
 
         if (property.getVideos() != null) {
-            this.videos = property.getVideos().stream()
-                    .map(v -> new PropertyVideoDto(v.getId(), v.getVideoUrl()))
-                    .collect(Collectors.toList());
+            property.getVideos().forEach(video -> this.videos.add(new PropertyVideoDto(video.getId(), video.getVideoUrl())));
         }
 
         if (property.getUtilities() != null) {
             this.utilities = property.getUtilities().stream()
                     .map(u -> new PropertyUtilityDto(u.getId(), u.getName()))
-                    .collect(Collectors.toSet());
+                    .collect(Collectors.toList());
         }
 
         if (property.getAmenities() != null) {
             this.amenities = property.getAmenities().stream()
                     .map(a -> new PropertyAmenityDto(a.getId(), a.getName()))
-                    .collect(Collectors.toSet());
+                    .collect(Collectors.toList());
         }
     }
 
@@ -140,17 +166,17 @@ public class PropertyDto {
         this.videos = videos;
     }
 
-    public Set<PropertyAmenityDto> getAmenities() {
+    public List<PropertyAmenityDto> getAmenities() {
         return amenities;
     }
-    public void setAmenities(Set<PropertyAmenityDto> amenities) {
+    public void setAmenities(List<PropertyAmenityDto> amenities) {
         this.amenities = amenities;
     }
 
-    public Set<PropertyUtilityDto> getUtilities() {
+    public List<PropertyUtilityDto> getUtilities() {
         return utilities;
     }
-    public void setUtilities(Set<PropertyUtilityDto> utilities) {
+    public void setUtilities(List<PropertyUtilityDto> utilities) {
         this.utilities = utilities;
     }
 
@@ -198,11 +224,11 @@ public class PropertyDto {
         this.propertyDeposit = propertyDeposit;
     }
 
-    public BigDecimal getDistanceFromCampus(){
+    public String getDistanceFromCampus(){
         return  distanceFromCampus;
     }
 
-    public void setDistanceFromCampus(BigDecimal distanceFromCampus) {
+    public void setDistanceFromCampus(String distanceFromCampus) {
         this.distanceFromCampus = distanceFromCampus;
     }
 
@@ -213,4 +239,16 @@ public class PropertyDto {
     public void setUniversity(String university) {
         this.university = university;
     }
+
+    public LocalDateTime getCreatedAt(){return createdAt;}
+    public void setCreatedAt(LocalDateTime createdAt ){this.createdAt=createdAt;}
+
+    public PropertyVerificationDto getVerification() {
+        return verification;
+    }
+
+    public void setVerification(PropertyVerificationDto verification) {
+        this.verification = verification;
+    }
+
 }

@@ -3,6 +3,8 @@ package com.campuskey.backend.services;
 
 import com.campuskey.backend.dto.PropertyDto;
 import com.campuskey.backend.dto.PropertyVideoDto;
+import com.campuskey.backend.entities.Property;
+import com.campuskey.backend.entities.PropertyImage;
 import com.campuskey.backend.entities.PropertyVideo;
 import com.campuskey.backend.repositories.PropertyVideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,5 +53,17 @@ public class PropertyVideoService {
         Files.createDirectories(filePath.getParent());
         Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
         return "/uploads/propertyVideos/" + filename;
+    }
+
+
+    public PropertyVideo saveVideoForProperty(Property property, MultipartFile file) throws IOException {
+
+        String videoUrl = saveVideo(file);
+
+        PropertyVideo video = new PropertyVideo();
+        video.setVideoUrl(videoUrl);
+        video.setProperty(property);
+
+        return propertyVideoRepository.save(video);
     }
 }

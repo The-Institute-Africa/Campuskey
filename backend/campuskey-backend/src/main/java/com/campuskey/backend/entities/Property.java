@@ -4,6 +4,7 @@ import com.campuskey.backend.dto.PropertyDto;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Entity
@@ -22,7 +23,10 @@ public class Property {
     private String address;
     private String  university;
     private BigDecimal propertyDeposit;
-    private BigDecimal distanceFromCampus;
+    private String distanceFromCampus;
+
+    @Column(nullable = false)
+    private long reviewCount;
 
     @Column(unique = true, nullable = false)
     private String slug;
@@ -38,11 +42,11 @@ public class Property {
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PropertyVideo> propertyVideos = new ArrayList<>();
 
-    @ManyToMany
-    private Set<PropertyAmenity> amenities = new HashSet<>();
+    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PropertyAmenity> amenities = new ArrayList<>();
 
-    @ManyToMany
-    private Set<PropertyUtility> utilities = new HashSet<>();
+    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PropertyUtility> utilities = new ArrayList<>();
 
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PropertyRule> propertyRules = new ArrayList<>();
@@ -51,11 +55,22 @@ public class Property {
     private String location;
     private BigDecimal price;
     private String propertyType;
-    private String rating;
+    private Double review ;
+
+
+
+    private LocalDateTime createdAt = LocalDateTime.now();
+
+    private Long views = 0L;
+
+    @OneToOne(mappedBy = "property", cascade = CascadeType.ALL, orphanRemoval = true)
+    private PropertyVerification verification;
 
     // Constructors
     public Property() {}
+
     public Property(PropertyDto propertyDto){}
+
     public Property(Long id , String name , String location){
         this.id=id;
         this.name=name;
@@ -64,9 +79,12 @@ public class Property {
     public Property(Long id, String name,String university ,String address, String slug, Landlord landlord,
                     List<Integer> studentsPerRoom, List<PropertyRule> propertyRules,
                     List<PropertyImage> images, List<PropertyVideo> propertyVideos,
-                    Set<PropertyAmenity> amenities, Set<PropertyUtility> utilities,
-                    String description,String rating, String location, BigDecimal price, String propertyType,BigDecimal propertyDeposit,
-   BigDecimal distanceFromCampus) {
+                    List<PropertyAmenity> amenities, List<PropertyUtility> utilities,
+                    String description,Double review, String location, BigDecimal price,
+                    String propertyType,BigDecimal propertyDeposit,
+   String distanceFromCampus,LocalDateTime createdAt , Long views ,
+                    PropertyVerification verification ,long reviewCount
+                    ) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -76,8 +94,8 @@ public class Property {
         this.propertyRules = propertyRules != null ? propertyRules : new ArrayList<>();
         this.images = images != null ? images : new ArrayList<>();
         this.propertyVideos = propertyVideos != null ? propertyVideos : new ArrayList<>();
-        this.amenities = amenities != null ? amenities : new HashSet<>();
-        this.utilities = utilities != null ? utilities : new HashSet<>();
+        this.amenities = amenities != null ? amenities : new ArrayList<>();
+        this.utilities = utilities != null ? utilities : new ArrayList<>();
         this.description = description;
         this.location = location;
         this.price = price;
@@ -85,7 +103,11 @@ public class Property {
         this.propertyType = propertyType;
         this.distanceFromCampus=distanceFromCampus;
         this.propertyDeposit=propertyDeposit;
-        this.rating=rating;
+        this.review=review;
+        this.createdAt = createdAt;
+        this.views=views;
+        this.verification=verification;
+        this.reviewCount=reviewCount;
     }
 
     // Getters and Setters
@@ -138,17 +160,17 @@ public class Property {
         this.propertyVideos = propertyVideos;
     }
 
-    public Set<PropertyAmenity> getAmenities() {
+    public List<PropertyAmenity> getAmenities() {
         return amenities;
     }
-    public void setAmenities(Set<PropertyAmenity> amenities) {
+    public void setAmenities(List<PropertyAmenity> amenities) {
         this.amenities = amenities;
     }
 
-    public Set<PropertyUtility> getUtilities() {
+    public List<PropertyUtility> getUtilities() {
         return utilities;
     }
-    public void setUtilities(Set<PropertyUtility> utilities) {
+    public void setUtilities(List<PropertyUtility> utilities) {
         this.utilities = utilities;
     }
 
@@ -211,20 +233,20 @@ public class Property {
         this.propertyDeposit = propertyDeposit;
     }
 
-    public BigDecimal getDistanceFromCampus(){
+    public String getDistanceFromCampus(){
         return  distanceFromCampus;
     }
 
-    public void setDistanceFromCampus(BigDecimal distanceFromCampus) {
+    public void setDistanceFromCampus(String distanceFromCampus) {
         this.distanceFromCampus = distanceFromCampus;
     }
 
-    public String getRating() {
-        return rating;
+    public Double  getRating() {
+        return review;
     }
 
-    public void setRating(String rating) {
-        this.rating = rating;
+    public void setRating(Double review) {
+        this.review = review;
     }
 
     public List<PropertyVideo> getPropertyVideos() {
@@ -235,14 +257,50 @@ public class Property {
         this.propertyVideos = propertyVideos;
     }
 
+    public LocalDateTime getCreatedAt(){
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt){
+        this.createdAt=createdAt;
+    }
+
+    public Long getViews(){
+        return views;
+    }
+
+    public void setViews(Long views){
+        this.views=views;
+    }
+
+    public long getReviewCount() {
+        return reviewCount;
+    }
+
+    public void setReviewCount(long reviewCount) {
+        this.reviewCount = reviewCount;
+    }
+
+    public PropertyVerification getVerification() {
+        return verification;
+    }
+
+    public void setVerification(PropertyVerification verification) {
+        this.verification = verification;
+        if (verification != null) {
+            verification.setProperty(this);
+        }
+    }
+
     @Override
     public String toString() {
         return String.format(
-                "Property[id=%d, name='%s', address='%s',university='%s',rating='%s',distanceFromCampus='%s',propertyDeposit='%s', slug='%s',studentsPerRoom=%s, images=%d, videos=%d, amenities=%d, utilities=%d, rules=%d, description='%s', location='%s', price='%.2f', propertyType='%s', landlord='%s']",
-                id, name, address,university,rating,distanceFromCampus,propertyDeposit,slug, studentsPerRoom, images.size(), propertyVideos.size(),
+                "Property[id=%d, name='%s', address='%s',university='%s',ratings='%d',distanceFromCampus='%s',propertyDeposit='%s', slug='%s',studentsPerRoom=%s, images=%d, videos=%d, amenities=%d, utilities=%d, rules=%d, description='%s', location='%s', price='%.2f', propertyType='%s', landlord='%s' , createdAt='%s',views='%s' , verification='%s' , review='%s']",
+                id, name, address,university,review,distanceFromCampus,propertyDeposit,slug, studentsPerRoom, images.size(), propertyVideos.size(),
                 amenities.size(), utilities.size(), propertyRules.size(),
                 description, location, price, propertyType,
-                landlord != null ? landlord.getName() : "N/A"
+                landlord != null ? landlord.getName() : "N/A" ,
+                createdAt,views , verification , reviewCount
         );
     }
 }

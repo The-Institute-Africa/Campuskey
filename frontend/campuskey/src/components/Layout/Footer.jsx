@@ -13,7 +13,7 @@ const Footer = () => {
               <div className="w-8 h-8 campus-gradient rounded-lg flex items-center justify-center">
                 <Building className="h-5 w-5 text-white" />
               </div>
-              <span className="text-lg font-bold">Campus Key Zimbabwe</span>
+              <span className="text-lg font-bold">CampusKey Zimbabwe</span>
             </div>
             <p className="text-gray-300 text-sm">
               Connecting students with quality accommodation across Zimbabwe's universities.
@@ -35,7 +35,7 @@ const Footer = () => {
               <Link to="/student-guide" className="text-gray-300 hover:text-white transition-colors text-sm">
                 Student Guide
               </Link>
-              <Link to="/landlord/signup" className="text-gray-300 hover:text-white transition-colors text-sm">
+              <Link to="/signup" className="text-gray-300 hover:text-white transition-colors text-sm">
                 List Your Property
               </Link>
               <Link to="/help" className="text-gray-300 hover:text-white transition-colors text-sm">
@@ -66,7 +66,7 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center space-x-2">
                 <Phone className="h-4 w-4 text-green-500" />
-                <span className="text-gray-300 text-sm">+263 77 123 4567</span>
+                <span className="text-gray-300 text-sm">+263 77 459 2474</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4 text-green-500" />
@@ -74,7 +74,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4 text-green-500" />
-                <span className="text-gray-300 text-sm">Harare, Zimbabwe</span>
+                <span className="text-gray-300 text-sm">Bulawayo, Zimbabwe</span>
               </div>
             </div>
           </div>
@@ -82,7 +82,7 @@ const Footer = () => {
 
         <div className="border-t border-gray-700 mt-8 pt-8 text-center">
           <p className="text-gray-400 text-sm">
-            © 2024 Campus Key Zimbabwe. All rights reserved.
+            © 2025 CampusKey Zimbabwe. All rights reserved.
           </p>
         </div>
       </div>

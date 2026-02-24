@@ -32,29 +32,29 @@ const AboutPage = () => {
 
   const team = [
     {
-      name: "Sarah Mukamuri",
+      name: "Tobby Carter",
       role: "Founder & CEO",
-      image: "Professional headshot of Sarah Mukamuri, founder and CEO",
-      description: "Former UZ student passionate about solving accommodation challenges."
+      image: "Professional headshot of Carter, founder and CEO",
+      description: "Visionary leader driving growth, strategy, and innovation while building and scaling success."
     },
     {
-      name: "David Chikwanha",
-      role: "Head of Operations",
+      name: "Talent Chiradza",
+      role: "Founder and Frontend lead",
       image: "Professional headshot of David Chikwanha, head of operations",
-      description: "Expert in property management with 8+ years experience."
+      description: "With expertise in modern frontend technologies"
     },
     {
-      name: "Grace Mutasa",
-      role: "Student Relations Manager",
+      name: "Ashly K Mandimutsira",
+      role: "Head of Partnership Operations",
       image: "Professional headshot of Grace Mutasa, student relations manager",
-      description: "Dedicated to ensuring exceptional student experiences."
+      description: "Focused on driving seamless partnership operations and exceptional stakeholder experiences."
     }
   ];
 
   return (
     <>
       <Helmet>
-        <title>About Us - Campus Key Zimbabwe</title>
+        <title>About Us - CampusKey Zimbabwe</title>
         <meta name="description" content="Learn about Campus Key Zimbabwe's mission to connect students with quality accommodation. Discover our story, values, and commitment to student housing." />
         <meta property="og:title" content="About Us - Campus Key Zimbabwe" />
         <meta property="og:description" content="Learn about Campus Key Zimbabwe's mission to connect students with quality accommodation. Discover our story, values, and commitment to student housing." />
@@ -101,8 +101,8 @@ const AboutPage = () => {
                       <h2 className="text-3xl font-bold campus-text-gradient">Our Mission</h2>
                     </div>
                     <p className="text-gray-600 text-lg leading-relaxed">
-                      To revolutionize student accommodation in Zimbabwe by creating a trusted platform 
-                      that connects students with verified, quality housing options near their universities. 
+                      To revolutionize student accommodation in Zimbabwe by creating a trusted platform
+                      that connects students with verified, quality housing options near their universities.
                       We strive to make the accommodation search process simple, safe, and stress-free.
                     </p>
                   </div>
@@ -113,8 +113,8 @@ const AboutPage = () => {
                       <h2 className="text-3xl font-bold campus-text-gradient">Our Vision</h2>
                     </div>
                     <p className="text-gray-600 text-lg leading-relaxed">
-                      To become Zimbabwe's leading student accommodation platform, where every student 
-                      can easily find safe, affordable, and comfortable housing that enhances their 
+                      To become Zimbabwe's leading student accommodation platform, where every student
+                      can easily find safe, affordable, and comfortable housing that enhances their
                       university experience and academic success.
                     </p>
                   </div>
@@ -127,7 +127,7 @@ const AboutPage = () => {
                 transition={{ duration: 0.8 }}
                 className="relative"
               >
-                <img  
+                <img
                   className="rounded-2xl shadow-2xl w-full h-96 object-cover"
                   alt="Students studying together in comfortable accommodation"
                  src="https://images.unsplash.com/photo-1684216515816-5e26dc01991d" />
@@ -148,19 +148,19 @@ const AboutPage = () => {
               <h2 className="text-3xl lg:text-4xl font-bold campus-text-gradient mb-6">Our Story</h2>
               <div className="max-w-4xl mx-auto">
                 <p className="text-lg text-gray-600 leading-relaxed mb-6">
-                  Campus Key Zimbabwe was born from personal experience. As university students, our founders 
-                  faced the same challenges that thousands of students encounter every year - finding safe, 
+                  Campus Key Zimbabwe was born from personal experience. As university students, our founders
+                  faced the same challenges that thousands of students encounter every year - finding safe,
                   affordable, and quality accommodation near their campus.
                 </p>
                 <p className="text-lg text-gray-600 leading-relaxed mb-6">
-                  After spending countless hours searching through unreliable listings, dealing with 
-                  unverified landlords, and facing accommodation scams, we realized there had to be a better way. 
-                  In 2023, we launched Campus Key Zimbabwe with a simple goal: to create a trusted platform 
-                  that puts student safety and satisfaction first.
+                  After hours of sifting through unreliable listings, dealing with unverified landlords,
+                  and encountering accommodation scams, they realized there had to be a better way.
+                  We launched Campus Key Zimbabwe with a clear mission:
+                   to create a trusted platform where student safety and satisfaction come first.
                 </p>
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  Today, we're proud to serve students across Zimbabwe's major universities, connecting them 
-                  with verified landlords and quality accommodation options. Our platform has helped thousands 
+                  Today, we're proud to serve students across Zimbabwe's major universities, connecting them
+                  with verified landlords and quality accommodation options. Our platform has helped thousands
                   of students find their perfect home away from home.
                 </p>
               </div>
@@ -216,7 +216,7 @@ const AboutPage = () => {
               className="text-center mb-16"
             >
               <h2 className="text-3xl lg:text-4xl font-bold campus-text-gradient mb-4">Meet Our Team</h2>
-              <p className="text-xl text-gray-600">The passionate people behind Campus Key Zimbabwe</p>
+              <p className="text-xl text-gray-600">The passionate people behind CampusKey Zimbabwe</p>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -230,7 +230,7 @@ const AboutPage = () => {
                   <Card className="text-center campus-hover-lift">
                     <CardHeader>
                       <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
-                        <img  
+                        <img
                           className="w-full h-full object-cover"
                           alt={`${member.name} profile photo`}
                          src="https://images.unsplash.com/photo-1644424235476-295f24d503d9" />
@@ -270,7 +270,7 @@ const AboutPage = () => {
                 <div className="text-4xl lg:text-5xl font-bold text-white mb-2">5,000+</div>
                 <div className="text-gray-200">Students Helped</div>
               </motion.div>
-              
+
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -279,7 +279,7 @@ const AboutPage = () => {
                 <div className="text-4xl lg:text-5xl font-bold text-white mb-2">1,200+</div>
                 <div className="text-gray-200">Verified Properties</div>
               </motion.div>
-              
+
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -288,7 +288,7 @@ const AboutPage = () => {
                 <div className="text-4xl lg:text-5xl font-bold text-white mb-2">500+</div>
                 <div className="text-gray-200">Trusted Landlords</div>
               </motion.div>
-              
+
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}

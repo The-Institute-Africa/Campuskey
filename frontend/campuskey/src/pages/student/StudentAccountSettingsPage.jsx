@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { useAuth } from '@/contexts/AuthContext';
 import Header from '@/components/Layout/Header';
 import Footer from '@/components/Layout/Footer';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -10,22 +9,37 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from '@/components/ui/use-toast';
 import { User, Mail, Lock, Bell, Trash2 } from 'lucide-react';
+import { useAuth } from '@/pages/auth/api/store/auth.store';
+import { deleteAccount } from '@/pages/auth/index';
 
 const StudentAccountSettingsPage = () => {
   const { user } = useAuth();
-  const [name, setName] = useState(user?.name || '');
+  const [studentName, setStudentName] = useState(user?.name || '');
   const [email, setEmail] = useState(user?.email || '');
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [message , setMessage] = useState('');
 
-  const handleProfileUpdate = (e) => {
-    e.preventDefault();
-    toast({
-      title: '🚧 Feature in development',
-      description: 'Profile updating will be available soon!',
-    });
-  };
+  const handleProfileUpdate = async (e) => {
+      e.preventDefault();
+      setLoading(true);
+      setMessage("");
+      try {
+
+        const profileData = { name, email };
+        const res = await updateProfile(profileData);
+
+        setMessage("Profile updated successfully!");
+        console.log("Updated profile:", res);
+      } catch (error) {
+        setMessage(error.message || "Failed to update profile.");
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
   const handleChangePassword = (e) => {
     e.preventDefault();
@@ -43,12 +57,31 @@ const StudentAccountSettingsPage = () => {
     });
   };
 
-  const handleDeleteAccount = () => {
-     toast({
-      title: '🚧 Feature in development',
-      description: 'Account deletion will be available soon!',
-    });
+  const handleDeleteAccount = async () => {
+    const confirmDelete = window.confirm("Are you sure you want to delete your account?");
+    if (!confirmDelete) return;
+
+    try {
+      const responseMessage = await deleteAccount();
+
+      toast({
+        title: "Account Deleted",
+        description: responseMessage || "Your account was deleted successfully.",
+      });
+
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      window.location.href = "/student/login";
+    } catch (error) {
+      toast({
+        title: "Error Deleting Account",
+        description: error.message || "Something went wrong.",
+        variant: "destructive",
+      });
+    }
   };
+
+
 
   return (
     <>
@@ -80,10 +113,10 @@ const StudentAccountSettingsPage = () => {
                     <form onSubmit={handleProfileUpdate} className="space-y-4">
                       <div>
                         <Label htmlFor="name">Full Name</Label>
-                        <Input id="name" value={name} onChange={(e) => setName(e.target.value)} />
+                        <Input id="name" value={studentName} onChange={(e) => setStudentName(e.target.value)} />
                       </div>
                       <div>
-                        <Label htmlFor="email">Email Address</Label>
+                        <Label htmlFor="phone">Email Address</Label>
                         <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                       </div>
                       <Button type="submit">Save Changes</Button>

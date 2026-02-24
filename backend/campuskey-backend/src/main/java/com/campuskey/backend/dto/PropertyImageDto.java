@@ -1,9 +1,6 @@
 package com.campuskey.backend.dto;
 
-import com.campuskey.backend.entities.Property;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class PropertyImageDto {
 

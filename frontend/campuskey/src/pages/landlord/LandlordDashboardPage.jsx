@@ -1,140 +1,222 @@
-
-import React from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { PlusCircle, Building, Eye, Star, MessageSquare, User, LogOut } from 'lucide-react';
+import {
+  PlusCircle,
+  Building,
+  Eye,
+  Star,
+  MessageSquare,
+  User,
+  LogOut,
+  CheckCircle,
+  XCircle,
+  Clock,
+  AlertCircle
+} from 'lucide-react';
+
 import Header from '@/components/Layout/Header';
 import Footer from '@/components/Layout/Footer';
 import { Button } from '@/components/ui/button';
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { useAuth } from '@/contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from '@/components/ui/use-toast';
 
+import { useAuth } from '@/pages/auth/api/store/auth.store';
+import { fetchDashboardStats, fetchPropertyByLandlord } from "./api/landlord.api";
+
+
 const LandlordDashboardPage = () => {
-  const { user, logout } = useAuth();
+  const { token,user, logout } = useAuth();
+
+  const [properties, setProperties] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [landlordStats, setLandlordStats] = useState(null);
   const navigate = useNavigate();
+  
 
-  if (!user || user.role !== 'landlord') {
-    navigate('/landlord/login');
-    toast({
-      title: "Access Denied",
-      description: "You must be logged in as a landlord to view this page.",
-      variant: "destructive"
-    });
-    return null;
-  }
 
-  const handleAction = (feature) => {
-    toast({
-      title: `🚧 ${feature} Coming Soon!`,
-      description: "This feature is under construction. Stay tuned! 🚀",
-    });
+  useEffect(() => {
+  if (!token || !user) return;
+
+  const loadDashboardData = async () => {
+    setLoading(true);
+    try {
+      const [statsData, propertyData] = await Promise.all([
+        fetchDashboardStats(),
+        fetchPropertyByLandlord()
+      ]);
+
+      setLandlordStats(statsData);
+      setProperties(propertyData);
+    } catch (err) {
+      console.error(err);
+      toast({
+        variant: "destructive",
+        title: "Connection Error",
+        description: "Could not load your properties."
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const stats = [
-    { title: "Total Listings", value: "5", icon: Building, change: "+1 this month" },
-    { title: "Total Views", value: "12,450", icon: Eye, change: "+15% this month" },
-    { title: "New Messages", value: "8", icon: MessageSquare, change: "+3 today" },
-    { title: "Average Rating", value: "4.7", icon: Star, change: "+0.1 this month" },
-  ];
+  loadDashboardData();
+}, [token, user]);
+
+
+  const stats = landlordStats ? [
+    { title: "Total Properties", value: landlordStats.totalListings, icon: Building },
+    { title: "Total Views", value: landlordStats.totalViews, icon: Eye },
+    { title: "New Properties", value: landlordStats.newListingsThisMonth, icon: MessageSquare },
+    { title: "Average Rating", value: landlordStats.averageRating.toFixed(1), icon: Star },
+  ] : [];
+
+  const renderStatusBadge = (property) => {
+    const status = property.verification?.status;
+
+    if (!status) {
+      return (
+        <span className="absolute top-2 right-2 flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-700">
+          <AlertCircle className="h-3 w-3" />
+          UNVERIFIED
+        </span>
+      );
+    }
+
+    if (status === "VERIFIED") {
+      return (
+        <span className="absolute top-2 right-2 flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+          <CheckCircle className="h-3 w-3" />
+          VERIFIED
+        </span>
+      );
+    }
+
+    if (status === "REJECTED") {
+      return (
+        <span className="absolute top-2 right-2 flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">
+          <XCircle className="h-3 w-3" />
+          REJECTED
+        </span>
+      );
+    }
+
+    if (status === "PENDING") {
+      return (
+        <span className="absolute top-2 right-2 flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">
+          <Clock className="h-3 w-3" />
+          PENDING
+        </span>
+      );
+    }
+  };
 
   return (
     <>
       <Helmet>
         <title>Landlord Dashboard - Campus Key Zimbabwe</title>
-        <meta name="description" content="Manage your properties, view stats, and connect with students on your Campus Key Zimbabwe landlord dashboard." />
       </Helmet>
 
       <div className="min-h-screen bg-gray-50">
         <Header />
 
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+        <main className="max-w-7xl mx-auto px-4 py-12">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <div className="flex justify-between items-center mb-8">
               <div>
-                <h1 className="text-3xl font-bold text-gray-900">Welcome, {user.fullName}!</h1>
-                <p className="text-gray-600">Here's your landlord dashboard overview.</p>
+                <h1 className="text-3xl font-bold">Welcome, {user.username}!</h1>
+                <p className="text-gray-600">Here's your dashboard</p>
               </div>
-              <Button onClick={() => handleAction('Add New Listing')}>
-                <PlusCircle className="h-4 w-4 mr-2" />
-                Add New Listing
-              </Button>
+
+              <Link to="/landlord/add-property">
+                <Button>
+                  <PlusCircle className="h-4 w-4 mr-2" />
+                  Add Property
+                </Button>
+              </Link>
             </div>
 
-            {/* Stats Grid */}
+            {/* Stats */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
               {stats.map((stat, index) => (
-                <Card key={index} className="campus-hover-lift">
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
+                <Card key={index}>
+                  <CardHeader className="flex flex-row justify-between">
+                    <CardTitle className="text-sm">{stat.title}</CardTitle>
                     <stat.icon className="h-4 w-4 text-muted-foreground" />
                   </CardHeader>
                   <CardContent>
                     <div className="text-2xl font-bold">{stat.value}</div>
-                    <p className="text-xs text-muted-foreground">{stat.change}</p>
                   </CardContent>
                 </Card>
               ))}
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {/* My Listings */}
-              <Card className="lg:col-span-2">
-                <CardHeader>
-                  <CardTitle>My Listings</CardTitle>
-                  <CardDescription>Manage your active and pending properties.</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-center py-12">
-                    <Building className="h-12 w-12 text-gray-300 mx-auto mb-4" />
-                    <h3 className="text-lg font-semibold text-gray-700">No listings yet</h3>
-                    <p className="text-gray-500 mb-4">Add your first property to get started.</p>
-                    <Button onClick={() => handleAction('Add First Listing')}>
-                      <PlusCircle className="h-4 w-4 mr-2" />
-                      Add First Listing
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
+            {/* Properties */}
+            <Card>
+              <CardHeader>
+                <CardTitle>My Properties</CardTitle>
+                <CardDescription>Manage your listings</CardDescription>
+              </CardHeader>
 
-              {/* Account Actions */}
-              <div className="space-y-6">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Account Actions</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-3">
-                    <Button variant="outline" className="w-full justify-start" onClick={() => handleAction('Edit Profile')}>
-                      <User className="h-4 w-4 mr-2" /> Edit Profile
-                    </Button>
-                    <Button variant="outline" className="w-full justify-start" onClick={() => handleAction('View Messages')}>
-                      <MessageSquare className="h-4 w-4 mr-2" /> View Messages
-                    </Button>
-                    <Button variant="destructive" className="w-full justify-start" onClick={logout}>
-                      <LogOut className="h-4 w-4 mr-2" /> Logout
-                    </Button>
-                  </CardContent>
-                </Card>
-                <Card className="bg-blue-50 border-blue-200">
-                  <CardHeader>
-                    <CardTitle className="text-blue-800">Need Help?</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-blue-700 mb-4">
-                      Check out our Landlord Guide or contact our support team for assistance.
-                    </p>
-                    <Button variant="outline" className="w-full" onClick={() => navigate('/help')}>
-                      Go to Help Center
-                    </Button>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
+              <CardContent>
+                {loading ? (
+                  <p className="text-center text-gray-500">Loading...</p>
+                ) : properties.length === 0 ? (
+                  <p className="text-center text-gray-500">No properties yet.</p>
+                ) : (
+                  <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+                    {properties.map(property => (
+                      <div
+                        key={property.id}
+                        className="border rounded-2xl p-4 shadow-sm hover:shadow-md transition"
+                      >
+                        {/* Image + Badge */}
+                        <div className="relative">
+                          <img
+                            src={property.images?.[0]?.imageUrl || "/placeholder.jpg"}
+                            alt={property.name}
+                            className="w-full h-40 object-cover rounded-xl"
+                          />
+                          {renderStatusBadge(property)}
+                        </div>
+
+                        <h3 className="text-lg font-semibold mt-3">{property.name}</h3>
+                        <p className="text-gray-500">{property.address}</p>
+                        <p className="font-medium mt-1">${property.price}/month</p>
+
+                        {/* Action Buttons */}
+                        <div className="mt-4 space-y-2">
+                          {property.verification?.status === "VERIFIED" && (
+                            <Link to={`/landlord/edit-property/${property.id}`}>
+                              <Button variant="outline" className="w-full">
+                                Edit
+                              </Button>
+                            </Link>
+                          )}
+
+                          {property.verification?.status === "REJECTED" && (
+                            <Link to={`/landlord/${property.id}/verify-documents/`}>
+                              <Button variant="destructive" className="w-full">
+                                Reapply Verification
+                              </Button>
+                            </Link>
+                          )}
+
+                          {!property.verification && (
+                            <Link to={`/landlord/${property.id}/verify-documents/`}>
+                              <Button className="w-full">
+                                Apply Verification
+                              </Button>
+                            </Link>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
           </motion.div>
         </main>
 

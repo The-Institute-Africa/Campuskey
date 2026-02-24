@@ -2,16 +2,18 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '@/contexts/AuthContext';
 import Header from '@/components/Layout/Header';
 import Footer from '@/components/Layout/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Heart, FileText, Settings, Search } from 'lucide-react';
 
+import { useAuth } from './api/index';
+
 const StudentDashboardPage = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
+
 
   const dashboardItems = [
     {

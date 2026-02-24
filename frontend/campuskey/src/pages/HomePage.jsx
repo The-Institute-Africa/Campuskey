@@ -11,7 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast } from '@/components/ui/use-toast';
-import { fetchProperties, getPropertyImageUrl, fetchPropertyAmenities, fetchPropertyUtilities } from '@/api/student';
+import { fetchProperties, getPropertyImageUrl, fetchPropertyAmenities, fetchPropertyUtilities } from './student/api/student.api';
 import AnimatedBackground from '@/components/AnimatedBackground';
 
 const HomePage = () => {
@@ -46,9 +46,8 @@ const HomePage = () => {
     loadData();
   }, []);
 
-
   const featuredListings = properties.slice(0, 3);
-
+  
   const handleSearch = () => {
     if (!searchLocation) {
       toast({
@@ -63,7 +62,7 @@ const HomePage = () => {
     if (searchLocation) params.append('location', searchLocation);
     if (priceRange) params.append('price', priceRange);
 
-    navigate(`/listings?${params.toString()}`);
+    navigate(`/properties?${params.toString()}`);
   };
 
   return (
@@ -220,7 +219,7 @@ const HomePage = () => {
 
                         <Button
                           className="w-full bg-blue-800 hover:bg-blue-900"
-                          onClick={() => navigate(`/listing/${listing.slug}`)}
+                          onClick={() => navigate(`/property/${listing.slug}`)}
                         >
                           View Details
                           <ArrowRight className="h-4 w-4 ml-2" />
@@ -236,7 +235,7 @@ const HomePage = () => {
               <Button
                 variant="outline"
                 size="lg"
-                onClick={() => navigate('/listings')}
+                onClick={() => navigate('/properties')}
                 className="border-blue-800 text-blue-800 hover:bg-blue-800 hover:text-white"
               >
                 View All Listings

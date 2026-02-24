@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/campuskey")
+@RequestMapping("/api/v1/campuskey/public/")
 public class VideoController {
 
     private final PropertyVideoService propertyVideoService;

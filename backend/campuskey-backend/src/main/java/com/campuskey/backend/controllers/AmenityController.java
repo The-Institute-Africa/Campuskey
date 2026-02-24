@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Set;
+import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/campuskey")
+@RequestMapping("/api/v1/campuskey/public/")
 public class AmenityController {
 
     private final PropertyAmenityService propertyAmenityService;
@@ -22,7 +22,7 @@ public class AmenityController {
     }
 
     @GetMapping("/amenities")
-    public Set<PropertyAmenityDto> getAllAmenities(){
+    public List<PropertyAmenityDto> getAllAmenities(){
         return propertyAmenityService.getAllAmenities();
     }
 

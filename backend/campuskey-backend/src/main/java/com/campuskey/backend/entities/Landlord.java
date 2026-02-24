@@ -1,20 +1,14 @@
 package com.campuskey.backend.entities;
 
 
+import java.math.BigInteger;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.FetchType;
+import jakarta.persistence.*;
 
-import com.campuskey.backend.entities.Property;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "landlord")
@@ -25,27 +19,34 @@ public class Landlord {
     private Long id;
     private String name ;
 
-    private Integer contact;
-    private String slug;
+    private BigInteger contact;
+
+    private String ownerUsername;
+
+    private String idNumber;
+    private String address;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "landlord", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<Property> properties = new HashSet<>();
-    
-    public Landlord(){}
-    public Landlord(Long id,String name,Integer contact ,String slug ,Set<Property> properties) {
 
-        this.id=id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    public Landlord(){}
+
+    public Landlord(String ownerUsername, LocalDateTime createdAt,String name,BigInteger contact,String idNumber,String address ,Set<Property> properties) {
+
+        this.ownerUsername=ownerUsername;
         this.name=name;
         this.contact=contact;
+        this.idNumber=idNumber;
+        this.address=address;
         this.properties = properties;
-        this.slug=slug;
-    }
-
-    public void setId(Long id){
-        this.id = id;
-    }
-    public Long getId(){
-        return id;
+        this.createdAt=createdAt;
     }
 
     public void setName(String name){
@@ -55,11 +56,35 @@ public class Landlord {
         return name;
     }
 
-    public void setContact(Integer contact){
+    public LocalDateTime getCreatedAt(){
+        return createdAt;
+    }
+    public void setId(Long id){
+        this.id=id;
+    }
+    public Long getId(){
+        return id;
+    }
+
+    public void setContact(BigInteger contact){
         this.contact=contact;
     }
-    public Integer getContact(){
+    public BigInteger getContact(){
         return contact;
+    }
+
+    public void setIdNumber(String idNumber){
+        this.idNumber=idNumber;
+    }
+    public String getIdNumber(){
+        return idNumber;
+    }
+
+    public void setAddress(String address ){
+        this.address=address;
+    }
+    public String getAddress(){
+        return address;
     }
 
     public void setProperty(Set<Property> properties) {
@@ -70,18 +95,16 @@ public class Landlord {
         return properties;
     }
 
-    public String getSlug() {
-        return slug;
+    public void setOwnerUsername(String username) {
+        this.ownerUsername = username;
     }
 
-    public void setSlug(String slug) {
-        this.slug = slug;
+    public User getUser() {
+        return user;
     }
 
-    @Override
-    public String toString() {
-        return String.format(
-            "Landlord[id=%d,name='%s',contact='%d',properties.size()=%d]",
-            id,name,contact,properties.size());
+    public void setUser(User user) {
+        this.user = user;
     }
+
 }

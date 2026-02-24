@@ -42,7 +42,7 @@ const Header = () => {
             <Home className="h-4 w-4" /> Home
           </NavLink>
           <NavLink to="/listings" className={navLinkStyle}>
-            <Building2 className="h-4 w-4" /> Listings
+            <Building2 className="h-4 w-4" /> Property
           </NavLink>
            <NavLink to="/student-guide" className={navLinkStyle}>
             <FileText className="h-4 w-4" /> Student Guide

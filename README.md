@@ -42,14 +42,86 @@
 ```
 
 campuskey/
-├── backend/              # Spring Boot project
-│   ├── src/main/java/
-│   ├── resources/
-│   └── build.gradle
-├── frontend/             # Next.js app
-│   ├── pages/
-│   ├── components/
-│   └── tailwind.config.js
+│
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/campuskey/
+│   │   │       ├── CampusKeyApplication.java
+│   │   │
+│   │   │       ├── config/
+│   │   │       │   ├── OpenApiConfig.java
+│   │   │       │   ├── SecurityConfig.java
+│   │   │       │   └── AppConfig.java
+│   │   │
+│   │   │       ├── common/
+│   │   │       │   ├── exceptions/
+│   │   │       │   │   ├── GlobalExceptionHandler.java
+│   │   │       │   │   └── ResourceNotFoundException.java
+│   │   │       │   ├── enums/
+│   │   │       │   ├── utils/
+│   │   │       │   └── annotations/
+│   │   │
+│   │   │       ├── modules/
+│   │   │       │
+│   │   │       │   ├── auth/
+│   │   │       │   │   ├── controller/
+│   │   │       │   │   ├── service/
+│   │   │       │   │   ├── model/
+│   │   │       │   │   ├── dto/
+│   │   │       │   │   ├── repository/
+│   │   │       │   │   └── mapper/
+│   │   │       │
+│   │   │       │   ├── student/
+│   │   │       │   │   ├── controller/
+│   │   │       │   │   ├── service/
+│   │   │       │   │   ├── model/
+│   │   │       │   │   ├── dto/
+│   │   │       │   │   ├── repository/
+│   │   │       │   │   └── mapper/
+│   │   │       │
+│   │   │       │   ├── accesscontrol/
+│   │   │       │   │   ├── controller/
+│   │   │       │   │   ├── service/
+│   │   │       │   │   ├── model/
+│   │   │       │   │   ├── dto/
+│   │   │       │   │   ├── strategy/      # Strategy Pattern for access rules
+│   │   │       │   │   ├── repository/
+│   │   │       │   │   └── mapper/
+│   │   │       │
+│   │   │       │   ├── facilitybooking/
+│   │   │       │   │   ├── controller/
+│   │   │       │   │   ├── service/
+│   │   │       │   │   ├── model/
+│   │   │       │   │   ├── dto/
+│   │   │       │   │   ├── repository/
+│   │   │       │   │   └── mapper/
+│   │   │       │
+│   │   │       │   ├── notifications/
+│   │   │       │   │   ├── events/
+│   │   │       │   │   ├── listener/
+│   │   │       │   │   ├── service/
+│   │   │       │   │   ├── dto/
+│   │   │       │   │   └── utils/
+│   │   │
+│   │   │       └── infrastructure/
+│   │   │           ├── external/          # API Clients, Adapters
+│   │   │           ├── persistence/       # Database configurations
+│   │   │           └── messaging/         # Kafka / RabbitMQ (Optional)
+│   │   │
+│   │   ├── resources/
+│   │   │   ├── application.yml
+│   │   │   ├── static/
+│   │   │   └── templates/
+│   │   │
+│   │   └── webapp/ (Optional - UI Layer)
+│   │
+│   └── test/
+│       └── com/campuskey/
+│           ├── integration/
+│           └── unit/
+│
+└── pom.xml
 
 ````
 

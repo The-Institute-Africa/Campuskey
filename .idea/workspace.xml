@@ -5,86 +5,154 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="976e61a7-d16e-48f3-84d4-39a9be55b025" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/authentication/JwtService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/authentication/LoginResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/configuration/CustomUserDetailsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/configuration/JwtFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/configuration/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/AmenityController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/AuthenticationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/PropertyImageController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/RuleController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/StudentController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/UtilityController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/VideoController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/LandlordDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/LoginRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/LoginUserDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/PropertyAmenityDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/PropertyDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/PropertyImageDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/PropertyRuleDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/PropertyUtilityDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/PropertyVideoDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/RegisterUserDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/StudentDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/UserDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/PropertyImage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/PropertyRule.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/PropertyUtility.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/Role.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/exceptions/GlobalExceptionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/repositories/PropertyAmenityRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/repositories/PropertyImageRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/repositories/PropertyRuleRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/repositories/PropertyUtilityRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/repositories/PropertyVideoRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/repositories/StudentRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/repositories/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/AuthenticationService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/PropertyAmenityService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/PropertyImageService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/PropertyRuleService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/PropertyUtilityService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/PropertyVideoService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/StudentService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/specification/PropertySpecification.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/AdminController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/AuthController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/CsrfController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/DashboardController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/LandlordVerificationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/ReviewController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/AdminDashboardDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/LandlordDashboardDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/LandlordVerificationDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/PropertyVerificationDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/RatingDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/Admin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/LandlordVerification.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/PasswordResetToken.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/PropertyVerification.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/Review.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/enumerations/AccountStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/enumerations/AppRole.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/enumerations/PropertyStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/exceptions/UnauthorizedException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/repositories/DashboardRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/repositories/LandlordVerificationRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/repositories/PasswordResetTokenRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/repositories/PropertyVerificationRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/repositories/ReviewRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/repositories/RoleRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/requests/ReviewRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/security/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/security/WebConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/security/jwt/AuthEntryPointJwt.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/security/jwt/AuthTokenFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/security/jwt/JwtUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/security/requests/LoginRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/security/requests/SignupRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/security/response/LoginResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/security/response/MessageResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/security/response/UserInfoResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/security/services/UserDetailsImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/security/services/UserDetailsServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/AdminService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/DashboardService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/LandlordApplicationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/LandlordVerificationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/PropertyVerificationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/RatingService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/ReviewService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/impl/UserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/utils/EmailService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/campuskey/src/pages/admin/AdminLogin.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/campuskey-backend.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/campuskey-backend.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/src/main/java/com/campuskey/backend/CampuskeyBackendApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/src/main/java/com/campuskey/backend/controllers/landlordController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/src/main/java/com/campuskey/backend/controllers/propertyController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/src/main/java/com/campuskey/backend/entities/Amenity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/src/main/java/com/campuskey/backend/entities/Image.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/src/main/java/com/campuskey/backend/entities/Landlord.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/src/main/java/com/campuskey/backend/entities/Property.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/src/main/java/com/campuskey/backend/entities/Student.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/src/main/java/com/campuskey/backend/entities/Video.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/src/main/java/com/campuskey/backend/repositories/landlordRepositories.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/src/main/java/com/campuskey/backend/repositories/propertyRepositories.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/src/main/java/com/campuskey/backend/services/landlordService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/src/main/java/com/campuskey/backend/services/propertyService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/campuskey-backend/src/test/java/com/campuskey/backend/CampuskeyBackendApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/CampuskeyBackendApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/CampuskeyBackendApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/authentication/JwtService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/authentication/LoginResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/configuration/CustomUserDetailsService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/configuration/JwtFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/configuration/SecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/AmenityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/AmenityController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/AuthenticationController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/LandlordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/LandlordController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/PropertyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/PropertyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/PropertyImageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/PropertyImageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/RuleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/RuleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/StudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/StudentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/UtilityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/UtilityController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/VideoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/controllers/VideoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/LandlordDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/LandlordDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/LoginRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/LoginUserDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/PropertyAmenityDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/PropertyAmenityDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/PropertyDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/PropertyDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/PropertyImageDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/PropertyImageDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/PropertyUtilityDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/PropertyUtilityDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/PropertyVideoDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/PropertyVideoDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/RegisterUserDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/StudentDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/StudentDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/dto/UserDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/Landlord.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/Landlord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/Property.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/PropertyAmenity.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/PropertyAmenity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/PropertyImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/PropertyImage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/PropertyUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/PropertyUtility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/PropertyVideo.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/PropertyVideo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/entities/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/exceptions/GlobalExceptionHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/repositories/LandlordRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/repositories/LandlordRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/repositories/PropertyRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/repositories/PropertyRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/repositories/StudentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/repositories/StudentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/repositories/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/AuthenticationService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/LandlordService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/LandlordService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/PropertyAmenityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/PropertyAmenityService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/PropertyImageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/PropertyImageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/PropertyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/PropertyService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/PropertyUtilityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/PropertyUtilityService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/PropertyVideoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/PropertyVideoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/services/StudentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/campuskey/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/campuskey/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/components/listing-detail/PropertyInfo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/components/listing-detail/PropertyInfo.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/components/listings/ListingCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/components/listings/ListingCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/components/student-guide/StepByStepGuide.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/components/student-guide/StepByStepGuide.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/pages/HelpCenterPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/pages/HelpCenterPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/pages/ListingDetailPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/pages/ListingDetailPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/pages/ListingsPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/pages/ListingsPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/public/.htaccess" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/api/auth.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/api/axios.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/api/landlord.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/api/student.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/components/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/components/Footer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/components/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/components/Header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/components/Layout/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/components/Layout/Footer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/components/Layout/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/components/Layout/Header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/components/ProtectedRoute.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/components/ProtectedRoute.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/components/listing-detail/BookingCard.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/components/listing-detail/ImageGallery.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/components/listing-detail/LandlordInfo.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/components/listing-detail/PropertyInfo.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/components/listing-detail/SafetyNotice.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/components/listings/ListingCard.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/components/listings/ListingsFilterPanel.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/components/listings/ListingsSearchHeader.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/components/listings/NoListingsFound.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/contexts/AuthContext.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/main.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/pages/ApplicationPage.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/pages/ForgotPasswordPage.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/pages/HomePage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/pages/HomePage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/pages/PaymentPage.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/pages/admin/AdminDashboardPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/pages/admin/AdminDashboardPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/pages/landlord/LandlordDashboardPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/pages/landlord/LandlordDashboardPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/pages/landlord/LandlordLoginPage.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/pages/landlord/LandlordSignupPage.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/pages/listings/ListingDetailPage.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/pages/listings/ListingsPage.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/pages/misc/AboutPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/pages/misc/AboutPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/pages/misc/ContactPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/pages/misc/ContactPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/pages/misc/HelpCenterPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/pages/misc/HelpCenterPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/pages/misc/TermsPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/pages/misc/TermsPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/pages/student/StudentAccountSettingsPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/pages/student/StudentAccountSettingsPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/pages/student/StudentApplicationsPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/pages/student/StudentApplicationsPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/pages/student/StudentDashboardPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/pages/student/StudentDashboardPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/pages/student/StudentFavoritesPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/pages/student/StudentFavoritesPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/pages/student/StudentGuidePage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/pages/student/StudentGuidePage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/pages/student/StudentLoginPage.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/pages/student/StudentSignupPage.jsx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,12 +167,26 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$/backend/campuskey-backend">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="campuskey-backend" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="campuskey-backend" type="f1a62948:ProjectNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="campuskey-backend" type="f1a62948:ProjectNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+                <item name="compileClasspath" type="62daadca:ExternalSystemViewDefaultContributor$DependencyScopeExternalSystemNode" />
               </path>
             </expand>
             <select />
@@ -116,8 +198,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Exception" />
+        <option value="AnnotationType" />
         <option value="Enum" />
+        <option value="Record" />
+        <option value="Exception" />
         <option value="Interface" />
         <option value="Class" />
       </list>
@@ -138,6 +222,9 @@
     &quot;accountId&quot;: &quot;82b8040e-b838-4f85-ab04-ad99697abd84&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 0
@@ -152,20 +239,39 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Gradle.campuskey-backend [:com.campuskey.backend.CampuskeyBackendApplication.main()].executor": "Debug",
+    "Gradle.Build campuskey-backend.executor": "Run",
+    "Gradle.Download Sources.executor": "Run",
+    "Gradle.campuskey-backend [:com.campuskey.backend.CampuskeyBackendApplication.main()].executor": "Run",
     "Gradle.campuskey-backend [test].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/USER/Desktop/CampusKey/Campuskey/backend/campuskey-backend/src/main/java/com/campuskey/backend/services",
     "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.campuskey.backend.dto" />
       <recent name="com.campuskey.backend.configuration" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\USER\Desktop\CampusKey\Campuskey\backend\campuskey-backend\src\main\java\com\campuskey\backend\services" />
+      <recent name="C:\Users\USER\Desktop\CampusKey\Campuskey\backend\campuskey-backend\src\main\java\com\campuskey\backend\controllers" />
+      <recent name="C:\Users\USER\Desktop\CampusKey\Campuskey\backend\campuskey-backend\src\main\java\com\campuskey\backend\entities" />
+      <recent name="C:\Users\USER\Desktop\CampusKey\Campuskey\backend\campuskey-backend\src\main\java\com\campuskey\backend\repositories" />
+      <recent name="C:\Users\USER\Desktop\CampusKey\Campuskey\backend\campuskey-backend\src\main\java\com\campuskey\backend" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\USER\Desktop\CampusKey\Campuskey\backend\campuskey-backend\src\main\java\com\campuskey\backend\dto" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.campuskey.backend.security" />
+      <recent name="com.campuskey.backend.dto" />
     </key>
   </component>
   <component name="RunManager" selected="Application.CampuskeyBackendApplication">
@@ -221,12 +327,23 @@
     </task>
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/authentication/LoginResponse.java</url>
-          <line>10</line>
+          <line>7</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

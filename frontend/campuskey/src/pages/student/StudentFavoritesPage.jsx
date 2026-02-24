@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Header from '@/components/Layout/Header';
 import Footer from '@/components/Layout/Footer';
-import ListingCard from '@/components/listings/ListingCard';
+import PropertyCard from '@/components/property/PropertyCard';
 import { mockListings as allListings } from '@/data/mockListings';
 import { Button } from '@/components/ui/button';
 import { Heart, Search } from 'lucide-react';

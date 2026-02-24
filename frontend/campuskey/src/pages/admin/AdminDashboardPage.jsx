@@ -1,113 +1,135 @@
-
-import React from 'react';
-import { Helmet } from 'react-helmet';
-import { motion } from 'framer-motion';
-import { Shield, Building, UserCheck, UserX, MessageSquare, BarChart } from 'lucide-react';
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { useEffect, useState } from "react";
 import Header from '@/components/Layout/Header';
-import Footer from '@/components/Layout/Footer';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { useAuth } from '@/contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
-import { toast } from '@/components/ui/use-toast';
+import {
+    Building2,
+    Users,
+    UserCheck,
+    UserPlus,
+    TrendingUp,
+    ShieldAlert,
+    CheckCircle2,
+    XCircle,
+    Mail,
+} from "lucide-react";
+import { useAuth } from '@/pages/auth/api/store/auth.store';
+import { fetchDashboardStats } from "./api/admin.api";
 
-const AdminDashboardPage = () => {
-  const { user } = useAuth();
-  const navigate = useNavigate();
+const AdminDashboard = () => {
+    const { token,user, logout } = useAuth();
+    const [stats, setStats] = useState([]);
 
-  // This is a placeholder for real admin check
-  const isAdmin = user && user.role === 'admin';
+    useEffect(() => {
+        async function loadStats() {
+            try {
+                const d = await fetchDashboardStats();
+                setStats([
+                    { label: "Total Properties", value: d.totalProperties, icon: Building2, color: "text-primary" },
+                    { label: "Total Landlords", value: d.totalLandlords, icon: Users, color: "text-secondary" },
+                    { label: "Total Students", value: d.totalStudents, icon: UserCheck, color: "text-success" },
+                    { label: "New Landlords", value: d.newLandlords, icon: UserPlus, color: "text-warning", badge: "This Month" },
+                    { label: "New Students", value: d.newStudents, icon: UserPlus, color: "text-warning", badge: "This Month" },
+                    { label: "Verified Accounts", value: d.verifiedAccounts, icon: CheckCircle2, color: "text-success" },
+                    { label: "Unverified Accounts", value: d.unverifiedAccounts, icon: XCircle, color: "text-destructive" },
+                    { label: "Suspended Accounts", value: d.suspendedAccounts, icon: ShieldAlert, color: "text-destructive" },
+                ]);
+            } catch (error) {
+                console.error("Failed to load dashboard stats", error);
+            }
+        }
 
-  if (!isAdmin) {
-    navigate('/');
-    toast({
-      title: "Access Denied",
-      description: "You do not have permission to view the admin dashboard.",
-      variant: "destructive"
-    });
-    return null;
-  }
-
-  const handleAction = (feature) => {
-    toast({
-      title: `🚧 ${feature} Feature Not Implemented`,
-      description: "This admin functionality is for demonstration purposes only. 🚀",
-    });
-  };
-
-  const adminActions = [
-    { title: "Approve Listings", icon: Building, description: "Review and approve new property listings." },
-    { title: "Manage Applications", icon: UserCheck, description: "Oversee ResCampus applications." },
-    { title: "Ban Landlords", icon: UserX, description: "Manage fraudulent or problematic landlords." },
-    { title: "View Messages", icon: MessageSquare, description: "Monitor support messages and inquiries." },
-    { title: "Site Analytics", icon: BarChart, description: "View website usage and performance data." },
-  ];
-
-  return (
-    <>
-      <Helmet>
-        <title>Admin Dashboard - Campus Key Zimbabwe</title>
-        <meta name="description" content="Admin dashboard for managing Campus Key Zimbabwe platform." />
-      </Helmet>
-
-      <div className="min-h-screen bg-gray-100">
-        <Header />
-
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="flex justify-between items-center mb-8">
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
-                <p className="text-gray-600">Platform Management & Oversight</p>
-              </div>
-              <div className="flex items-center gap-2 text-green-600">
-                <Shield className="h-6 w-6" />
-                <span className="font-semibold">Admin Access</span>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {adminActions.map((action, index) => (
-                <Card key={index} className="campus-hover-lift cursor-pointer" onClick={() => handleAction(action.title)}>
-                  <CardHeader>
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                        <action.icon className="h-6 w-6 text-blue-600" />
-                      </div>
-                      <CardTitle>{action.title}</CardTitle>
+        loadStats();
+    }, []);
+/*
+    if (!stats.length)
+        return <div>Loading...</div>;
+*/
+    return (
+        <div className="min-h-screen bg-background">
+            <Header />
+            {/* Main Content */}
+            <main className="container mx-auto px-4 py-8">
+                {/* Platform Statistics */}
+                <div className="mb-8">
+                    <h2 className="mb-6 text-3xl font-bold">Platform Statistics</h2>
+                    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                        {stats.map((stat) => (
+                            <Card key={stat.label} className="p-6 shadow-card transition-all hover:shadow-card-hover">
+                                <div className="flex items-start justify-between">
+                                    <div>
+                                        <p className="text-sm text-muted-foreground">{stat.label}</p>
+                                        <p className="mt-2 text-3xl font-bold">{stat.value}</p>
+                                        {stat.badge && <Badge className="mt-2">{stat.badge}</Badge>}
+                                    </div>
+                                    <div className={`rounded-full bg-muted p-3 ${stat.color}`}>
+                                        <stat.icon className="h-6 w-6" />
+                                    </div>
+                                </div>
+                            </Card>
+                        ))}
                     </div>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription>{action.description}</CardDescription>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
-            <Card className="mt-8">
-              <CardHeader>
-                <CardTitle>Pending Approvals</CardTitle>
-                <CardDescription>Items requiring immediate attention.</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="text-center py-12">
-                  <UserCheck className="h-12 w-12 text-gray-300 mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold text-gray-700">All Clear!</h3>
-                  <p className="text-gray-500">There are no pending items requiring approval at this time.</p>
                 </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </main>
 
-        <Footer />
-      </div>
-    </>
-  );
+                {/* Quick Actions */}
+                <div className="mb-8">
+                    <h2 className="mb-6 text-2xl font-bold">Quick Actions</h2>
+                    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                        <Link to="/admin/accounts">
+                            <Card className="cursor-pointer p-6 shadow-card transition-all hover:shadow-card-hover">
+                                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+                                    <Users className="h-6 w-6 text-primary" />
+                                </div>
+                                <h3 className="mb-2 text-xl font-semibold">Manage Accounts</h3>
+                                <p className="text-muted-foreground">
+                                    View and manage user accounts, suspensions, and verifications
+                                </p>
+                            </Card>
+                        </Link>
+
+                        <Link to="/admin/properties">
+                            <Card className="cursor-pointer p-6 shadow-card transition-all hover:shadow-card-hover">
+                                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-secondary/10">
+                                    <Building2 className="h-6 w-6 text-secondary" />
+                                </div>
+                                <h3 className="mb-2 text-xl font-semibold">Manage Properties</h3>
+                                <p className="text-muted-foreground">
+                                    Review, verify, suspend, or ban property listings
+                                </p>
+                            </Card>
+                        </Link>
+
+                        <Link to="/admin/messaging">
+                            <Card className="cursor-pointer p-6 shadow-card transition-all hover:shadow-card-hover">
+                                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-success/10">
+                                    <Mail className="h-6 w-6 text-success" />
+                                </div>
+                                <h3 className="mb-2 text-xl font-semibold">Send Messages</h3>
+                                <p className="text-muted-foreground">
+                                    Send emails or WhatsApp messages to users
+                                </p>
+                            </Card>
+                        </Link>
+                    </div>
+                </div>
+
+                {/* User Activity Placeholder */}
+                <div>
+                    <h2 className="mb-6 text-2xl font-bold">User Activity</h2>
+                    <Card className="p-6">
+                        <div className="flex h-64 items-center justify-center text-muted-foreground">
+                            <div className="text-center">
+                                <TrendingUp className="mx-auto mb-4 h-12 w-12" />
+                                <p>User activity chart coming soon</p>
+                            </div>
+                        </div>
+                    </Card>
+                </div>
+            </main>
+        </div>
+    );
 };
 
-export default AdminDashboardPage;
+export default AdminDashboard;

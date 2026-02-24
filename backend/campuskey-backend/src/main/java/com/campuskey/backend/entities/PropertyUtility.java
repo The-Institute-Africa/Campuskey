@@ -18,8 +18,9 @@ public class PropertyUtility {
 
     private String name;
 
-    @ManyToMany(mappedBy = "utilities" , cascade = CascadeType.ALL)
-    private  List<Property> properties = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "property_id")
+    private  Property property;
 
     public PropertyUtility() {}
 
@@ -42,12 +43,12 @@ public class PropertyUtility {
         this.name=name;
     }
 
-    public void setProperty(List<Property> properties){
-        this.properties = properties;
+    public void setProperty(Property property){
+        this.property = property;
     }
 
-    public List<Property> getProperties(){
-        return properties;
+    public Property getProperty(){
+        return property;
     }
     public String toString(){
         return "PropertyUtility[id=%id,name='%s']";

@@ -19,10 +19,10 @@ public class PropertyAmenityService {
         this.propertyAmenityRepository = propertyAmenityRepository;
     }
 
-    public Set<PropertyAmenityDto> getAllAmenities(){
+    public List<PropertyAmenityDto> getAllAmenities(){
         return propertyAmenityRepository.findAll().stream()
                 .map(this::convertToDto)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     public PropertyAmenityDto convertToDto(PropertyAmenity propertyAmenity){
@@ -30,12 +30,12 @@ public class PropertyAmenityService {
         dto.setId(propertyAmenity.getId());
         dto.setName(propertyAmenity.getName());
 
-        List<PropertyDto> PropertyDTOs = propertyAmenity.getProperties().stream()
-                .map(PropertyDto::new)
-                .toList();
+        // Convert Property entity to PropertyDto
+        if (propertyAmenity.getProperty() != null) {
+            dto.setProperty(new PropertyDto(propertyAmenity.getProperty()));
+        }
 
-        dto.setProperty(PropertyDTOs);
         return dto;
-
     }
+
 }
