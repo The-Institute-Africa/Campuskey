@@ -7,7 +7,7 @@
 ## 🔧 Tech Stack
 
 ### 💻 Frontend
-- [ReactJs.js](https://react.org/) – React-based frontend framework
+- [ReactJs.js](https://react.org/) – Javascript frontend framework
 - [Tailwind CSS](https://tailwindcss.com/) – Utility-first CSS for modern UI
 - [shadcn/ui](https://ui.shadcn.com/) – Accessible, customizable UI components
 
