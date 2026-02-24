@@ -187,8 +187,8 @@ Coming soon: [https://campuskey.co.zw](https://campuskey.co.zw)
 
 ## 📬 Contact
 
-Developed with ❤️ by [Terryktee](https://linkedin.com/in/terryktee)
-🌐 Website: [https://Karvellie.co.zw](https://neotech.co.zw)
+Developed with ❤️ by [The Institute]
+🌐 Website: [https://theInstitute.co.zw](https://theInstitute.co.zw)
 
 ---
 
