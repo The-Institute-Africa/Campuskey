@@ -7,7 +7,7 @@
 ## 🔧 Tech Stack
 
 ### 💻 Frontend
-- [Next.js](https://nextjs.org/) – React-based frontend framework
+- [ReactJs.js](https://react.org/) – React-based frontend framework
 - [Tailwind CSS](https://tailwindcss.com/) – Utility-first CSS for modern UI
 - [shadcn/ui](https://ui.shadcn.com/) – Accessible, customizable UI components
 
@@ -15,7 +15,7 @@
 - [Spring Boot](https://spring.io/projects/spring-boot) – Java-based backend framework
 - [Spring Data JPA](https://spring.io/projects/spring-data-jpa) – ORM & database integration
 - [Spring Security](https://spring.io/projects/spring-security) – Authentication & Authorization
-- PostgreSQL – Relational database (can switch to MySQL)
+- MySQL – Relational database
 - H2 – In-memory DB for development/testing
 - Spring Boot Actuator – System monitoring endpoints
 - Springdoc OpenAPI – API documentation (Swagger UI)
@@ -35,6 +35,11 @@
 - Receive student inquiries
 - Build trust through student reviews
 
+### 🧑‍💼 For Admins
+- Register and verify account
+- Verify and manage properties
+- Receive student inquiries
+- Build trust through student and landlords reviews
 ---
 
 ## 📁 Project Structure
@@ -139,7 +144,7 @@ campuskey/
 
 4. API will be available at: `http://localhost:8080`
 
-### ✅ Frontend Setup (Next.js)
+### ✅ Frontend Setup (Reactjs)
 
 1. Install Node.js (18+ recommended)
 2. Navigate to `frontend/`
