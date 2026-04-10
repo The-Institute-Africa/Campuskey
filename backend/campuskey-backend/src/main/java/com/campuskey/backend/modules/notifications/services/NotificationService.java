@@ -3,10 +3,14 @@ package com.campuskey.backend.modules.notifications.services;
 import com.campuskey.backend.exceptions.BadRequestException;
 import com.campuskey.backend.exceptions.ForbiddenException;
 import com.campuskey.backend.exceptions.ResourceNotFoundException;
+import com.campuskey.backend.modules.emails.dto.EmailRequestDto;
+import com.campuskey.backend.modules.emails.services.EmailService;
 import com.campuskey.backend.modules.notifications.dto.NotificationDto;
 import com.campuskey.backend.modules.notifications.entity.Notification;
 import com.campuskey.backend.modules.notifications.mapper.NotificationMapper;
 import com.campuskey.backend.modules.notifications.repository.NotificationRepository;
+import com.campuskey.backend.modules.users.entity.User;
+import com.campuskey.backend.modules.users.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +30,8 @@ public class NotificationService {
 
     private final NotificationRepository notificationRepository;
     private final NotificationMapper notificationMapper;
+    private final UserRepository userRepository;
+    private final EmailService emailService;
 
     @Transactional(readOnly = true)
     public Page<NotificationDto> listCurrentUserNotifications(Authentication authentication, Pageable pageable) {
@@ -44,7 +50,19 @@ public class NotificationService {
 
         Notification notification = notificationMapper.fromCreateRequest(request);
         Notification saved = notificationRepository.save(notification);
+        queueEmailForNotification(saved);
         return notificationMapper.toDto(saved);
+    }
+
+    private void queueEmailForNotification(Notification notification) {
+        userRepository.findByUserNameIgnoreCase(notification.getRecipientUsername())
+                .map(User::getEmail)
+                .filter(email -> email != null && !email.isBlank())
+                .ifPresentOrElse(email -> {
+                    EmailRequestDto emailRequest = notificationMapper.toEmailRequest(notification, email);
+                    emailService.queueNotificationEmail(emailRequest);
+                }, () -> log.warn("No email address found for notification recipient={}",
+                        notification.getRecipientUsername()));
     }
 
     @Transactional

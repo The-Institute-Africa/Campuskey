@@ -26,6 +26,17 @@ public class EmailService {
     private final EmailMapper emailMapper;
 
     @Transactional
+    public void queueNotificationEmail(EmailRequestDto request) {
+        validateRequest(request);
+        String source = request.sourceModule().trim();
+        if (emailMessageRepository.existsByRecipientIgnoreCaseAndSourceModule(request.to().trim(), source)) {
+            log.info("Skipping duplicate notification email for recipient={} sourceModule={}", request.to(), source);
+            return;
+        }
+        queueEmail(request);
+    }
+
+    @Transactional
     public EmailResponseDto queueEmail(EmailRequestDto request) {
         validateRequest(request);
         log.info("Queueing email for recipient={} sourceModule={}", request.to(), request.sourceModule());

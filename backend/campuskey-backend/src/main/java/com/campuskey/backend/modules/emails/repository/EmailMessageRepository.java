@@ -11,5 +11,7 @@ public interface EmailMessageRepository extends JpaRepository<EmailMessage, Long
     Page<EmailMessage> findByRecipientIgnoreCaseOrderByQueuedAtDesc(String recipient, Pageable pageable);
 
     Page<EmailMessage> findByStatusOrderByQueuedAtDesc(EmailStatus status, Pageable pageable);
+
+    boolean existsByRecipientIgnoreCaseAndSourceModule(String recipient, String sourceModule);
 }
 

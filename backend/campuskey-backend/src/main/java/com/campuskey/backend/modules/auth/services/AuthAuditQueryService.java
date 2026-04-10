@@ -28,7 +28,7 @@ public class AuthAuditQueryService {
         log.info("Admin auth audit query requested page={} size={}",
                 pageable.getPageNumber(), pageable.getPageSize());
 
-        Specification<AuthAuditEvent> specification = Specification.where(null);
+        Specification<AuthAuditEvent> specification = (root, query, cb) -> cb.conjunction();
         if (filter.getEventType() != null) {
             specification = specification.and((root, query, cb) -> cb.equal(root.get("eventType"), filter.getEventType()));
         }
@@ -49,4 +49,5 @@ public class AuthAuditQueryService {
         return authAuditEventRepository.findAll(specification, pageable).map(authAuditEventMapper::toAdminDto);
     }
 }
+
 

@@ -1,0 +1,3 @@
+com\campuskey\backend\modules\auth\services\PasswordResetAbusePolicyServiceTest.class
+com\campuskey\backend\modules\notifications\services\NotificationServiceTest.class
+com\campuskey\backend\CampuskeyBackendApplicationTests.class

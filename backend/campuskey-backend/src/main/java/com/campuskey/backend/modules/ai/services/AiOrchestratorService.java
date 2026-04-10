@@ -4,7 +4,8 @@ import com.campuskey.backend.infrastructure.ai.guardrails.ContentFilter;
 import com.campuskey.backend.infrastructure.ai.guardrails.RateLimiter;
 import com.campuskey.backend.infrastructure.ai.guardrails.TocenBudgetManager;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,10 +14,11 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AiOrchestratorService {
+
+    private static final Logger log = LoggerFactory.getLogger(AiOrchestratorService.class);
 
     private static final int MAX_REQUESTS_PER_MINUTE = 30;
     private static final int FALLBACK_COOLDOWN_SECONDS = 30;
