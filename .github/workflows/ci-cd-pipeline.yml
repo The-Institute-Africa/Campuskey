@@ -86,7 +86,7 @@ jobs:
   build-backend-image:
     name: Build Backend Image
     needs: [changes, test-backend]
-    if: github.event_name == 'push' && (needs.changes.outputs.backend == 'true' || needs.changes.outputs.docker == 'true')
+    if: ${{ always() && github.event_name == 'push' && (needs.changes.outputs.backend == 'true' || needs.changes.outputs.docker == 'true') && (needs.test-backend.result == 'success' || needs.test-backend.result == 'skipped') }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -120,7 +120,7 @@ jobs:
   build-frontend-image:
     name: Build Frontend Image
     needs: [changes, test-frontend]
-    if: github.event_name == 'push' && (needs.changes.outputs.frontend == 'true' || needs.changes.outputs.docker == 'true')
+    if: ${{ always() && github.event_name == 'push' && (needs.changes.outputs.frontend == 'true' || needs.changes.outputs.docker == 'true') && (needs.test-frontend.result == 'success' || needs.test-frontend.result == 'skipped') }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
