@@ -1,10 +1,10 @@
 package com.campuskey.backend.security;
 
 import com.campuskey.backend.entities.enumerations.AppRole;
-import com.campuskey.backend.entities.Role;
-import com.campuskey.backend.entities.User;
-import com.campuskey.backend.repositories.RoleRepository;
-import com.campuskey.backend.repositories.UserRepository;
+import com.campuskey.backend.modules.users.entity.Role;
+import com.campuskey.backend.modules.users.entity.User;
+import com.campuskey.backend.modules.users.repository.RoleRepository;
+import com.campuskey.backend.modules.users.repository.UserRepository;
 import com.campuskey.backend.security.jwt.AuthEntryPointJwt;
 import com.campuskey.backend.security.jwt.AuthTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -154,4 +154,5 @@ public class SecurityConfig {
     }
 
 }
+
 
