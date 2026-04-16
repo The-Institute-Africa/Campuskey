@@ -25,6 +25,8 @@ jobs:
       docker: ${{ steps.filter.outputs.docker }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: dorny/paths-filter@v3
         id: filter
         with:
@@ -37,6 +39,11 @@ jobs:
               - 'docker/Dockerfile.frontend'
             docker:
               - 'docker/**'
+      - name: Debug change detection
+        run: |
+          echo "backend=${{ steps.filter.outputs.backend }}"
+          echo "frontend=${{ steps.filter.outputs.frontend }}"
+          echo "docker=${{ steps.filter.outputs.docker }}"
 
   test-backend:
     name: Backend Tests
