@@ -1,0 +1,12 @@
+services:
+  backend:
+    build:
+      args:
+        SPRING_PROFILES_ACTIVE: prod
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+
+  frontend:
+    build:
+      args:
+        VITE_API_URL: /api

@@ -1,0 +1,68 @@
+FROM node:20-alpine AS deps
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+RUN npm ci --ignore-scripts
+
+FROM node:20-alpine AS builder
+WORKDIR /app
+
+ARG VITE_API_URL=/api
+ENV VITE_API_URL=${VITE_API_URL}
+
+COPY --from=deps /app/node_modules ./node_modules
+COPY package.json package-lock.json ./
+COPY . ./
+
+RUN npm run build
+
+FROM nginx:1.27-alpine AS runner
+
+RUN apk add --no-cache curl && rm -f /etc/nginx/conf.d/default.conf
+
+RUN cat > /etc/nginx/conf.d/default.conf <<'EOF'
+server {
+	listen 80;
+	server_name _;
+	root /usr/share/nginx/html;
+	index index.html;
+
+	gzip on;
+	gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
+
+	add_header X-Frame-Options SAMEORIGIN always;
+	add_header X-Content-Type-Options nosniff always;
+	add_header X-XSS-Protection "1; mode=block" always;
+
+	location /api/ {
+		proxy_pass http://backend:8080/;
+		proxy_http_version 1.1;
+		proxy_set_header Host $host;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header X-Forwarded-Proto $scheme;
+	}
+
+	location / {
+		try_files $uri $uri/ /index.html;
+	}
+
+	location ~* \.(?:js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$ {
+		expires 1y;
+		add_header Cache-Control "public, immutable";
+		try_files $uri =404;
+	}
+}
+EOF
+
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+EXPOSE 80
+
+HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
+	CMD curl -f http://localhost/
+
+CMD ["nginx", "-g", "daemon off;"]
+
+
+

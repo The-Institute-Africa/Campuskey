@@ -1,0 +1,49 @@
+services:
+  backend:
+    build:
+      target: builder
+    command: >
+      mvn spring-boot:run
+      -Dspring-boot.run.jvmArguments="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+      -Dspring-boot.run.profiles=dev
+    volumes:
+      - ../backend/campuskey-backend/src:/app/src:cached
+      - ../backend/campuskey-backend/pom.xml:/app/pom.xml:ro
+      - maven-cache:/root/.m2
+    ports:
+      - "8080:8080"
+      - "5005:5005"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      SPRING_DEVTOOLS_RESTART_ENABLED: "true"
+      MANAGEMENT_HEALTH_MAIL_ENABLED: "false"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      start_period: 90s
+      retries: 15
+
+  frontend:
+    build:
+      target: deps
+    command: npm run dev -- --host 0.0.0.0
+    volumes:
+      - ../frontend/campuskey/src:/app/src:cached
+      - ../frontend/campuskey/public:/app/public:cached
+      - ../frontend/campuskey/plugins:/app/plugins:cached
+      - ../frontend/campuskey/index.html:/app/index.html:ro
+      - ../frontend/campuskey/vite.config.js:/app/vite.config.js:ro
+      - ../frontend/campuskey/tailwind.config.js:/app/tailwind.config.js:ro
+      - ../frontend/campuskey/postcss.config.js:/app/postcss.config.js:ro
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_URL: http://localhost:8080
+
+  database:
+    ports:
+      - "${MYSQL_HOST_PORT:-3307}:3306"
+
+volumes:
+  maven-cache:

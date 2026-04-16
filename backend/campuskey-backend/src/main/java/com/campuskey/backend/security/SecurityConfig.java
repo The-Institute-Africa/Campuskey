@@ -65,6 +65,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests((requests)
                 -> requests
                 .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
+                .requestMatchers("/actuator/health", "/actuator/health/**").permitAll()
                 .requestMatchers("/api/csrf-token").permitAll()
                 .requestMatchers("/api/v1/campuskey/auth/public/**").permitAll()
                 .requestMatchers("/error").permitAll()

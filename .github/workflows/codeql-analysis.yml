@@ -1,0 +1,98 @@
+name: CodeQL Security Analysis
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '0 6 * * 1'
+
+jobs:
+  analyze:
+    name: Analyze ${{ matrix.language }}
+    runs-on: ubuntu-latest
+
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+      issues: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [java, javascript]
+
+    steps:
+      # 1. Checkout repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Initialize CodeQL
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+
+      # 3. Setup Java (only when needed)
+      - name: Set up Java
+        if: matrix.language == 'java'
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: maven
+
+      # 4. Install JavaScript dependencies
+      - name: Install JS dependencies
+        if: matrix.language == 'javascript'
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      # 5. Build Java project (custom path safe)
+      - name: Build Java project
+        if: matrix.language == 'java'
+        run: |
+          if [ -d "backend/campuskey-backend" ]; then
+            cd backend/campuskey-backend
+            mvn -B clean compile -DskipTests
+          else
+            echo "Java project path not found, falling back to autobuild"
+          fi
+
+      # 6. Autobuild fallback (important)
+      - name: Autobuild (fallback)
+        uses: github/codeql-action/autobuild@v3
+
+      # 7. Run CodeQL analysis
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+
+      # 8. Create GitHub Issue if vulnerabilities are found
+      - name: Create Issue on Failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = "🚨 CodeQL Security Scan Failed";
+            const body = `
+            The CodeQL security scan detected issues or failed.
+
+            🔍 Please review:
+            - Security tab → Code scanning alerts
+            - Workflow run logs
+
+            ⚠️ Action required before merging.
+            `;
+
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: body
+            });

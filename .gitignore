@@ -1,0 +1,6 @@
+.env
+.env.local
+.env.*.local
+docker/data/
+docker-compose.override.yml
+

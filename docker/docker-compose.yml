@@ -1,0 +1,10 @@
+include:
+  - path: services/database.compose.yml
+  - path: services/redis.compose.yml
+  - path: services/backend.compose.yml
+  - path: services/frontend.compose.yml
+
+networks:
+  campuskey-net:
+    driver: bridge
+    name: campuskey-net

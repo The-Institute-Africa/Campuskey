@@ -1,0 +1,13 @@
+.git
+.github
+.idea
+node_modules
+target
+build
+.gradle
+*.log
+*.md
+!README.md
+.env*
+uploads/
+

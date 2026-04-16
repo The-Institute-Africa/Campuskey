@@ -1,0 +1,19 @@
+services:
+  frontend:
+    build:
+      context: ../../..
+      dockerfile: frontend/campuskey/docker/Dockerfile
+      args:
+        VITE_API_URL: ${VITE_API_URL:-/api}
+    image: ${FRONTEND_IMAGE:-campuskey-frontend:latest}
+    container_name: campuskey-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+

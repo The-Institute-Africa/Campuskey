@@ -1,0 +1,10 @@
+services: {}
+
+# Uncomment and configure when AI model serving is ready
+# services:
+#   ai-service:
+#     image: campuskey-ai:latest
+#     container_name: campuskey-ai
+#     restart: unless-stopped
+#     networks:
+#       - campuskey-net
