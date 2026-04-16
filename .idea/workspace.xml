@@ -4,36 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="976e61a7-d16e-48f3-84d4-39a9be55b025" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/campuskey/docker/configs/nginx.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dockerignore" beforeDir="false" afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/ai-model-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/ai-model-test.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/ci-cd-pipeline.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/ci-cd-pipeline.yml" afterDir="false" />
+    <list default="true" id="976e61a7-d16e-48f3-84d4-39a9be55b025" name="Changes" comment="feat(docker): enhance Docker configurations and add CI/CD pipeline for backend and frontend">
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/test/resources/application-test.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.github/workflows/codeql-analysis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/codeql-analysis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/copilotDiffState.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilotDiffState.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/docker/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/docker/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/security/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/.dockerignore" beforeDir="false" afterPath="$PROJECT_DIR$/docker/.dockerignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/Dockerfile.backend" beforeDir="false" afterPath="$PROJECT_DIR$/docker/Dockerfile.backend" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/Dockerfile.frontend" beforeDir="false" afterPath="$PROJECT_DIR$/docker/Dockerfile.frontend" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/configs/prometheus.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/configs/prometheus.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/configs/promtail-config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/configs/promtail-config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/configs/redis.conf" beforeDir="false" afterPath="$PROJECT_DIR$/docker/configs/redis.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/docker-compose.dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/docker-compose.dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/docker-compose.prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/docker-compose.prod.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/infrastructure/ai.compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/infrastructure/ai.compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/infrastructure/observability.compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/infrastructure/observability.compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/services/backend.compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/services/backend.compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/services/database.compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/services/database.compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/services/frontend.compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/services/frontend.compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/services/redis.compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/services/redis.compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/campuskey/docker/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/docker/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/campuskey/docker/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/docker/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/test/java/com/campuskey/backend/CampuskeyBackendApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/test/java/com/campuskey/backend/CampuskeyBackendApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/target/classes/com/campuskey/backend/security/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/target/classes/com/campuskey/backend/security/SecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/target/surefire-reports/TEST-com.campuskey.backend.modules.notifications.services.NotificationServiceTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/target/surefire-reports/TEST-com.campuskey.backend.modules.notifications.services.NotificationServiceTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/target/surefire-reports/com.campuskey.backend.modules.notifications.services.NotificationServiceTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/target/surefire-reports/com.campuskey.backend.modules.notifications.services.NotificationServiceTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/target/test-classes/com/campuskey/backend/CampuskeyBackendApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/target/test-classes/com/campuskey/backend/CampuskeyBackendApplicationTests.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/deployment-guide.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/deployment-guide.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -250,8 +231,17 @@
       <workItem from="1775842292790" duration="9727000" />
       <workItem from="1776187520549" duration="3890000" />
       <workItem from="1776260496468" duration="6736000" />
-      <workItem from="1776283267474" duration="12057000" />
+      <workItem from="1776283267474" duration="14588000" />
     </task>
+    <task id="LOCAL-00001" summary="feat(docker): enhance Docker configurations and add CI/CD pipeline for backend and frontend">
+      <option name="closed" value="true" />
+      <created>1776298851014</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1776298851014</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -267,6 +257,11 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="chore(repo): add platform assets, docs, frontend ai surfaces and workspace updates" />
+    <MESSAGE value="feat(docker): enhance Docker configurations and add CI/CD pipeline for backend and frontend" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(docker): enhance Docker configurations and add CI/CD pipeline for backend and frontend" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
