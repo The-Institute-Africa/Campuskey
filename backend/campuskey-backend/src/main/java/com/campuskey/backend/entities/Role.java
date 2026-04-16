@@ -4,9 +4,8 @@ import com.campuskey.backend.entities.enumerations.AppRole;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.ToString; // keep ToString only if still used manually
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +13,7 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+// @Data removed; manual getters/setters added below
 @Table(name = "roles")
 public class Role{
 
@@ -36,5 +35,15 @@ public class Role{
     public Role(AppRole roleName) {
         this.roleName = roleName;
     }
+
+    // manual getters/setters replacing Lombok
+    public Integer getRoleId() { return roleId; }
+    public void setRoleId(Integer roleId) { this.roleId = roleId; }
+
+    public AppRole getRoleName() { return roleName; }
+    public void setRoleName(AppRole roleName) { this.roleName = roleName; }
+
+    public Set<User> getUsers() { return users; }
+    public void setUsers(Set<User> users) { this.users = users; }
 }
 

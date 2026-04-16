@@ -3,8 +3,7 @@ package com.campuskey.backend.security.services;
 
 import com.campuskey.backend.entities.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+// lombok removed; manual methods are defined below
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,10 +12,13 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-@NoArgsConstructor
-@Data
+// no-args constructor manually defined
 public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
+
+    public UserDetailsImpl() {
+        // default constructor
+    }
 
     private Long id;
     private String username;
