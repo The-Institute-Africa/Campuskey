@@ -1,5 +1,6 @@
 import API from '@/api/api'
 const placeholderImage = "https://images.unsplash.com/photo-1595872018818-97555653a011";
+const BASE_URL = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
 
 export const fetchProperties = async () => {
   const response = await API.get("public/properties");

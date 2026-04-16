@@ -4,17 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="976e61a7-d16e-48f3-84d4-39a9be55b025" name="Changes" comment="feat(docker): enhance Docker configurations and add CI/CD pipeline for backend and frontend">
-      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/test/resources/application-test.properties" afterDir="false" />
+    <list default="true" id="976e61a7-d16e-48f3-84d4-39a9be55b025" name="Changes" comment="feat(tests): add application test properties and configure test profile for Spring Boot">
+      <change afterPath="$PROJECT_DIR$/frontend/campuskey/.eslintrc.cjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/ci-cd-pipeline.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/ci-cd-pipeline.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.github/workflows/codeql-analysis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/codeql-analysis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/copilotDiffState.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilotDiffState.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/test/java/com/campuskey/backend/CampuskeyBackendApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/test/java/com/campuskey/backend/CampuskeyBackendApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/target/classes/com/campuskey/backend/security/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/target/classes/com/campuskey/backend/security/SecurityConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/target/surefire-reports/TEST-com.campuskey.backend.modules.notifications.services.NotificationServiceTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/target/surefire-reports/TEST-com.campuskey.backend.modules.notifications.services.NotificationServiceTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/target/surefire-reports/com.campuskey.backend.modules.notifications.services.NotificationServiceTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/target/surefire-reports/com.campuskey.backend.modules.notifications.services.NotificationServiceTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/target/test-classes/com/campuskey/backend/CampuskeyBackendApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/target/test-classes/com/campuskey/backend/CampuskeyBackendApplicationTests.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/deployment-guide.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/deployment-guide.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/campuskey/src/pages/student/api/student.api.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/campuskey/src/pages/student/api/student.api.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -231,7 +226,7 @@
       <workItem from="1775842292790" duration="9727000" />
       <workItem from="1776187520549" duration="3890000" />
       <workItem from="1776260496468" duration="6736000" />
-      <workItem from="1776283267474" duration="14588000" />
+      <workItem from="1776283267474" duration="15855000" />
     </task>
     <task id="LOCAL-00001" summary="feat(docker): enhance Docker configurations and add CI/CD pipeline for backend and frontend">
       <option name="closed" value="true" />
@@ -241,7 +236,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776298851014</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="feat(tests): add application test properties and configure test profile for Spring Boot">
+      <option name="closed" value="true" />
+      <created>1776301348454</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1776301348454</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -261,7 +264,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="chore(repo): add platform assets, docs, frontend ai surfaces and workspace updates" />
     <MESSAGE value="feat(docker): enhance Docker configurations and add CI/CD pipeline for backend and frontend" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(docker): enhance Docker configurations and add CI/CD pipeline for backend and frontend" />
+    <MESSAGE value="feat(tests): add application test properties and configure test profile for Spring Boot" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(tests): add application test properties and configure test profile for Spring Boot" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
