@@ -8,8 +8,6 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  BACKEND_IMAGE: ghcr.io/${{ github.repository_owner }}/campuskey-backend
-  FRONTEND_IMAGE: ghcr.io/${{ github.repository_owner }}/campuskey-frontend
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -99,9 +97,32 @@ jobs:
         working-directory: frontend/campuskey
         run: npm run build
 
+  prepare-image-metadata:
+    name: Prepare Image Metadata
+    runs-on: ubuntu-latest
+    outputs:
+      owner_lc: ${{ steps.owner.outputs.owner_lc }}
+      backend_image: ${{ steps.images.outputs.backend_image }}
+      frontend_image: ${{ steps.images.outputs.frontend_image }}
+    steps:
+      - name: Normalize repository owner
+        id: owner
+        run: echo "owner_lc=$(echo \"${GITHUB_REPOSITORY_OWNER}\" | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_OUTPUT"
+      - name: Compose image names
+        id: images
+        run: |
+          echo "backend_image=${{ env.REGISTRY }}/${{ steps.owner.outputs.owner_lc }}/campuskey-backend" >> "$GITHUB_OUTPUT"
+          echo "frontend_image=${{ env.REGISTRY }}/${{ steps.owner.outputs.owner_lc }}/campuskey-frontend" >> "$GITHUB_OUTPUT"
+      - name: Debug normalized image namespace
+        run: |
+          echo "repository_owner_raw=${GITHUB_REPOSITORY_OWNER}"
+          echo "repository_owner_lc=${{ steps.owner.outputs.owner_lc }}"
+          echo "backend_image=${{ steps.images.outputs.backend_image }}"
+          echo "frontend_image=${{ steps.images.outputs.frontend_image }}"
+
   build-backend-image:
     name: Build Backend Image
-    needs: [test-backend]
+    needs: [test-backend, prepare-image-metadata]
     if: ${{ always() && github.event_name == 'push' && (needs.test-backend.result == 'success' || needs.test-backend.result == 'skipped') }}
     runs-on: ubuntu-latest
     permissions:
@@ -128,14 +149,14 @@ jobs:
           file: docker/Dockerfile.backend
           push: true
           tags: |
-            ${{ env.BACKEND_IMAGE }}:${{ steps.version.outputs.VERSION }}
-            ${{ env.BACKEND_IMAGE }}:latest
+            ${{ needs.prepare-image-metadata.outputs.backend_image }}:${{ steps.version.outputs.VERSION }}
+            ${{ needs.prepare-image-metadata.outputs.backend_image }}:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
   build-frontend-image:
     name: Build Frontend Image
-    needs: [test-frontend]
+    needs: [test-frontend, prepare-image-metadata]
     if: ${{ always() && github.event_name == 'push' && (needs.test-frontend.result == 'success' || needs.test-frontend.result == 'skipped') }}
     runs-on: ubuntu-latest
     permissions:
@@ -162,8 +183,8 @@ jobs:
           file: docker/Dockerfile.frontend
           push: true
           tags: |
-            ${{ env.FRONTEND_IMAGE }}:${{ steps.version.outputs.VERSION }}
-            ${{ env.FRONTEND_IMAGE }}:latest
+            ${{ needs.prepare-image-metadata.outputs.frontend_image }}:${{ steps.version.outputs.VERSION }}
+            ${{ needs.prepare-image-metadata.outputs.frontend_image }}:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -177,28 +198,189 @@ jobs:
     if: failure()
     runs-on: ubuntu-latest
     permissions:
+      actions: read
+      contents: read
       issues: write
     steps:
-      - uses: actions/github-script@v7
+      - uses: actions/github-script@v8
         with:
           script: |
             const title = `CI Failure: ${context.workflow} on ${context.ref}`;
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            const failureConclusions = new Set([
+              "failure",
+              "cancelled",
+              "timed_out",
+              "action_required",
+              "startup_failure",
+              "stale"
+            ]);
+
+            const buildSection = (titleText, lines) => {
+              if (!lines || lines.length === 0) {
+                return `### ${titleText}\nNo matching log lines were captured.\n`;
+              }
+              return `### ${titleText}\n\`\`\`text\n${lines.join("\n")}\n\`\`\`\n`;
+            };
+
+            const sanitizeLabel = (value) =>
+              value
+                .toLowerCase()
+                .replace(/[^a-z0-9-]+/g, "-")
+                .replace(/^-+|-+$/g, "")
+                .slice(0, 50);
+
+            const extractSignalLines = (rawLog) => {
+              if (!rawLog) return [];
+              const lines = rawLog
+                .split(/\r?\n/)
+                .map((line) => line.trim())
+                .filter(Boolean);
+
+              const signal = lines.filter((line) => /\b(error|exception|failed|failure|warning|warn)\b/i.test(line));
+              return signal.slice(0, 40);
+            };
+
+            const fetchJobLog = async (job) => {
+              try {
+                const response = await github.request("GET /repos/{owner}/{repo}/actions/jobs/{job_id}/logs", {
+                  owner,
+                  repo,
+                  job_id: job.id
+                });
+
+                if (typeof response.data === "string") {
+                  return response.data;
+                }
+
+                const redirectUrl = response.headers?.location;
+                if (!redirectUrl) {
+                  return "";
+                }
+
+                const redirected = await fetch(redirectUrl);
+                if (!redirected.ok) {
+                  return "";
+                }
+                return await redirected.text();
+              } catch (error) {
+                core.warning(`Failed to fetch logs for job ${job.name}: ${error.message}`);
+                return "";
+              }
+            };
+
+            const jobsResponse = await github.rest.actions.listJobsForWorkflowRun({
+              owner,
+              repo,
+              run_id: context.runId,
+              per_page: 100
+            });
+
+            const failedJobs = jobsResponse.data.jobs.filter((job) => failureConclusions.has(job.conclusion));
+            const failedJobLines = failedJobs.map(
+              (job) => `- ${job.name}: ${job.conclusion} (${job.html_url})`
+            );
+
+            const logSections = [];
+            for (const job of failedJobs.slice(0, 6)) {
+              const logText = await fetchJobLog(job);
+              const signalLines = extractSignalLines(logText);
+              logSections.push(buildSection(`${job.name} (${job.conclusion})`, signalLines));
+            }
+
+            const labelConfig = {
+              "ci-failure": { color: "d73a4a", description: "CI pipeline failure" },
+              "pipeline-triage": { color: "fbca04", description: "Needs CI triage" },
+              "automated-report": { color: "5319e7", description: "Automatically generated by workflow" },
+              "logs-captured": { color: "0e8a16", description: "Issue contains failure log snippets" },
+              "needs-investigation": { color: "b60205", description: "Requires engineering investigation" }
+            };
+
+            const dynamicLabels = failedJobs
+              .slice(0, 3)
+              .map((job) => sanitizeLabel(`failed-job-${job.name}`))
+              .filter(Boolean);
+
+            const labels = [...Object.keys(labelConfig), ...dynamicLabels];
+
+            const existingLabels = await github.paginate(github.rest.issues.listLabelsForRepo, {
+              owner,
+              repo,
+              per_page: 100
+            });
+            const existingLabelNames = new Set(existingLabels.map((label) => label.name));
+
+            for (const [name, spec] of Object.entries(labelConfig)) {
+              if (existingLabelNames.has(name)) {
+                continue;
+              }
+              try {
+                await github.rest.issues.createLabel({
+                  owner,
+                  repo,
+                  name,
+                  color: spec.color,
+                  description: spec.description
+                });
+              } catch (error) {
+                core.warning(`Could not create label ${name}: ${error.message}`);
+              }
+            }
+
+            for (const name of dynamicLabels) {
+              if (existingLabelNames.has(name)) {
+                continue;
+              }
+              try {
+                await github.rest.issues.createLabel({
+                  owner,
+                  repo,
+                  name,
+                  color: "cfd3d7",
+                  description: "Failed job marker generated by CI"
+                });
+              } catch (error) {
+                core.warning(`Could not create dynamic label ${name}: ${error.message}`);
+              }
+            }
             
             // ✅ Prevent duplicate issues (Fix #6)
             const { data: issues } = await github.rest.issues.listForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
+              owner,
+              repo,
               state: "open"
             });
 
             const exists = issues.find(issue => issue.title === title);
 
+            const body = [
+              `Failure detected in workflow run: ${context.runId}`,
+              `Workflow: ${context.workflow}`,
+              `Event: ${context.eventName}`,
+              `Ref: ${context.ref}`,
+              "",
+              "## Failed Jobs",
+              ...(failedJobLines.length ? failedJobLines : ["- No failed jobs were listed by Actions API."]),
+              "",
+              "## Error/Warning Log Excerpts",
+              ...(logSections.length ? logSections : ["No log excerpts could be collected."])
+            ].join("\n");
+
             if (!exists) {
               await github.rest.issues.create({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
+                owner,
+                repo,
                 title,
-                body: `Failure detected in workflow run: ${context.runId}`,
-                labels: ["ci", "bug", "auto-generated"]
+                body,
+                labels
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: exists.number,
+                body
               });
             }
