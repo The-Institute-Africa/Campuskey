@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/modules/auth/controller/authController.java">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/modules/auth/controller/authController.java" />
+              <option name="updatedContent" value="package com.campuskey.backend.modules.auth.controller;&#10;&#10;import com.campuskey.backend.modules.auth.dto.AuthLoginRequest;&#10;import com.campuskey.backend.modules.auth.dto.AuthResponse;&#10;import com.campuskey.backend.modules.auth.dto.AuthSignupRequest;&#10;import com.campuskey.backend.modules.auth.services.AuthService;&#10;import jakarta.validation.Valid;&#10;import lombok.RequiredArgsConstructor;&#10;import org.springframework.web.bind.annotation.PostMapping;&#10;import org.springframework.web.bind.annotation.RequestBody;&#10;import org.springframework.web.bind.annotation.RequestMapping;&#10;import org.springframework.web.bind.annotation.RestController;&#10;&#10;@RestController&#10;@RequestMapping(&quot;/api/v1/campuskey/auth/public&quot;)&#10;@RequiredArgsConstructor&#10;public class AuthController {&#10;&#10;&#9;private final AuthService authService;&#10;&#10;&#9;@PostMapping(&quot;/signin&quot;)&#10;&#9;public AuthResponse signIn(@Valid @RequestBody AuthLoginRequest request) {&#10;&#9;&#9;return authService.signIn(request);&#10;&#9;}&#10;&#10;&#9;@PostMapping(&quot;/signup&quot;)&#10;&#9;public AuthResponse signUp(@Valid @RequestBody AuthSignupRequest request) {&#10;&#9;&#9;return authService.signUp(request);&#10;&#9;}&#10;}&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

@@ -2,12 +2,13 @@
 
 import fs from 'fs';
 import path from 'path';
+import { pathToFileURL } from 'url';
 
 const CLEAN_CONTENT_REGEX = {
   comments: /\/\*[\s\S]*?\*\/|\/\/.*$/gm,
   templateLiterals: /`[\s\S]*?`/g,
   strings: /'[^']*'|"[^"]*"/g,
-  jsxExpressions: /\{.*?\}/g,
+  jsxExpressions: /\{.*?}/g,
   htmlEntities: {
     quot: /&quot;/g,
     amp: /&amp;/g,
@@ -20,7 +21,7 @@ const CLEAN_CONTENT_REGEX = {
 const EXTRACTION_REGEX = {
   route: /<Route\s+[^>]*>/g,
   path: /path=["']([^"']+)["']/,
-  element: /element=\{<(\w+)[^}]*\/?\s*>\}/,
+   element: /element=\{<(\w+)[^}]*\/?\s*>}/,
   helmet: /<Helmet[^>]*?>([\s\S]*?)<\/Helmet>/i,
   helmetTest: /<Helmet[\s\S]*?<\/Helmet>/i,
   title: /<title[^>]*?>\s*(.*?)\s*<\/title>/i,
@@ -82,7 +83,21 @@ function extractRoutes(appJsxPath) {
 }
 
 function findReactFiles(dir) {
-  return fs.readdirSync(dir).map(item => path.join(dir, item));
+  if (!fs.existsSync(dir)) return [];
+
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  const files = [];
+
+  for (const entry of entries) {
+    const entryPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      files.push(...findReactFiles(entryPath));
+    } else if (/\.(jsx?|tsx?)$/i.test(entry.name)) {
+      files.push(entryPath);
+    }
+  }
+
+  return files;
 }
 
 function extractHelmetData(content, filePath, routes) {
@@ -174,7 +189,9 @@ function main() {
   fs.writeFileSync(outputPath, llmsTxtContent, 'utf8');
 }
 
-const isMainModule = import.meta.url === `file://${process.argv[1]}`;
+const isMainModule = process.argv[1]
+  ? import.meta.url === pathToFileURL(process.argv[1]).href
+  : false;
 
 if (isMainModule) {
   main();

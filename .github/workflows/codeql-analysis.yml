@@ -1,0 +1,124 @@
+name: CodeQL Security Analysis
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '0 6 * * 1'
+
+jobs:
+  analyze:
+    name: Analyze ${{ matrix.language }}
+    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false
+
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+      issues: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [java, javascript]
+
+    steps:
+      # 1. Checkout repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Detect whether code scanning is enabled for this repository
+      - name: Check code scanning availability
+        id: code_scanning
+        uses: actions/github-script@v8
+        with:
+          script: |
+            try {
+              await github.request('GET /repos/{owner}/{repo}/code-scanning/default-setup', {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+              });
+              core.setOutput('enabled', 'true');
+            } catch (error) {
+              core.warning(`Code scanning check skipped: ${error.message}`);
+              core.setOutput('enabled', 'false');
+            }
+
+      # 3. Initialize CodeQL
+      - name: Initialize CodeQL
+        if: steps.code_scanning.outputs.enabled == 'true'
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+
+      # 4. Setup Java (only when needed)
+      - name: Set up Java
+        if: matrix.language == 'java' && steps.code_scanning.outputs.enabled == 'true'
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: maven
+
+      # 5. Install JavaScript dependencies
+      - name: Install JS dependencies
+        if: matrix.language == 'javascript' && steps.code_scanning.outputs.enabled == 'true'
+        working-directory: frontend/campuskey
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      # 6. Build Java project (custom path safe)
+      - name: Build Java project
+        if: matrix.language == 'java' && steps.code_scanning.outputs.enabled == 'true'
+        run: |
+          if [ -d "backend/campuskey-backend" ]; then
+            cd backend/campuskey-backend
+            mvn -B clean compile -DskipTests
+          else
+            echo "Java project path not found, falling back to autobuild"
+          fi
+
+      # 7. Autobuild fallback (important)
+      - name: Autobuild (fallback)
+        if: steps.code_scanning.outputs.enabled == 'true'
+        uses: github/codeql-action/autobuild@v3
+
+      # 8. Run CodeQL analysis
+      - name: Perform CodeQL Analysis
+        if: steps.code_scanning.outputs.enabled == 'true'
+        uses: github/codeql-action/analyze@v3
+
+      - name: Skip notice when code scanning is disabled
+        if: steps.code_scanning.outputs.enabled != 'true'
+        run: echo "Code scanning is disabled for this repository. Enable it in repository settings to run CodeQL uploads."
+
+      # 9. Create GitHub Issue if vulnerabilities are found
+      - name: Create Issue on Failure
+        if: failure() && steps.code_scanning.outputs.enabled == 'true'
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const title = "🚨 CodeQL Security Scan Failed";
+            const body = `
+            The CodeQL security scan detected issues or failed.
+
+            🔍 Please review:
+            - Security tab → Code scanning alerts
+            - Workflow run logs
+
+            ⚠️ Action required before merging.
+            `;
+
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: body
+            });

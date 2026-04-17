@@ -1,0 +1,26 @@
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: campuskey-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf", "--requirepass", "${REDIS_PASSWORD:-}"]
+    volumes:
+      - ../configs/redis.conf:/usr/local/etc/redis/redis.conf:ro
+      - campuskey-redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD:-}", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    networks:
+      - campuskey-net
+
+volumes:
+  campuskey-redis-data:
+
+networks:
+  campuskey-net:
+    name: campuskey-net

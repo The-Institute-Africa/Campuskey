@@ -22,7 +22,6 @@ import AboutPage from '@/pages/misc/AboutPage';
 import ContactPage from '@/pages/misc/ContactPage';
 import ListingsPage from '@/pages/property/PropertyPage';
 import ListingDetailPage from '@/pages/property/PropertyDetailPage';
-import PropertyDetail from '@/pages/student/propertyDetail';
 import StudentGuidePage from '@/pages/student/StudentGuidePage';
 import HelpCenterPage from '@/pages/misc/HelpCenterPage';
 import TermsPage from '@/pages/misc/TermsPage';
@@ -38,7 +37,7 @@ import StudentAccountSettingsPage from '@/pages/student/StudentAccountSettingsPa
 import StudentApplicationsPage from '@/pages/student/StudentApplicationsPage';
 import StudentFavoritesPage from '@/pages/student/StudentFavoritesPage';
 import ScrollToTop from "@/components/ScrollToTop";
-import StudentProfile from "@/pages/student/StudentProfile"
+import StudentProfile from "@/pages/student/studentProfile"
 
 import { Toaster } from '@/components/ui/toaster';
 import { AuthProvider } from './pages/auth/api/store/auth.store';

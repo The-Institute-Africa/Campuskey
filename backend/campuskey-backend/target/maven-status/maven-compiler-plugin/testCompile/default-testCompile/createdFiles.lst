@@ -1,0 +1,4 @@
+com\campuskey\backend\modules\notifications\services\NotificationServiceTest.class
+com\campuskey\backend\CampuskeyBackendApplicationTests.class
+com\campuskey\backend\modules\auth\dto\AppRoleDeserializerTest.class
+com\campuskey\backend\modules\auth\services\PasswordResetAbusePolicyServiceTest.class

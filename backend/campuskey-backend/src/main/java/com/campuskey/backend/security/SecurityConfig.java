@@ -1,10 +1,10 @@
 package com.campuskey.backend.security;
 
 import com.campuskey.backend.entities.enumerations.AppRole;
-import com.campuskey.backend.entities.Role;
-import com.campuskey.backend.entities.User;
-import com.campuskey.backend.repositories.RoleRepository;
-import com.campuskey.backend.repositories.UserRepository;
+import com.campuskey.backend.modules.users.entity.Role;
+import com.campuskey.backend.modules.users.entity.User;
+import com.campuskey.backend.modules.users.repository.RoleRepository;
+import com.campuskey.backend.modules.users.repository.UserRepository;
 import com.campuskey.backend.security.jwt.AuthEntryPointJwt;
 import com.campuskey.backend.security.jwt.AuthTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +65,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests((requests)
                 -> requests
                 .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
+                .requestMatchers("/actuator/health", "/actuator/health/**").permitAll()
                 .requestMatchers("/api/csrf-token").permitAll()
                 .requestMatchers("/api/v1/campuskey/auth/public/**").permitAll()
                 .requestMatchers("/error").permitAll()
@@ -154,4 +155,5 @@ public class SecurityConfig {
     }
 
 }
+
 

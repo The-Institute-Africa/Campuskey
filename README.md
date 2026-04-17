@@ -162,6 +162,27 @@ campuskey/
 
 ---
 
+## 🐳 Docker Development
+
+Use the Docker-based workflow for local development:
+
+```bash
+cp .env.example .env
+```
+
+Fill in the values in `.env`, then use the following commands:
+
+```bash
+make dev
+make dev-detach
+make dev-logs
+make test-all
+make build-all
+make clean
+```
+
+---
+
 ## 🔐 Environment Variables
 
 ### Frontend (`.env.local`)

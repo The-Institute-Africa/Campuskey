@@ -1,8 +1,8 @@
 package com.campuskey.backend.security.services;
 
 
-import com.campuskey.backend.entities.User;
-import com.campuskey.backend.repositories.UserRepository;
+import com.campuskey.backend.modules.users.entity.User;
+import com.campuskey.backend.modules.users.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -30,3 +30,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 
 }
+
