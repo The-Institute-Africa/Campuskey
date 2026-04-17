@@ -40,12 +40,24 @@ public class AppRoleDeserializer extends JsonDeserializer<AppRole> {
         if (rawValue == null || rawValue.isBlank()) {
             return null;
         }
+
+        String normalizedValue = normalizeRoleValue(rawValue);
         try {
-            return AppRole.valueOf(rawValue.trim().toUpperCase());
+            return AppRole.valueOf(normalizedValue);
         } catch (IllegalArgumentException ex) {
             return (AppRole) context.handleWeirdStringValue(AppRole.class, rawValue,
-                    "Role must be one of ROLE_STUDENT, ROLE_LANDLORD, ROLE_ADMIN.");
+                    "Role must be one of student, landlord, admin, ROLE_STUDENT, ROLE_LANDLORD, ROLE_ADMIN.");
         }
+    }
+
+    private String normalizeRoleValue(String rawValue) {
+        String value = rawValue.trim().toUpperCase();
+        return switch (value) {
+            case "STUDENT", "ROLE_STUDENT" -> AppRole.ROLE_STUDENT.name();
+            case "LANDLORD", "ROLE_LANDLORD" -> AppRole.ROLE_LANDLORD.name();
+            case "ADMIN", "ROLE_ADMIN" -> AppRole.ROLE_ADMIN.name();
+            default -> value;
+        };
     }
 
     private void consumeRemainingArray(JsonParser parser) throws IOException {

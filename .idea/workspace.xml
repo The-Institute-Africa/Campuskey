@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="976e61a7-d16e-48f3-84d4-39a9be55b025" name="Changes" comment="feat(auth): implement AppRoleDeserializer for custom deserialization of AppRole">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/ci-cd-pipeline.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/ci-cd-pipeline.yml" afterDir="false" />
+    <list default="true" id="976e61a7-d16e-48f3-84d4-39a9be55b025" name="Changes" comment="feat(ci): simplify CI/CD pipeline conditions for backend and frontend image builds">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -225,7 +225,7 @@
       <workItem from="1776283267474" duration="15855000" />
       <workItem from="1776302910430" duration="361000" />
       <workItem from="1776303372123" duration="1760000" />
-      <workItem from="1776384388167" duration="1167000" />
+      <workItem from="1776384388167" duration="3900000" />
     </task>
     <task id="LOCAL-00001" summary="feat(docker): enhance Docker configurations and add CI/CD pipeline for backend and frontend">
       <option name="closed" value="true" />
@@ -283,7 +283,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776385001225</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="feat(ci): simplify CI/CD pipeline conditions for backend and frontend image builds">
+      <option name="closed" value="true" />
+      <created>1776385862048</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1776385862048</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -309,7 +317,8 @@
     <MESSAGE value="feat(ci): remove AI model test workflow and enhance CI/CD pipeline with debug steps" />
     <MESSAGE value="feat(ci): enhance CI/CD pipeline conditions for backend and frontend image builds" />
     <MESSAGE value="feat(auth): implement AppRoleDeserializer for custom deserialization of AppRole" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(auth): implement AppRoleDeserializer for custom deserialization of AppRole" />
+    <MESSAGE value="feat(ci): simplify CI/CD pipeline conditions for backend and frontend image builds" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(ci): simplify CI/CD pipeline conditions for backend and frontend image builds" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
