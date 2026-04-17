@@ -2,7 +2,7 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [main, develop]
+    branches: ['**']
   pull_request:
     branches: [main, develop]
 
@@ -45,10 +45,26 @@ jobs:
           echo "frontend=${{ steps.filter.outputs.frontend }}"
           echo "docker=${{ steps.filter.outputs.docker }}"
 
+  debug-gates:
+    name: Debug Pipeline Gates
+    needs: [changes]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print trigger and filter context
+        run: |
+          echo "event_name=${{ github.event_name }}"
+          echo "ref=${{ github.ref }}"
+          echo "base_ref=${{ github.base_ref }}"
+          echo "sha=${{ github.sha }}"
+          echo "changes.backend=${{ needs.changes.outputs.backend }}"
+          echo "changes.frontend=${{ needs.changes.outputs.frontend }}"
+          echo "changes.docker=${{ needs.changes.outputs.docker }}"
+
   test-backend:
     name: Backend Tests
-    needs: changes
-    if: needs.changes.outputs.backend == 'true' || needs.changes.outputs.docker == 'true'
+    needs: [changes, debug-gates]
+    if: always()
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -63,8 +79,8 @@ jobs:
 
   test-frontend:
     name: Frontend Tests
-    needs: changes
-    if: needs.changes.outputs.frontend == 'true' || needs.changes.outputs.docker == 'true'
+    needs: [changes, debug-gates]
+    if: always()
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -85,7 +101,7 @@ jobs:
 
   build-backend-image:
     name: Build Backend Image
-    needs: [changes, test-backend]
+    needs: [test-backend]
     if: ${{ always() && github.event_name == 'push' && (needs.test-backend.result == 'success' || needs.test-backend.result == 'skipped') }}
     runs-on: ubuntu-latest
     permissions:
@@ -119,7 +135,7 @@ jobs:
 
   build-frontend-image:
     name: Build Frontend Image
-    needs: [changes, test-frontend]
+    needs: [test-frontend]
     if: ${{ always() && github.event_name == 'push' && (needs.test-frontend.result == 'success' || needs.test-frontend.result == 'skipped') }}
     runs-on: ubuntu-latest
     permissions:
