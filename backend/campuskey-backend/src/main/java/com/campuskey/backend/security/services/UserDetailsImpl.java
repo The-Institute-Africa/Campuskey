@@ -3,9 +3,13 @@ package com.campuskey.backend.security.services;
 
 import com.campuskey.backend.modules.users.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+<<<<<<< HEAD
+// lombok removed; manual methods are defined below
+=======
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+>>>>>>> 10df2552210ffb6dce08388831e33070867bd3f3
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,11 +18,19 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
+<<<<<<< HEAD
+// no-args constructor manually defined
+=======
 @NoArgsConstructor
 @Getter
 @Setter
+>>>>>>> 10df2552210ffb6dce08388831e33070867bd3f3
 public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
+
+    public UserDetailsImpl() {
+        // default constructor
+    }
 
     private Long id;
     private String username;
