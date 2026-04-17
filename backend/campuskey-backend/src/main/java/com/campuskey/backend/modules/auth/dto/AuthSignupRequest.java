@@ -1,6 +1,7 @@
 package com.campuskey.backend.modules.auth.dto;
 
 import com.campuskey.backend.entities.enumerations.AppRole;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -20,6 +21,7 @@ public class AuthSignupRequest {
     @Size(min = 6, max = 255)
     private String password;
 
+    @JsonDeserialize(using = AppRoleDeserializer.class)
     private AppRole role;
 
     public String getUsername() {
@@ -54,4 +56,3 @@ public class AuthSignupRequest {
         this.role = role;
     }
 }
-

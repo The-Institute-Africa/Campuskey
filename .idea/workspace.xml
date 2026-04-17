@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="976e61a7-d16e-48f3-84d4-39a9be55b025" name="Changes" comment="feat(refactor): update import paths and enhance file handling in generate-llms script">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/ai-model-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/ai-model-test.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/ci-cd-pipeline.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/ci-cd-pipeline.yml" afterDir="false" />
+    <list default="true" id="976e61a7-d16e-48f3-84d4-39a9be55b025" name="Changes" comment="feat(ci): enhance CI/CD pipeline conditions for backend and frontend image builds">
+      <change afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/modules/auth/dto/AppRoleDeserializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/modules/auth/dto/AuthSignupRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/src/main/java/com/campuskey/backend/modules/auth/dto/AuthSignupRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/target/classes/com/campuskey/backend/modules/auth/dto/AuthSignupRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/target/classes/com/campuskey/backend/modules/auth/dto/AuthSignupRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/campuskey-backend/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/backend/campuskey-backend/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +26,7 @@
     <option name="chatModeId" value="Agent" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="633" />
+    <option name="cachedIndexableFilesCount" value="634" />
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$/backend/campuskey-backend">
@@ -225,7 +229,8 @@
       <workItem from="1776260496468" duration="6736000" />
       <workItem from="1776283267474" duration="15855000" />
       <workItem from="1776302910430" duration="361000" />
-      <workItem from="1776303372123" duration="1221000" />
+      <workItem from="1776303372123" duration="1760000" />
+      <workItem from="1776384388167" duration="563000" />
     </task>
     <task id="LOCAL-00001" summary="feat(docker): enhance Docker configurations and add CI/CD pipeline for backend and frontend">
       <option name="closed" value="true" />
@@ -259,7 +264,23 @@
       <option name="project" value="LOCAL" />
       <updated>1776303909642</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="feat(ci): remove AI model test workflow and enhance CI/CD pipeline with debug steps">
+      <option name="closed" value="true" />
+      <created>1776304656861</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1776304656861</updated>
+    </task>
+    <task id="LOCAL-00006" summary="feat(ci): enhance CI/CD pipeline conditions for backend and frontend image builds">
+      <option name="closed" value="true" />
+      <created>1776305033947</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1776305033947</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -282,7 +303,9 @@
     <MESSAGE value="feat(tests): add application test properties and configure test profile for Spring Boot" />
     <MESSAGE value="feat(eslint): add ESLint configuration for code quality enforcement" />
     <MESSAGE value="feat(refactor): update import paths and enhance file handling in generate-llms script" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(refactor): update import paths and enhance file handling in generate-llms script" />
+    <MESSAGE value="feat(ci): remove AI model test workflow and enhance CI/CD pipeline with debug steps" />
+    <MESSAGE value="feat(ci): enhance CI/CD pipeline conditions for backend and frontend image builds" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(ci): enhance CI/CD pipeline conditions for backend and frontend image builds" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -50,6 +50,7 @@ D:\Documents\Campuskey\backend\campuskey-backend\src\main\java\com\campuskey\bac
 D:\Documents\Campuskey\backend\campuskey-backend\src\main\java\com\campuskey\backend\modules\auth\config\PasswordResetSecurityProperties.java
 D:\Documents\Campuskey\backend\campuskey-backend\src\main\java\com\campuskey\backend\modules\auth\controller\AdminAuthAuditController.java
 D:\Documents\Campuskey\backend\campuskey-backend\src\main\java\com\campuskey\backend\modules\auth\controller\AuthController.java
+D:\Documents\Campuskey\backend\campuskey-backend\src\main\java\com\campuskey\backend\modules\auth\dto\AppRoleDeserializer.java
 D:\Documents\Campuskey\backend\campuskey-backend\src\main\java\com\campuskey\backend\modules\auth\dto\AuthAuditEventAdminDto.java
 D:\Documents\Campuskey\backend\campuskey-backend\src\main\java\com\campuskey\backend\modules\auth\dto\AuthAuditEventFilter.java
 D:\Documents\Campuskey\backend\campuskey-backend\src\main\java\com\campuskey\backend\modules\auth\dto\AuthLoginRequest.java

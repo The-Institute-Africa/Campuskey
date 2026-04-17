@@ -22,6 +22,7 @@ com\campuskey\backend\security\response\UserInfoResponse.class
 com\campuskey\backend\modules\bookings\controller\BookingController.class
 com\campuskey\backend\exceptions\UnauthorizedException.class
 com\campuskey\backend\modules\users\entity\User.class
+com\campuskey\backend\modules\auth\dto\AppRoleDeserializer.class
 com\campuskey\backend\modules\reviews\controller\ReviewController.class
 com\campuskey\backend\modules\notifications\services\NotificationService.class
 com\campuskey\backend\modules\auth\config\AuthModuleSchedulingConfig.class
