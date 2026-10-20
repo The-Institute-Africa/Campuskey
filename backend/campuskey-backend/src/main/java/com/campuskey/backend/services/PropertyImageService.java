@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.nio.file.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,10 +17,12 @@ import java.util.stream.Collectors;
 public class PropertyImageService {
 
     private final PropertyImageRepository propertyImageRepository;
+    private final PublicMediaStorage mediaStorage;
 
     @Autowired
-    public PropertyImageService(PropertyImageRepository propertyImageRepository) {
+    public PropertyImageService(PropertyImageRepository propertyImageRepository, PublicMediaStorage mediaStorage) {
         this.propertyImageRepository = propertyImageRepository;
+        this.mediaStorage = mediaStorage;
     }
 
     public List<PropertyImageDto> getPropertyPictures() {
@@ -45,12 +46,7 @@ public class PropertyImageService {
      * Saves the image file to disk and returns the URL path.
      */
     public String saveImage(MultipartFile file) throws IOException {
-        String filename = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-        String uploadDir = "uploads/propertyImages/";
-        Path filePath = Paths.get(uploadDir + filename);
-        Files.createDirectories(filePath.getParent());
-        Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-        return "/uploads/propertyImages/" + filename;
+        return mediaStorage.storeImage(file);
     }
 
     /**

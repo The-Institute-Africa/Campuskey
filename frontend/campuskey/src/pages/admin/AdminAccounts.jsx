@@ -22,7 +22,7 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 
-import { fetchAllLandlords } from "./api/admin.api";
+import { fetchAllLandlords, fetchLandlordVerificationDocument } from "./api/admin.api";
 import {
   verifyLandlordAccount,
   suspendLandlordAccount,
@@ -148,6 +148,25 @@ const AdminAccounts = () => {
       ? accounts
       : accounts.filter((a) => a.accountStatus === filter);
 
+  const handleViewDocument = async (id) => {
+    const preview = window.open("about:blank", "_blank");
+    if (!preview) {
+      toast.error("Allow pop-ups to view verification documents");
+      return;
+    }
+
+    try {
+      const document = await fetchLandlordVerificationDocument(id);
+      const url = URL.createObjectURL(document);
+      preview.opener = null;
+      preview.location.href = url;
+      window.setTimeout(() => URL.revokeObjectURL(url), 60_000);
+    } catch {
+      preview.close();
+      toast.error("Failed to load verification document");
+    }
+  };
+
   if (loading) {
     return <div className="text-center py-10">Loading accounts...</div>;
   }
@@ -187,6 +206,7 @@ const AdminAccounts = () => {
                 handleVerify={handleVerify}
                 handleSuspend={handleSuspend}
                 handleUnsuspend={handleUnsuspend}
+                handleViewDocument={handleViewDocument}
                 openNoticeModal={(acc) => {
                   setSelectedAccount(acc);
                   setModalOpen(true);
@@ -214,6 +234,7 @@ const AccountTable = ({
   handleVerify,
   handleSuspend,
   handleUnsuspend,
+  handleViewDocument,
   openNoticeModal,
 }) => (
   <div className="overflow-x-auto rounded-lg border bg-card">
@@ -231,13 +252,6 @@ const AccountTable = ({
 
       <tbody>
         {accounts.map((account) => {
-          const isImage = /\.(jpg|jpeg|png|webp)$/i.test(
-            account.documentPath || ""
-          );
-          const documentUrl = account.documentPath
-            ? `${import.meta.env.VITE_API_BASE_URL}/api/v1/campuskey/${account.documentPath}`
-            : null;
-
           return (
             <tr
               key={account.id}
@@ -256,29 +270,14 @@ const AccountTable = ({
               </td>
 
               <td className="px-4 py-3">
-                {documentUrl ? (
-                  isImage ? (
-                    <a
-                      href={documentUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <img
-                        src={documentUrl}
-                        alt="ID Document"
-                        className="h-16 w-auto rounded border hover:opacity-80"
-                      />
-                    </a>
-                  ) : (
-                    <a
-                      href={documentUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary underline"
-                    >
-                      View Document
-                    </a>
-                  )
+                {account.documentPath ? (
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => handleViewDocument(account.id)}
+                  >
+                    View Document
+                  </Button>
                 ) : (
                   "—"
                 )}

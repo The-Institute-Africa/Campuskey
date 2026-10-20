@@ -14,6 +14,20 @@ export const fetchAllLandlords= async () => {
     return response.data;
 }
 
+export const fetchLandlordVerificationDocument = async (id) => {
+    const response = await API.get(`/admin/landlords/verifications/${id}/document`, {
+        responseType: "blob",
+    });
+    return response.data;
+}
+
+export const fetchPropertyVerificationDocument = async (propertyId) => {
+    const response = await API.get(`/admin/properties/${propertyId}/verification-document`, {
+        responseType: "blob",
+    });
+    return response.data;
+}
+
 // Submit verification document (optional)
 export const submitVerificationDocument = async (propertyId, file) => {
     const formData = new FormData();

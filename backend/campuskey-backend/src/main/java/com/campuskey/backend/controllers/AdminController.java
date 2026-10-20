@@ -9,9 +9,13 @@ import com.campuskey.backend.services.PropertyService;
 import com.campuskey.backend.services.PropertyVerificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.CacheControl;
+import org.springframework.http.HttpHeaders;
+import org.springframework.core.io.Resource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -94,5 +98,27 @@ public class AdminController {
     @GetMapping("/landlords/verifications")
     public List<LandlordVerificationDto> getAllLandlords(){
         return landlordVerificationService.getAll();
+    }
+
+    @GetMapping("/landlords/verifications/{id}/document")
+    public ResponseEntity<Resource> getLandlordVerificationDocument(@PathVariable Long id) throws IOException {
+        var document = landlordVerificationService.getDocument(id);
+        return ResponseEntity.ok()
+                .contentType(document.mediaType())
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"verification-document\"")
+                .header("X-Content-Type-Options", "nosniff")
+                .cacheControl(CacheControl.noStore())
+                .body(document.resource());
+    }
+
+    @GetMapping("/properties/{propertyId}/verification-document")
+    public ResponseEntity<Resource> getPropertyVerificationDocument(@PathVariable Long propertyId) throws IOException {
+        var document = verificationService.getDocument(propertyId);
+        return ResponseEntity.ok()
+                .contentType(document.mediaType())
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"verification-document\"")
+                .header("X-Content-Type-Options", "nosniff")
+                .cacheControl(CacheControl.noStore())
+                .body(document.resource());
     }
 }

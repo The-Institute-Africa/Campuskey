@@ -1,38 +1,31 @@
 package com.campuskey.backend.services;
 
 import com.campuskey.backend.dto.LandlordVerificationDto;
-import com.campuskey.backend.dto.PropertyVerificationDto;
-import com.campuskey.backend.entities.Property;
-import com.campuskey.backend.entities.PropertyVerification;
 import com.campuskey.backend.entities.enumerations.AccountStatus;
 import com.campuskey.backend.entities.Landlord;
 import com.campuskey.backend.entities.LandlordVerification;
-import com.campuskey.backend.entities.enumerations.PropertyStatus;
 import com.campuskey.backend.repositories.LandlordRepository;
 import com.campuskey.backend.repositories.LandlordVerificationRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class LandlordVerificationService {
 
     private final LandlordVerificationRepository verificationRepo;
     private final LandlordRepository landlordRepo;
+    private final VerificationDocumentStorage documentStorage;
 
     public LandlordVerificationService(LandlordVerificationRepository verificationRepo,
-                                       LandlordRepository landlordRepo) {
+                                       LandlordRepository landlordRepo,
+                                       VerificationDocumentStorage documentStorage) {
         this.verificationRepo = verificationRepo;
         this.landlordRepo = landlordRepo;
+        this.documentStorage = documentStorage;
     }
 
     public List<LandlordVerificationDto> getAll() {
@@ -53,18 +46,7 @@ public class LandlordVerificationService {
 
         LandlordVerification verification = new LandlordVerification();
 
-        // ---------- LOCAL STORAGE ----------
-        String uploadDir = "uploads/landlord/verification/";
-        Files.createDirectories(Paths.get(uploadDir));
-
-        String originalFilename = file.getOriginalFilename();
-        String fileName = UUID.randomUUID() + "_" + originalFilename;
-        Path filePath = Paths.get(uploadDir, fileName);
-
-        Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-
-        // store local path (for now)
-        verification.setDocumentPath(filePath.toString());
+        verification.setDocumentPath(documentStorage.store(file, "landlord/verification"));
 
         verification.setAddress(dto.getAddress());
         verification.setIdNumber(dto.getIdNumber());
@@ -79,6 +61,13 @@ public class LandlordVerificationService {
         return verificationRepo.findById(id).map(this::mapToDTO);
     }
 
+    public VerificationDocumentStorage.StoredDocument getDocument(Long id) throws IOException {
+        LandlordVerification verification = verificationRepo.findById(id)
+                .orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(
+                        org.springframework.http.HttpStatus.NOT_FOUND, "Verification record not found"));
+        return documentStorage.load(verification.getDocumentPath());
+    }
+
     private LandlordVerificationDto mapToDTO(LandlordVerification v) {
         return new LandlordVerificationDto(
                 v.getId(),
@@ -86,7 +75,8 @@ public class LandlordVerificationService {
                 v.getIdNumber(),
                 v.getLandlord() != null ? v.getLandlord().getId() : null,
                 v.getAccountStatus(),
-                v.getDocumentPath(),
+                v.getDocumentPath() == null ? null : "/api/v1/campuskey/admin/landlords/verifications/"
+                        + v.getId() + "/document",
                 v.getOwnerusername()
         );
     }
