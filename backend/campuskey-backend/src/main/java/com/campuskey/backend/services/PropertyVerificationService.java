@@ -8,8 +8,11 @@ import com.campuskey.backend.repositories.PropertyVerificationRepository;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -32,10 +35,14 @@ public class PropertyVerificationService {
         this.verificationRepository = verificationRepository;
     }
 
-    public PropertyVerificationDto submitDocument(Long propertyId, MultipartFile file) throws IOException {
+    @Transactional
+    public PropertyVerificationDto submitDocument(Long propertyId, MultipartFile file, String username) throws IOException {
 
         Property property = propertyRepository.findById(propertyId)
                 .orElseThrow(() -> new RuntimeException("Property not found"));
+        if (!username.equals(property.getLandlord().getUser().getUserName())) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You are not authorized to verify this property");
+        }
 
         PropertyVerification pv = verificationRepository.findByPropertyId(propertyId)
                 .orElseGet(() -> {

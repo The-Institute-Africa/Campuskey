@@ -3,6 +3,7 @@ package com.campuskey.backend.repositories;
 import com.campuskey.backend.dto.PropertyDto;
 import com.campuskey.backend.entities.Landlord;
 import com.campuskey.backend.entities.Property;
+import com.campuskey.backend.entities.enumerations.PropertyStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -17,6 +18,7 @@ import java.util.Optional;
 public interface PropertyRepository extends JpaRepository <Property,Long>,JpaSpecificationExecutor<Property> {
     Optional<Property> findByLocation(String Location);
     Optional<Property> findBySlug(String slug);
+    List<Property> findAllByVerification_Status(PropertyStatus status);
     List<PropertyDto> findByLandlord(Landlord landlord);
 
     long countByLandlord(Landlord landlord);

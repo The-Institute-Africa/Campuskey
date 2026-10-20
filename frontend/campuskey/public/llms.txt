@@ -1,0 +1,25 @@
+## Pages
+- [- Campus Key Zimbabwe](/propertydetail): No description available
+- [About Us - CampusKey Zimbabwe](/about): Learn about Campus Key Zimbabwe
+- [Account Details - Campus Key Zimbabwe](/landlordprofile): No description available
+- [Account Settings - Campus Key Zimbabwe](/landlordaccount): Manage your account settings on Campus Key Zimbabwe.
+- [Account Settings - Campus Key Zimbabwe](/studentaccountsettings): Manage your account settings on Campus Key Zimbabwe.
+- [Campus Key Zimbabwe - Find Student Accommodation](/home): Find quality student accommodation near Zimbabwe
+- [Contact Us - Campus Key Zimbabwe](/contact): Get in touch with Campus Key Zimbabwe. Contact us for student accommodation inquiries, support, or partnership opportunities.
+- [Disclaimer - Campus Key Zimbabwe](/disclaimer): Read important disclaimers about using Campus Key Zimbabwe. Understand limitations, responsibilities, and legal information for our student accommodation platform.
+- [Forgot Password - Campus Key Zimbabwe](/forgotpassword): Reset your Campus Key Zimbabwe student account password.
+- [Help Center - Campus Key Zimbabwe](/helpcenter): Get help with finding student accommodation in Zimbabwe. Browse our FAQ, contact support, and find answers to common questions about housing, payments, and applications.
+- [Landlord Dashboard - Campus Key Zimbabwe](/landlorddashboard): No description available
+- [Login - Campus Key Zimbabwe](/login): No description available
+- [My Booking Requests - CampusKey Zimbabwe](/studentapplications): Review and manage your accommodation booking requests.
+- [My Favorite Listings - CampusKey Zimbabwe](/studentfavorites): View your saved favorite listings on CampusKey Zimbabwe.
+- [My Inquiries - CampusKey Zimbabwe](/studentinquiries): No description available
+- [Online Payments Unavailable - CampusKey Zimbabwe](/payment): CampusKey does not currently process rent or deposit payments.
+- [Privacy Policy - Campus Key Zimbabwe](/privacy): Learn how Campus Key Zimbabwe protects your privacy and handles your personal information. Read our comprehensive privacy policy for students and landlords.
+- [Profile Details - Campus Key Zimbabwe](/studentprofile): No description available
+- [Reset Password - CampusKey Zimbabwe](/resetpassword): No description available
+- [Student Accommodation Guide - Campus Key Zimbabwe](/studentguide): Complete guide to finding student accommodation in Zimbabwe. Learn how to search, verify properties, budget effectively, and stay safe while finding your perfect student home.
+- [Student Accommodation Listings - Campus Key Zimbabwe](/property): Browse verified student accommodation near Zimbabwe
+- [Student Dashboard - Campus Key Zimbabwe](/studentdashboard): Manage your account, view favorite listings, and track applications on your Campus Key Zimbabwe student dashboard.
+- [Student Signup - CampusKey Zimbabwe](/signup): Create a student account on Campus Key Zimbabwe to find your perfect accommodation.
+- [Terms & Conditions - Campus Key Zimbabwe](/terms): Read the terms and conditions for using Campus Key Zimbabwe. Understand your rights and responsibilities when using our student accommodation platform.

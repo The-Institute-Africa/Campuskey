@@ -14,6 +14,9 @@ import com.campuskey.backend.security.response.LoginResponse;
 import com.campuskey.backend.security.response.MessageResponse;
 import com.campuskey.backend.security.response.UserInfoResponse;
 import com.campuskey.backend.services.UserService;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,14 +31,17 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
+@Validated
 @RequestMapping("/api/v1/campuskey/auth")
 public class AuthController {
 
@@ -109,11 +115,26 @@ public class AuthController {
                     .body(new MessageResponse("Error: Email is already in use!"));
         }
 
-        // 🔴 ROLE IS NOW REQUIRED
         Set<String> strRoles = signUpRequest.getRole();
-        if (strRoles == null || strRoles.isEmpty()) {
+        if (strRoles == null || strRoles.size() != 1) {
             return ResponseEntity.badRequest()
-                    .body(new MessageResponse("Error: Role is required to create an account."));
+                    .body(new MessageResponse("Error: Select exactly one account role."));
+        }
+
+        String requestedRole = strRoles.iterator().next();
+        if (requestedRole == null || requestedRole.isBlank()) {
+            return ResponseEntity.badRequest()
+                    .body(new MessageResponse("Error: Select a valid account role."));
+        }
+
+        AppRole appRole = switch (requestedRole.toLowerCase(Locale.ROOT)) {
+            case "landlord" -> AppRole.ROLE_LANDLORD;
+            case "student" -> AppRole.ROLE_STUDENT;
+            default -> null;
+        };
+        if (appRole == null) {
+            return ResponseEntity.badRequest()
+                    .body(new MessageResponse("Error: This account role cannot be self-registered."));
         }
 
         User user = new User(
@@ -129,16 +150,8 @@ public class AuthController {
         user.setEnabled(true);
         user.setTwoFactorEnabled(false);
 
-        String roleStr = strRoles.iterator().next().toLowerCase();
-        Role role = switch (roleStr) {
-            case "admin" -> roleRepository.findByRoleName(AppRole.ROLE_ADMIN)
-                    .orElseThrow(() -> new RuntimeException("Error: Admin Role not found."));
-            case "landlord" -> roleRepository.findByRoleName(AppRole.ROLE_LANDLORD)
-                    .orElseThrow(() -> new RuntimeException("Error: Landlord Role not found."));
-            case "student" -> roleRepository.findByRoleName(AppRole.ROLE_STUDENT)
-                    .orElseThrow(() -> new RuntimeException("Error: Student Role not found."));
-            default -> throw new RuntimeException("Error: Invalid role provided.");
-        };
+        Role role = roleRepository.findByRoleName(appRole)
+                .orElseThrow(() -> new IllegalStateException("Configured account role not found."));
 
         // Account status logic
         if (role.getRoleName().equals(AppRole.ROLE_LANDLORD)) {
@@ -190,15 +203,37 @@ public class AuthController {
     }
 
     @PostMapping("/public/forgot-password")
-    public ResponseEntity<?> forgotPassword(@RequestParam String email){
+    public ResponseEntity<?> forgotPassword(@RequestParam @Email @NotBlank String email){
         try{
             userService.generatePasswordResetToken(email);
-            return ResponseEntity.ok(new MessageResponse("Password reset email sent!"));
-        } catch (Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new MessageResponse("Error sending password reset email"));
+            return ResponseEntity.ok(new MessageResponse(
+                    "If an account exists for that email, a password reset link will be sent."));
+        } catch (org.springframework.mail.MailException e){
+            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
+                    .body(new MessageResponse("Password reset email could not be sent. Please try again later."));
         }
+    }
 
+    public record PasswordResetRequest(
+            @NotBlank String token,
+            @NotBlank @Size(min = 8, max = 128) String password) {}
+
+    @PostMapping("/public/reset-password")
+    public ResponseEntity<?> resetPassword(@Valid @RequestBody PasswordResetRequest request) {
+        userService.resetPassword(request.token(), request.password());
+        return ResponseEntity.ok(new MessageResponse("Password reset successfully. You can now sign in."));
+    }
+
+    public record ChangePasswordRequest(
+            @NotBlank String currentPassword,
+            @NotBlank @Size(min = 8, max = 128) String newPassword) {}
+
+    @PutMapping("/password")
+    public ResponseEntity<?> changePassword(
+            @AuthenticationPrincipal UserDetails user,
+            @Valid @RequestBody ChangePasswordRequest request) {
+        userService.changePassword(user.getUsername(), request.currentPassword(), request.newPassword());
+        return ResponseEntity.ok(new MessageResponse("Password updated successfully."));
     }
 
     @GetMapping("/me")

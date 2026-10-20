@@ -120,9 +120,10 @@ public class PropertyController {
     @PostMapping("landlord/{propertyId}/submit")
     public ResponseEntity<PropertyVerificationDto> submitDocument(
             @PathVariable Long propertyId,
-            @RequestParam("file") MultipartFile file
+            @RequestParam("file") MultipartFile file,
+            @AuthenticationPrincipal UserDetails userDetails
     ) throws Exception {
-        return ResponseEntity.ok(verificationService.submitDocument(propertyId, file));
+        return ResponseEntity.ok(verificationService.submitDocument(propertyId, file, userDetails.getUsername()));
     }
 
 }
