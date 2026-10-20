@@ -2,9 +2,7 @@ package com.campuskey.backend.security;
 
 import com.campuskey.backend.entities.enumerations.AppRole;
 import com.campuskey.backend.entities.Role;
-import com.campuskey.backend.entities.User;
 import com.campuskey.backend.repositories.RoleRepository;
-import com.campuskey.backend.repositories.UserRepository;
 import com.campuskey.backend.security.jwt.AuthEntryPointJwt;
 import com.campuskey.backend.security.jwt.AuthTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +26,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -71,7 +68,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/v1/campuskey/public/**").permitAll()
                 .requestMatchers("/api/v1/campuskey/landlord/**").hasRole("LANDLORD")
                 .requestMatchers("/api/v1/campuskey/admin/**").hasRole("ADMIN")
-                .requestMatchers("/api/campuskey/student/**").hasRole("STUDENT")
+                .requestMatchers("/api/v1/campuskey/student/**").hasRole("STUDENT")
                 .anyRequest().authenticated());
 
         http.exceptionHandling(exception ->
@@ -107,51 +104,17 @@ public class SecurityConfig {
     }
 
     @Bean
-    public CommandLineRunner initData(RoleRepository roleRepository,
-                                      UserRepository userRepository,
-                                      PasswordEncoder passwordEncoder) {
+    public CommandLineRunner initData(RoleRepository roleRepository) {
         return args -> {
-            Role studentRole = roleRepository.findByRoleName(AppRole.ROLE_STUDENT)
+            roleRepository.findByRoleName(AppRole.ROLE_STUDENT)
                     .orElseGet(() -> roleRepository.save(new Role(AppRole.ROLE_STUDENT)));
 
-            Role adminRole = roleRepository.findByRoleName(AppRole.ROLE_ADMIN)
+            roleRepository.findByRoleName(AppRole.ROLE_ADMIN)
                     .orElseGet(() -> roleRepository.save(new Role(AppRole.ROLE_ADMIN)));
 
-            Role landlordRole = roleRepository.findByRoleName(AppRole.ROLE_LANDLORD)
+            roleRepository.findByRoleName(AppRole.ROLE_LANDLORD)
                     .orElseGet(() -> roleRepository.save(new Role(AppRole.ROLE_LANDLORD)));
-
-
-            if (!userRepository.existsByUserName("user1")) {
-                User user1 = new User("user1", "user1@example.com",
-                        passwordEncoder.encode("password1"));
-                user1.setAccountNonLocked(false);
-                user1.setAccountNonExpired(true);
-                user1.setCredentialsNonExpired(true);
-                user1.setEnabled(true);
-                user1.setCredentialsExpiryDate(LocalDate.now().plusYears(1));
-                user1.setAccountExpiryDate(LocalDate.now().plusYears(1));
-                user1.setTwoFactorEnabled(false);
-                user1.setSignUpMethod("email");
-                user1.setRole(studentRole);
-                userRepository.save(user1);
-            }
-
-            if (!userRepository.existsByUserName("admin")) {
-                User admin = new User("admin", "admin@example.com",
-                        passwordEncoder.encode("adminPass"));
-                admin.setAccountNonLocked(true);
-                admin.setAccountNonExpired(true);
-                admin.setCredentialsNonExpired(true);
-                admin.setEnabled(true);
-                admin.setCredentialsExpiryDate(LocalDate.now().plusYears(1));
-                admin.setAccountExpiryDate(LocalDate.now().plusYears(1));
-                admin.setTwoFactorEnabled(false);
-                admin.setSignUpMethod("email");
-                admin.setRole(adminRole);
-                userRepository.save(admin);
-            }
         };
     }
 
 }
-

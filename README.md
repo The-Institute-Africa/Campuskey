@@ -1,197 +1,67 @@
-# 🏫 CampusKey – Student Accommodation Platform
+# CampusKey
 
-**CampusKey** is a smart, student-first web platform that connects university students with trusted and verified landlords offering housing near campuses. Built with a modern full-stack architecture, it offers secure listings, real-time messaging, and transparent reviews to streamline the student housing experience.
+CampusKey connects university students with accommodation listings and landlords in Zimbabwe.
 
----
+## Stack and layout
 
-## 🔧 Tech Stack
+- **Frontend:** React 18, Vite, Tailwind CSS, Radix UI
+- **Backend:** Java 21, Spring Boot 3.5, Spring Data JPA, Spring Security, JWT
+- **Database:** MySQL for the application; H2 for automated tests
 
-### 💻 Frontend
-- [Next.js](https://nextjs.org/) – React-based frontend framework
-- [Tailwind CSS](https://tailwindcss.com/) – Utility-first CSS for modern UI
-- [shadcn/ui](https://ui.shadcn.com/) – Accessible, customizable UI components
-
-### 🚀 Backend
-- [Spring Boot](https://spring.io/projects/spring-boot) – Java-based backend framework
-- [Spring Data JPA](https://spring.io/projects/spring-data-jpa) – ORM & database integration
-- [Spring Security](https://spring.io/projects/spring-security) – Authentication & Authorization
-- PostgreSQL – Relational database (can switch to MySQL)
-- H2 – In-memory DB for development/testing
-- Spring Boot Actuator – System monitoring endpoints
-- Springdoc OpenAPI – API documentation (Swagger UI)
-
----
-
-## 📦 Features
-
-### 👨‍🎓 For Students
-- Browse and filter verified property listings
-- View photos, amenities, pricing, and landlord info
-- Book accommodation and leave reviews
-
-### 🧑‍💼 For Landlords
-- Register and verify account
-- Add and manage listings
-- Receive student inquiries
-- Build trust through student reviews
-
----
-
-## 📁 Project Structure
-
+```text
+backend/campuskey-backend/   Spring Boot application and Gradle build
+frontend/campuskey/          React/Vite application
 ```
 
-campuskey/
-│
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── com/campuskey/
-│   │   │       ├── CampusKeyApplication.java
-│   │   │
-│   │   │       ├── config/
-│   │   │       │   ├── OpenApiConfig.java
-│   │   │       │   ├── SecurityConfig.java
-│   │   │       │   └── AppConfig.java
-│   │   │
-│   │   │       ├── common/
-│   │   │       │   ├── exceptions/
-│   │   │       │   │   ├── GlobalExceptionHandler.java
-│   │   │       │   │   └── ResourceNotFoundException.java
-│   │   │       │   ├── enums/
-│   │   │       │   ├── utils/
-│   │   │       │   └── annotations/
-│   │   │
-│   │   │       ├── modules/
-│   │   │       │
-│   │   │       │   ├── auth/
-│   │   │       │   │   ├── controller/
-│   │   │       │   │   ├── service/
-│   │   │       │   │   ├── model/
-│   │   │       │   │   ├── dto/
-│   │   │       │   │   ├── repository/
-│   │   │       │   │   └── mapper/
-│   │   │       │
-│   │   │       │   ├── student/
-│   │   │       │   │   ├── controller/
-│   │   │       │   │   ├── service/
-│   │   │       │   │   ├── model/
-│   │   │       │   │   ├── dto/
-│   │   │       │   │   ├── repository/
-│   │   │       │   │   └── mapper/
-│   │   │       │
-│   │   │       │   ├── accesscontrol/
-│   │   │       │   │   ├── controller/
-│   │   │       │   │   ├── service/
-│   │   │       │   │   ├── model/
-│   │   │       │   │   ├── dto/
-│   │   │       │   │   ├── strategy/      # Strategy Pattern for access rules
-│   │   │       │   │   ├── repository/
-│   │   │       │   │   └── mapper/
-│   │   │       │
-│   │   │       │   ├── facilitybooking/
-│   │   │       │   │   ├── controller/
-│   │   │       │   │   ├── service/
-│   │   │       │   │   ├── model/
-│   │   │       │   │   ├── dto/
-│   │   │       │   │   ├── repository/
-│   │   │       │   │   └── mapper/
-│   │   │       │
-│   │   │       │   ├── notifications/
-│   │   │       │   │   ├── events/
-│   │   │       │   │   ├── listener/
-│   │   │       │   │   ├── service/
-│   │   │       │   │   ├── dto/
-│   │   │       │   │   └── utils/
-│   │   │
-│   │   │       └── infrastructure/
-│   │   │           ├── external/          # API Clients, Adapters
-│   │   │           ├── persistence/       # Database configurations
-│   │   │           └── messaging/         # Kafka / RabbitMQ (Optional)
-│   │   │
-│   │   ├── resources/
-│   │   │   ├── application.yml
-│   │   │   ├── static/
-│   │   │   └── templates/
-│   │   │
-│   │   └── webapp/ (Optional - UI Layer)
-│   │
-│   └── test/
-│       └── com/campuskey/
-│           ├── integration/
-│           └── unit/
-│
-└── pom.xml
+## Workflows
 
-````
+Students can browse approved listings, save favorites, send booking requests and inquiries, review request statuses and landlord replies, and reset or change passwords. Landlords can submit verification information, manage property listings, respond to bookings, and reply to inquiries.
 
----
+CampusKey does not process rent or deposit payments. A booking request is a request for landlord review, not a lease or payment.
 
-## 🧪 Getting Started
+## Local setup
 
-### ✅ Backend Setup (Spring Boot)
+### Backend
 
-1. Install JDK 17+
-2. Make sure MySQL is installed and running locally
-3. Create a MySQL database:
-   ```sql
-   CREATE DATABASE campuskey;
+Install JDK 21 and run MySQL. Set the required environment variables, then start the API:
 
-4. API will be available at: `http://localhost:8080`
-
-### ✅ Frontend Setup (Next.js)
-
-1. Install Node.js (18+ recommended)
-2. Navigate to `frontend/`
-3. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-4. Run the development server:
-
-   ```bash
-   npm run dev
-   ```
-5. App will be live at: `http://localhost:3000`
-
----
-
-## 🔐 Environment Variables
-
-### Frontend (`.env.local`)
-
-```
-NEXT_PUBLIC_API_URL=http://localhost:8080
+```bash
+cd backend/campuskey-backend
+./gradlew bootRun
 ```
 
-### Backend (`application.properties`)
+The API listens on `http://localhost:8080`.
 
-```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/campuskey
-spring.datasource.username=your_mysql_user
-spring.datasource.password=your_mysql_password
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+### Frontend
+
+Install Node.js and npm. Set `VITE_API_URL` to the backend origin (for example, `http://localhost:8080`), then run:
+
+```bash
+cd frontend/campuskey
+npm ci
+npm run dev
 ```
 
----
+Create a production bundle with `npm run build`.
 
-## 🌍 Live Demo
+## Backend environment
 
-Coming soon: [https://campuskey.co.zw](https://campuskey.co.zw)
+| Variable | Purpose |
+| --- | --- |
+| `CAMPUSKEY_DB_URL` | JDBC URL for MySQL |
+| `CAMPUSKEY_DB_USERNAME` | MySQL username |
+| `CAMPUSKEY_DB_PASSWORD` | MySQL password |
+| `CAMPUSKEY_JWT_SECRET` | Base64-encoded JWT key of at least 256 bits |
+| `CAMPUSKEY_MAIL_USERNAME` | SMTP account |
+| `CAMPUSKEY_MAIL_PASSWORD` | SMTP password or app password |
+| `CAMPUSKEY_FRONTEND_URL` | Allowed frontend origin; defaults to `http://localhost:5173` |
+| `CAMPUSKEY_JPA_DDL_AUTO` | Hibernate schema mode; defaults to `update` for development |
+| `CAMPUSKEY_SQL_LOGGING` | SQL logging; defaults to `false` |
+| `CAMPUSKEY_SECURITY_LOG_LEVEL` | Spring Security logging level; defaults to `INFO` |
+| `CAMPUSKEY_ERROR_INCLUDE_MESSAGE` | Error response detail; defaults to `never` |
 
----
+The project does not yet contain a reviewed baseline/versioned migration set or a selected hosting configuration. Do not deploy with Hibernate `update`; establish and test the production migration plan before switching to schema validation. Credentials previously committed in repository history must be rotated; removing their current configuration does not revoke them.
 
+## Contact and license
 
-## 📬 Contact
-
-Developed with ❤️ by [TheInstitutee]
-🌐 Website: [https://theinstutite.co.zw](https://theinstutite.co.zw)
-
----
-
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE).
+Developed by [The Institute](https://theinstutite.co.zw). Licensed under the MIT License; see [LICENSE](LICENSE).

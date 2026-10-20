@@ -8,11 +8,16 @@ import com.campuskey.backend.repositories.PasswordResetTokenRepository;
 import com.campuskey.backend.repositories.RoleRepository;
 import com.campuskey.backend.repositories.UserRepository;
 import com.campuskey.backend.services.UserService;
+import com.campuskey.backend.utils.EmailService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.http.HttpStatus;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -40,6 +45,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    @Autowired
+    EmailService emailService;
 
     @Override
     public void updateUserRole(Long userId, String roleName) {
@@ -75,7 +83,6 @@ public class UserServiceImpl implements UserService {
                 user.isEnabled(),
                 user.getCredentialsExpiryDate(),
                 user.getAccountExpiryDate(),
-                user.getTwoFactorSecret(),
                 user.isTwoFactorEnabled(),
                 user.getSignUpMethod(),
                 user.getRole(),
@@ -143,17 +150,48 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void generatePasswordResetToken(String email){
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        Optional<User> userOptional = userRepository.findByEmail(email);
+        if (userOptional.isEmpty()) {
+            return;
+        }
+        User user = userOptional.get();
 
         String token = UUID.randomUUID().toString();
-        Instant expiryDate = Instant.now().plus(24, ChronoUnit.HOURS);
+        Instant expiryDate = Instant.now().plus(1, ChronoUnit.HOURS);
+        passwordResetTokenRepository.deleteAllByUser(user);
         PasswordResetToken resetToken = new PasswordResetToken(token, expiryDate, user);
         passwordResetTokenRepository.save(resetToken);
 
         String resetUrl = frontendUrl + "/reset-password?token=" + token;
-        // Send email to user
+        emailService.sendPasswordResetEmail(user.getEmail(), resetUrl);
+    }
+
+    @Override
+    @Transactional
+    public void resetPassword(String token, String newPassword) {
+        PasswordResetToken resetToken = passwordResetTokenRepository.findByToken(token)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid or expired reset link"));
+        if (resetToken.isUsed() || resetToken.getExpiryDate().isBefore(Instant.now())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid or expired reset link");
+        }
+        User user = resetToken.getUser();
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
+        resetToken.setUsed(true);
+        passwordResetTokenRepository.save(resetToken);
+    }
+
+    @Override
+    @Transactional
+    public void changePassword(String username, String currentPassword, String newPassword) {
+        User user = userRepository.findByUserName(username)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+        if (!passwordEncoder.matches(currentPassword, user.getPassword())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Current password is incorrect");
+        }
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
     }
 }
-

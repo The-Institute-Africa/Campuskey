@@ -4,12 +4,15 @@ import com.campuskey.backend.dto.*;
 import com.campuskey.backend.entities.*;
 import com.campuskey.backend.repositories.*;
 import com.campuskey.backend.specification.PropertySpecification;
+import com.campuskey.backend.entities.enumerations.PropertyStatus;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 
 import java.io.IOException;
@@ -59,7 +62,7 @@ PropertyService {
 
     // ✅ Get all properties
     public List<PropertyDto> getProperties() {
-        return propertyRepository.findAll()
+        return propertyRepository.findAllByVerification_Status(PropertyStatus.APPROVED)
                 .stream()
                 .map(PropertyDto::new)
                 .collect(Collectors.toList());
@@ -68,6 +71,8 @@ PropertyService {
     // ✅ Get property by slug
     public Optional<PropertyDto> getPropertyBySlug(String slug) {
         return propertyRepository.findBySlug(slug)
+                .filter(property -> property.getVerification() != null
+                        && property.getVerification().getStatus() == PropertyStatus.APPROVED)
                 .map(PropertyDto::new);
     }
 
@@ -123,6 +128,12 @@ PropertyService {
         Property property = propertyRepository.findBySlug(slug)
                 .orElseThrow(() -> new NoSuchElementException("Property not found with slug: " + slug));
 
+        Landlord landlord = landlordRepository.findByOwnerUsername(username)
+                .orElseThrow(() -> new EntityNotFoundException("Landlord not found"));
+        if (!Objects.equals(property.getLandlord().getId(), landlord.getId())) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You are not authorized to update this property");
+        }
+
         // Update fields
         property.setName(dto.getName());
         property.setAddress(dto.getAddress());
@@ -131,10 +142,6 @@ PropertyService {
         property.setLocation(dto.getLocation());
         property.setPrice(dto.getPrice());
         property.setStudentsPerRoom(dto.getStudentsPerRoom());
-
-        // Update landlord
-        Landlord landlord = landlordRepository.findByOwnerUsername(username)
-                .orElseThrow(() -> new EntityNotFoundException("Landlord not found"));
 
         if (dto.getSlug() != null && !dto.getSlug().isBlank()) {
             property.setSlug(dto.getSlug());
@@ -227,13 +234,17 @@ PropertyService {
 
 
     public List<PropertyDto> searchProperty(String location, BigDecimal price, String university) {
-        return propertyRepository.findAll(
-                PropertySpecification.search(location, price, university)
-        ).stream().map(PropertyDto::new).toList();
+        Specification<Property> approved = (root, query, cb) ->
+                cb.equal(root.join("verification").get("status"), PropertyStatus.APPROVED);
+        return propertyRepository.findAll(approved.and(
+                PropertySpecification.search(location, price, university)))
+                .stream().map(PropertyDto::new).toList();
     }
 
     public List<PropertyDto> filterProperty(String propertyType, BigDecimal distance, List<Integer> studentsPerRoom) {
         Specification<Property> spec = (root, query, cb) -> cb.conjunction();
+        spec = spec.and((root, query, cb) ->
+                cb.equal(root.join("verification").get("status"), PropertyStatus.APPROVED));
 
         if (propertyType != null && !propertyType.isEmpty()) {
             spec = spec.and((root, query, cb) ->
