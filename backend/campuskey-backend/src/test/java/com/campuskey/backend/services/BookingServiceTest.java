@@ -44,7 +44,7 @@ class BookingServiceTest {
     void createsBookingForApprovedListingAndOwningStudent() {
         Student student = student("student");
         Property property = property();
-        when(studentRepository.findByOwnerUsername("student")).thenReturn(Optional.of(student));
+        when(studentRepository.findFirstByOwnerUsernameOrderByIdAsc("student")).thenReturn(Optional.of(student));
         when(propertyRepository.findById(10L)).thenReturn(Optional.of(property));
         when(bookingRepository.save(any(Booking.class))).thenAnswer(call -> call.getArgument(0));
 
@@ -58,7 +58,7 @@ class BookingServiceTest {
 
     @Test
     void refusesBookingForUnapprovedListing() {
-        when(studentRepository.findByOwnerUsername("student")).thenReturn(Optional.of(student("student")));
+        when(studentRepository.findFirstByOwnerUsernameOrderByIdAsc("student")).thenReturn(Optional.of(student("student")));
         Property property = property();
         property.setVerification(new PropertyVerification(property));
         when(propertyRepository.findById(10L)).thenReturn(Optional.of(property));
@@ -84,7 +84,7 @@ class BookingServiceTest {
     @Test
     void studentCannotCancelAnotherStudentsBooking() {
         Student student = student("student");
-        when(studentRepository.findByOwnerUsername("student")).thenReturn(Optional.of(student));
+        when(studentRepository.findFirstByOwnerUsernameOrderByIdAsc("student")).thenReturn(Optional.of(student));
         when(bookingRepository.findByIdAndStudent(12L, student)).thenReturn(Optional.empty());
 
         assertThrows(EntityNotFoundException.class, () -> bookingService.cancel("student", 12L));

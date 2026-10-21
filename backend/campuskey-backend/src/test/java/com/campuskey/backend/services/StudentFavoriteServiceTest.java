@@ -37,7 +37,7 @@ class StudentFavoriteServiceTest {
         student.setOwnerUsername("student");
         Property property = new Property();
         property.setVerification(new PropertyVerification(property));
-        when(studentRepository.findByOwnerUsername("student")).thenReturn(Optional.of(student));
+        when(studentRepository.findFirstByOwnerUsernameOrderByIdAsc("student")).thenReturn(Optional.of(student));
         when(propertyRepository.findById(20L)).thenReturn(Optional.of(property));
 
         assertThrows(EntityNotFoundException.class, () -> favoriteService.add("student", 20L));
@@ -52,7 +52,7 @@ class StudentFavoriteServiceTest {
         PropertyVerification verification = new PropertyVerification(property);
         verification.setStatus(PropertyStatus.APPROVED);
         property.setVerification(verification);
-        when(studentRepository.findByOwnerUsername("student")).thenReturn(Optional.of(student));
+        when(studentRepository.findFirstByOwnerUsernameOrderByIdAsc("student")).thenReturn(Optional.of(student));
         when(propertyRepository.findById(20L)).thenReturn(Optional.of(property));
         when(favoriteRepository.findByStudentAndProperty_Id(student, 20L))
                 .thenReturn(Optional.of(new StudentFavorite(student, property)));
@@ -70,7 +70,7 @@ class StudentFavoriteServiceTest {
         PropertyVerification verification = new PropertyVerification(property);
         verification.setStatus(PropertyStatus.APPROVED);
         property.setVerification(verification);
-        when(studentRepository.findByOwnerUsername("student")).thenReturn(Optional.of(student));
+        when(studentRepository.findFirstByOwnerUsernameOrderByIdAsc("student")).thenReturn(Optional.of(student));
         when(propertyRepository.findById(20L)).thenReturn(Optional.of(property));
         when(favoriteRepository.findByStudentAndProperty_Id(student, 20L)).thenReturn(Optional.empty());
 

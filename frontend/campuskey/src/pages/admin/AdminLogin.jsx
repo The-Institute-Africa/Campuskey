@@ -40,7 +40,7 @@ const AdminLogin = () => {
       if (roles.includes("ROLE_ADMIN")) {
         navigate("/admin", { replace: true });
       } else {
-        navigate("/denied-access", { replace: true });
+        navigate("/access-denied", { replace: true });
       }
     } catch (err) {
       toast({

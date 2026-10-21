@@ -1,5 +1,6 @@
 package com.campuskey.backend.config;
 
+import com.campuskey.backend.entities.enumerations.AppRole;
 import com.campuskey.backend.entities.enumerations.PropertyStatus;
 import com.campuskey.backend.repositories.BookingRepository;
 import com.campuskey.backend.repositories.InquiryRepository;
@@ -17,7 +18,7 @@ import org.springframework.test.context.TestPropertySource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest
+@SpringBootTest(properties = "campuskey.demo-data.admin-password=test-admin-password")
 @ActiveProfiles({"test", "demo"})
 @TestPropertySource(properties = {
         "campuskey.demo-data.enabled=true",
@@ -56,8 +57,11 @@ class DemoDataSeederTest {
         assertTrue(listings.stream().filter(property -> property.getSlug().startsWith("demo-")).count() >= 3);
         var student = userRepository.findByUserName("demo_student").orElseThrow();
         var landlord = userRepository.findByUserName("demo_landlord").orElseThrow();
+        var admin = userRepository.findByUserName("demo_admin").orElseThrow();
         assertTrue(passwordEncoder.matches("CampuskeyDemoStudent!2026", student.getPassword()));
         assertTrue(passwordEncoder.matches("CampuskeyDemoLandlord!2026", landlord.getPassword()));
+        assertTrue(passwordEncoder.matches("test-admin-password", admin.getPassword()));
+        assertEquals(AppRole.ROLE_ADMIN, admin.getRole().getRoleName());
         assertEquals(1, bookingRepository.count());
         assertEquals(1, inquiryRepository.count());
         assertEquals(1, favoriteRepository.count());

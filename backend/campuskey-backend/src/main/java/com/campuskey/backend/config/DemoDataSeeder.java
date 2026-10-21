@@ -38,6 +38,7 @@ public class DemoDataSeeder implements ApplicationRunner {
     private final PasswordEncoder passwordEncoder;
     private final String studentPassword;
     private final String landlordPassword;
+    private final String adminPassword;
 
     public DemoDataSeeder(
             RoleRepository roleRepository,
@@ -50,7 +51,8 @@ public class DemoDataSeeder implements ApplicationRunner {
             StudentFavoriteRepository favoriteRepository,
             PasswordEncoder passwordEncoder,
             @Value("${campuskey.demo-data.student-password}") String studentPassword,
-            @Value("${campuskey.demo-data.landlord-password}") String landlordPassword) {
+            @Value("${campuskey.demo-data.landlord-password}") String landlordPassword,
+            @Value("${campuskey.demo-data.admin-password}") String adminPassword) {
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
         this.studentRepository = studentRepository;
@@ -62,21 +64,23 @@ public class DemoDataSeeder implements ApplicationRunner {
         this.passwordEncoder = passwordEncoder;
         this.studentPassword = studentPassword;
         this.landlordPassword = landlordPassword;
+        this.adminPassword = adminPassword;
     }
 
     @Override
     @Transactional
     public void run(ApplicationArguments arguments) {
-        if (studentPassword.isBlank() || landlordPassword.isBlank()) {
+        if (studentPassword.isBlank() || landlordPassword.isBlank() || adminPassword.isBlank()) {
             throw new IllegalStateException(
-                    "Set CAMPUSKEY_DEMO_STUDENT_PASSWORD and CAMPUSKEY_DEMO_LANDLORD_PASSWORD when demo seeding is enabled");
+                    "Set all CAMPUSKEY_DEMO_*_PASSWORD values when demo seeding is enabled");
         }
 
         User studentUser = ensureUser("demo_student", "demo.student@campuskey.test",
                 studentPassword, AppRole.ROLE_STUDENT);
         User landlordUser = ensureUser("demo_landlord", "demo.landlord@campuskey.test",
                 landlordPassword, AppRole.ROLE_LANDLORD);
-        Student student = studentRepository.findByOwnerUsername(studentUser.getUserName())
+        ensureUser("demo_admin", "demo.admin@campuskey.test", adminPassword, AppRole.ROLE_ADMIN);
+        Student student = studentRepository.findFirstByOwnerUsernameOrderByIdAsc(studentUser.getUserName())
                 .orElseGet(() -> createStudent(studentUser));
         Landlord landlord = landlordRepository.findByOwnerUsername(landlordUser.getUserName())
                 .orElseGet(() -> createLandlord(landlordUser));

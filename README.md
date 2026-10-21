@@ -77,6 +77,7 @@ export SPRING_PROFILES_ACTIVE=demo
 export CAMPUSKEY_DEMO_DATA_ENABLED=true
 export CAMPUSKEY_DEMO_STUDENT_PASSWORD='choose-a-local-test-password'
 export CAMPUSKEY_DEMO_LANDLORD_PASSWORD='choose-another-local-test-password'
+export CAMPUSKEY_DEMO_ADMIN_PASSWORD='choose-a-local-admin-test-password'
 export CAMPUSKEY_JWT_SECRET="$(openssl rand -base64 48)"
 export CAMPUSKEY_DOCUMENT_ENCRYPTION_KEY="$(openssl rand -base64 32)"
 ```
@@ -87,7 +88,7 @@ Start the backend from `backend/campuskey-backend`:
 ./gradlew bootRun
 ```
 
-The seeder creates three approved fictional Harare listings, a student and landlord login, and sample booking, inquiry, and favorite records. Browse listings at `http://localhost:5173/properties` after starting the frontend with `VITE_API_URL=http://localhost:8080 npm run dev` from `frontend/campuskey`; sign in as `demo_student` or `demo_landlord` using the passwords you set above to view sample dashboards. Seeding is idempotent and only runs when the non-production `demo` profile and explicit enable flag are both active. The demo profile cannot seed when `prod` is active.
+The seeder creates three approved fictional Harare listings, student, landlord, and platform-admin accounts, and sample booking, inquiry, and favorite records. Browse listings at `http://localhost:5173/properties` after starting the frontend with `VITE_API_URL=http://localhost:8080 npm run dev` from `frontend/campuskey`; sign in as `demo_student` or `demo_landlord` using the passwords you set above to view sample dashboards. The platform admin signs in at `http://localhost:5173/admin-login` as `demo_admin` using `CAMPUSKEY_DEMO_ADMIN_PASSWORD`. Seeding is idempotent and only runs when the non-production `demo` profile and explicit enable flag are both active. The demo profile cannot seed when `prod` is active.
 
 The browser-runtime dependency audit (`npm audit --omit=dev`) is clean. The full audit still reports findings in Tailwind 3's build-time dependency tree; resolving them requires a Tailwind 4 migration and visual regression testing, so the full build toolchain is not yet audit-clean.
 

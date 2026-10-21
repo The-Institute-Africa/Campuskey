@@ -27,7 +27,7 @@ const AddProperty = () => {
     university: "",
     distance: "",
     deposit: "",
-    studentsPerRoom: "",
+    studentsPerRoom: [],
     price: "",
     propertyType: "",
     description: "",
@@ -117,9 +117,12 @@ const AddProperty = () => {
 
         try {
 
-            await addProperty(form, token);
-            toast.success("Property information saved!");
-            navigate("landlord");
+            const property = await addProperty(form, token);
+            if (!property?.id) {
+                throw new Error("The server did not return the saved property's ID.");
+            }
+            toast.success("Property saved. Submit its documents for verification.");
+            navigate(`/landlord/${property.id}/verify-documents/`);
         } catch (error) {
             console.error(error);
             toast.error("Failed to save property. Please try again.");
