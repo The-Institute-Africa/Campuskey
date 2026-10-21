@@ -42,6 +42,19 @@ class VerificationDocumentStorageTest {
     }
 
     @Test
+    void acceptsZesaAndCityCouncilReceiptsAsSupportedProofOfAddressFiles() throws Exception {
+        VerificationDocumentStorage storage = storage();
+        for (String filename : new String[]{"zesa-receipt.pdf", "city-council-receipt.pdf"}) {
+            String path = storage.store(new MockMultipartFile(
+                    "file", filename, "application/pdf", "%PDF-1.7 utility receipt".getBytes()),
+                    "landlord/verification");
+            assertTrue(path.endsWith(".pdf"));
+            assertEquals("%PDF-1.7 utility receipt", new String(
+                    storage.load(path).resource().getInputStream().readAllBytes(), StandardCharsets.UTF_8));
+        }
+    }
+
+    @Test
     void rejectsUnsupportedContentAndOversizedDocuments() {
         VerificationDocumentStorage storage = storage();
         MockMultipartFile unsupported = new MockMultipartFile(

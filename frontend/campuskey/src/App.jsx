@@ -39,6 +39,7 @@ import StudentFavoritesPage from '@/pages/student/StudentFavoritesPage';
 import StudentInquiriesPage from '@/pages/student/StudentInquiriesPage';
 import ScrollToTop from "@/components/ScrollToTop";
 import StudentProfile from "@/pages/student/studentProfile"
+import ProfileViewPage from "@/pages/ProfileViewPage";
 
 import { Toaster } from '@/components/ui/toaster';
 import { AuthProvider } from './pages/auth/api/store/auth.store';
@@ -86,6 +87,7 @@ function App() {
             <Route path="/student/applications" element={<ProtectedRoute roles={["ROLE_STUDENT"]}><StudentApplicationsPage /></ProtectedRoute>} />
             <Route path="/student/inquiries" element={<ProtectedRoute roles={["ROLE_STUDENT"]}><StudentInquiriesPage /></ProtectedRoute>} />
             <Route path="/student/favorites" element={<ProtectedRoute roles={["ROLE_STUDENT"]}><StudentFavoritesPage /></ProtectedRoute>} />
+            <Route path="/profile/view/:role/:id" element={<ProtectedRoute roles={["ROLE_STUDENT", "ROLE_LANDLORD"]}><ProfileViewPage /></ProtectedRoute>} />
 
             {/* Landlord Routes */}
             <Route path="/landlord" element={<ProtectedRoute roles={["ROLE_LANDLORD"]}><LandlordDashboardPage /></ProtectedRoute>} />

@@ -40,10 +40,14 @@ const ProtectedRoute = ({ children, roles }) => {
   }
 
   const role = user?.roles?.[0];
-  const status = user?.accountStatus;
-  // Suspended users
-  if (status === "SUSPENDED") {
-    return <Navigate to="/access-denied" replace />;
+  const accountState = user?.accountState;
+  const isStudentProfile = location.pathname === "/student/profile";
+  const isLandlordProfile = location.pathname === "/landlord/profile";
+  if (accountState === "DELETED" && !isStudentProfile && !isLandlordProfile) {
+    return <Navigate to={rolePath(user)} replace />;
+  }
+  if (accountState === "SUSPENDED" && !isStudentProfile && !isLandlordProfile) {
+    return <Navigate to={rolePath(user)} replace />;
   }
 
   // Role-based access
@@ -52,9 +56,9 @@ if (roles && (!role || !roles.includes(role))) {
 }
 
 if (role === "ROLE_LANDLORD") {
-  const needsProfile = status == null || status === "UNVERIFIED";
+const needsProfile = user?.accountStatus == null || user?.accountStatus === "UNVERIFIED";
 
-  if (needsProfile && location.pathname !== "/landlord/profile") {
+if (needsProfile && !isLandlordProfile) {
     return <Navigate to="/landlord/profile" replace />;
   }
 }
@@ -62,7 +66,7 @@ if (role === "ROLE_LANDLORD") {
 
   // Student-specific redirects
   if (role === "ROLE_STUDENT") {
-    if (!user.hasStudentProfile && location.pathname !== "/student/profile") {
+    if (!user.studentProfileComplete && !isStudentProfile) {
       return <Navigate to="/student/profile" replace />;
     }
 
@@ -71,5 +75,7 @@ if (role === "ROLE_LANDLORD") {
   // All checks passed, render children
   return children;
 };
+
+const rolePath = (user) => user?.roles?.includes("ROLE_LANDLORD") ? "/landlord/profile" : "/student/profile";
 
 export default ProtectedRoute;

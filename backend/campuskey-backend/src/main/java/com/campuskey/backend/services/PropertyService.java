@@ -68,6 +68,13 @@ PropertyService {
                 .collect(Collectors.toList());
     }
 
+    public List<PropertyDto> getPropertiesForAdmin() {
+        return propertyRepository.findAllByVerification_Status(PropertyStatus.APPROVED)
+                .stream()
+                .map(property -> new PropertyDto(property, true))
+                .collect(Collectors.toList());
+    }
+
     // ✅ Get property by slug
     @Transactional
     public Optional<PropertyDto> getPropertyBySlug(String slug) {

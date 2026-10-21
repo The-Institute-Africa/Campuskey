@@ -2,6 +2,7 @@ package com.campuskey.backend.security.services;
 
 
 import com.campuskey.backend.entities.User;
+import com.campuskey.backend.entities.enumerations.AccountState;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,17 +27,20 @@ public class UserDetailsImpl implements UserDetails {
     private String password;
 
     private boolean is2faEnabled;
+    private AccountState accountState;
 
     private Collection<? extends GrantedAuthority> authorities;
 
     public UserDetailsImpl(Long id, String username, String email, String password,
-                           boolean is2faEnabled, Collection<? extends GrantedAuthority> authorities) {
+                           boolean is2faEnabled, Collection<? extends GrantedAuthority> authorities,
+                           AccountState accountState) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
         this.is2faEnabled = is2faEnabled;
         this.authorities = authorities;
+        this.accountState = accountState;
     }
 
     public static UserDetailsImpl build(User user) {
@@ -48,7 +52,8 @@ public class UserDetailsImpl implements UserDetails {
                 user.getEmail(),
                 user.getPassword(),
                 user.isTwoFactorEnabled(),
-                List.of(authority) // Wrapping the single authority in a list
+                List.of(authority),
+                user.getAccountState() == null ? AccountState.ACTIVE : user.getAccountState()
         );
     }
 
@@ -110,4 +115,3 @@ public class UserDetailsImpl implements UserDetails {
         return Objects.equals(id, user.id);
     }
 }
-

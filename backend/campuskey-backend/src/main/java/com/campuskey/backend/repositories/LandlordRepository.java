@@ -16,5 +16,7 @@ public interface LandlordRepository extends JpaRepository <Landlord,Long> {
     Optional<Landlord> findByContact (BigInteger contact);
     Optional <Landlord> findByName (String name);
     Optional <Landlord> findByOwnerUsername (String userName);
+    Optional<Landlord> findByIdAndOwnerUsername(Long id, String ownerUsername);
+    boolean existsByOwnerUsername(String ownerUsername);
 
 }

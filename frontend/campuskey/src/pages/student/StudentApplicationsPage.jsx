@@ -92,6 +92,9 @@ const StudentApplicationsPage = () => {
                           <Button variant="outline" size="sm" asChild>
                             <Link to={`/property/${booking.propertySlug}`}>View listing</Link>
                           </Button>
+                          {booking.landlordId && <Button variant="outline" size="sm" asChild>
+                            <Link to={`/profile/view/landlord/${booking.landlordId}`}>Landlord profile</Link>
+                          </Button>}
                           {booking.status === 'PENDING' && (
                             <Button
                               variant="outline"

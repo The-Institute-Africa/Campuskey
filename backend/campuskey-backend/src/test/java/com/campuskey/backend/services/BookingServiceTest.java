@@ -22,6 +22,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
+import java.math.BigInteger;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -93,6 +94,9 @@ class BookingServiceTest {
     private Student student(String username) {
         Student student = new Student();
         student.setStudentName("Student Name");
+        student.setStudentNumber("STU-1");
+        student.setStudentContact(BigInteger.valueOf(263771234567L));
+        student.setAddress("Harare");
         student.setOwnerUsername(username);
         return student;
     }
@@ -101,6 +105,7 @@ class BookingServiceTest {
         User user = new User();
         user.setUserName(username);
         Landlord landlord = new Landlord();
+        landlord.setId(9L);
         landlord.setUser(user);
         return landlord;
     }
@@ -110,6 +115,7 @@ class BookingServiceTest {
         property.setId(10L);
         property.setName("Campus House");
         property.setSlug("campus-house");
+        property.setLandlord(landlord("landlord"));
         property.setVerification(new PropertyVerification(property));
         property.getVerification().setStatus(PropertyStatus.APPROVED);
         return property;

@@ -46,6 +46,10 @@ public class PropertyDto {
         this.location = location;
     }
     public PropertyDto(Property property) {
+        this(property, false);
+    }
+
+    public PropertyDto(Property property, boolean includeLandlordContact) {
         this.id = property.getId();
         this.name = property.getName();
         this.address = property.getAddress();
@@ -85,8 +89,8 @@ public class PropertyDto {
         }
         this.landlord = new LandlordDto(
                 landlord.getId(),
-                landlord.getName(),
-                landlord.getContact()
+                includeLandlordContact ? landlord.getName() : null,
+                includeLandlordContact ? landlord.getContact() : null
         );
 
 

@@ -15,4 +15,5 @@ public interface StudentRepository extends JpaRepository<Student,Long> {
     Optional<Student> findFirstByOwnerUsernameOrderByIdAsc(String ownerUsername);
     Optional <Student> findByStudentNumber (String studentNumber);
     boolean existsByStudentNumber(String studentNumber);
+    Optional<Student> findByIdAndOwnerUsername(Long id, String ownerUsername);
 }

@@ -38,7 +38,7 @@ public class AdminController {
 
     @GetMapping("/properties")
     public List<PropertyDto> getAllProperties() {
-        return propertyService.getProperties();
+        return propertyService.getPropertiesForAdmin();
     }
 
     @PutMapping("/suspend/{account}")

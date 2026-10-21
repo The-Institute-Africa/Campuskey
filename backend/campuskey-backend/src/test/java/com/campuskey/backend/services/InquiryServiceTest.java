@@ -21,6 +21,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
+import java.math.BigInteger;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.http.HttpStatus;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -66,9 +69,25 @@ class InquiryServiceTest {
         assertThrows(EntityNotFoundException.class, () -> inquiryService.close("student", 12L));
     }
 
+    @Test
+    void inquiryRequiresAllStudentProfileFields() {
+        Student student = student();
+        student.setAddress(" ");
+        when(studentRepository.findFirstByOwnerUsernameOrderByIdAsc("student")).thenReturn(Optional.of(student));
+
+        ResponseStatusException error = assertThrows(ResponseStatusException.class,
+                () -> inquiryService.create("student", 10L,
+                        new com.campuskey.backend.dto.InquiryRequest("Can I see this?")));
+
+        assertEquals(HttpStatus.CONFLICT, error.getStatusCode());
+    }
+
     private Student student() {
         Student student = new Student();
         student.setStudentName("Student Name");
+        student.setStudentNumber("STU-1");
+        student.setStudentContact(BigInteger.valueOf(263771234567L));
+        student.setAddress("Harare");
         student.setOwnerUsername("student");
         return student;
     }
@@ -77,6 +96,7 @@ class InquiryServiceTest {
         User user = new User();
         user.setUserName(username);
         Landlord landlord = new Landlord();
+        landlord.setId(9L);
         landlord.setUser(user);
         return landlord;
     }
@@ -86,6 +106,7 @@ class InquiryServiceTest {
         property.setId(10L);
         property.setName("Campus House");
         property.setSlug("campus-house");
+        property.setLandlord(landlord("landlord"));
         PropertyVerification verification = new PropertyVerification(property);
         verification.setStatus(PropertyStatus.APPROVED);
         property.setVerification(verification);
