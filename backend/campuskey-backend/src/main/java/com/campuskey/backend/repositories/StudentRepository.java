@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface StudentRepository extends JpaRepository<Student,Long> {
     boolean existsByOwnerUsername(String ownerUsername);
-    Optional<Student> findByOwnerUsername(String ownerUsername);
+    Optional<Student> findFirstByOwnerUsernameOrderByIdAsc(String ownerUsername);
     Optional <Student> findByStudentNumber (String studentNumber);
     boolean existsByStudentNumber(String studentNumber);
 }

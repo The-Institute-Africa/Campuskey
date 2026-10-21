@@ -50,8 +50,12 @@ public class StudentController {
 
         String username = userDetails.getUsername();
 
+        if (studentRepository.existsByOwnerUsername(username)) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "A student profile already exists for this account");
+        }
+
         if (studentRepository.existsByStudentNumber(student.getStudentNumber())) {
-            throw new IllegalAccessException("Student already exists");
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Student number is already registered");
         }
 
         User user = userRepository.findByUserName(username)

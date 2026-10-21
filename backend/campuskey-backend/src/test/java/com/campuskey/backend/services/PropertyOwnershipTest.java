@@ -5,6 +5,7 @@ import com.campuskey.backend.entities.Landlord;
 import com.campuskey.backend.entities.Property;
 import com.campuskey.backend.entities.PropertyVerification;
 import com.campuskey.backend.entities.User;
+import com.campuskey.backend.entities.enumerations.PropertyStatus;
 import com.campuskey.backend.repositories.PropertyAmenityRepository;
 import com.campuskey.backend.repositories.LandlordRepository;
 import com.campuskey.backend.repositories.PropertyRepository;
@@ -23,6 +24,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -80,6 +82,38 @@ class PropertyOwnershipTest {
     }
 
     @Test
+    void approvedPropertyDetailIncrementsItsViewCount() {
+        Property property = new Property();
+        property.setId(12L);
+        property.setName("Approved property");
+        property.setSlug("approved-property");
+        property.setLandlord(landlord(1L, "owner"));
+        PropertyVerification verification = new PropertyVerification(property);
+        verification.setStatus(PropertyStatus.APPROVED);
+        property.setVerification(verification);
+        when(propertyRepository.findBySlug("approved-property")).thenReturn(Optional.of(property));
+        when(propertyRepository.incrementViews(12L)).thenReturn(1);
+
+        assertTrue(propertyService.getPropertyBySlug("approved-property").isPresent());
+
+        verify(propertyRepository).incrementViews(12L);
+    }
+
+    @Test
+    void unapprovedPropertyDetailDoesNotIncrementItsViewCount() {
+        Property property = new Property();
+        property.setId(12L);
+        PropertyVerification verification = new PropertyVerification(property);
+        verification.setStatus(PropertyStatus.PENDING);
+        property.setVerification(verification);
+        when(propertyRepository.findBySlug("pending-property")).thenReturn(Optional.of(property));
+
+        assertTrue(propertyService.getPropertyBySlug("pending-property").isEmpty());
+
+        verify(propertyRepository, never()).incrementViews(12L);
+    }
+
+    @Test
     void landlordCannotSubmitVerificationForAnotherLandlordsProperty() throws Exception {
         Property property = new Property();
         property.setId(12L);
@@ -98,6 +132,7 @@ class PropertyOwnershipTest {
         user.setUserName(username);
         Landlord landlord = new Landlord();
         landlord.setId(id);
+        landlord.setName("Landlord");
         landlord.setUser(user);
         return landlord;
     }

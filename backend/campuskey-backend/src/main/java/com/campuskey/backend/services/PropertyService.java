@@ -69,11 +69,17 @@ PropertyService {
     }
 
     // ✅ Get property by slug
+    @Transactional
     public Optional<PropertyDto> getPropertyBySlug(String slug) {
-        return propertyRepository.findBySlug(slug)
-                .filter(property -> property.getVerification() != null
-                        && property.getVerification().getStatus() == PropertyStatus.APPROVED)
-                .map(PropertyDto::new);
+        Optional<Property> property = propertyRepository.findBySlug(slug)
+                .filter(listing -> listing.getVerification() != null
+                        && listing.getVerification().getStatus() == PropertyStatus.APPROVED);
+        if (property.isEmpty()) {
+            return Optional.empty();
+        }
+
+        propertyRepository.incrementViews(property.get().getId());
+        return Optional.of(new PropertyDto(property.get()));
     }
 
     public List<PropertyDto> getPropertiesByUsername(String username) {
@@ -322,6 +328,7 @@ private Property buildPropertyFromDto(PropertyDto dto) {
         slug = generateSlug(dto.getName()); // e.g., "my-property-name-123"
     }
     property.setSlug(slug);
+    property.setVerification(new PropertyVerification(property));
 
 
     // ✅ Null-safe amenities

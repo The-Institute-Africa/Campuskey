@@ -60,7 +60,7 @@ class InquiryServiceTest {
     @Test
     void studentCannotCloseAnotherStudentsInquiry() {
         Student student = student();
-        when(studentRepository.findByOwnerUsername("student")).thenReturn(Optional.of(student));
+        when(studentRepository.findFirstByOwnerUsernameOrderByIdAsc("student")).thenReturn(Optional.of(student));
         when(inquiryRepository.findByIdAndStudent(12L, student)).thenReturn(Optional.empty());
 
         assertThrows(EntityNotFoundException.class, () -> inquiryService.close("student", 12L));

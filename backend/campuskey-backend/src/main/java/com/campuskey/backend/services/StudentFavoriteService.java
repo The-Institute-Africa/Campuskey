@@ -61,7 +61,7 @@ public class StudentFavoriteService {
     }
 
     private Student findStudent(String username) {
-        return studentRepository.findByOwnerUsername(username)
+        return studentRepository.findFirstByOwnerUsernameOrderByIdAsc(username)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.CONFLICT, "Create a student profile before saving properties"));
     }
