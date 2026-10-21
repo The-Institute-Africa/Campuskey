@@ -15,24 +15,21 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Service
 public class PropertyVerificationService {
 
     private final PropertyRepository propertyRepository;
     private final PropertyVerificationRepository verificationRepository;
-
+    private final VerificationDocumentStorage documentStorage;
 
     public PropertyVerificationService(PropertyRepository propertyRepository,
-                                    PropertyVerificationRepository verificationRepository) {
+                                    PropertyVerificationRepository verificationRepository,
+                                    VerificationDocumentStorage documentStorage) {
         this.propertyRepository = propertyRepository;
         this.verificationRepository = verificationRepository;
+        this.documentStorage = documentStorage;
     }
 
     @Transactional
@@ -54,18 +51,7 @@ public class PropertyVerificationService {
                     return newPv;
                 });
 
-        // ---------- LOCAL STORAGE ----------
-        String uploadDir = "uploads/verification/";
-        Files.createDirectories(Paths.get(uploadDir));
-
-        String originalFilename = file.getOriginalFilename();
-        String fileName = UUID.randomUUID() + "_" + originalFilename;
-        Path filePath = Paths.get(uploadDir, fileName);
-
-        Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-
-        // store local path (for now)
-        pv.setDocumentPath(filePath.toString());
+        pv.setDocumentPath(documentStorage.store(file, "property/verification"));
 
         // reset verification state
         pv.setStatus(PropertyStatus.PENDING);
@@ -77,6 +63,12 @@ public class PropertyVerificationService {
         return toDto(pv);
     }
 
+    public VerificationDocumentStorage.StoredDocument getDocument(Long propertyId) throws IOException {
+        PropertyVerification verification = verificationRepository.findByPropertyId(propertyId)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Verification record not found"));
+        return documentStorage.load(verification.getDocumentPath());
+    }
 
     // ---------- APPROVE ----------
     public PropertyVerificationDto approveProperty(@AuthenticationPrincipal UserDetails userDetails ,
@@ -126,7 +118,9 @@ public class PropertyVerificationService {
                 pv.getSubmittedAt(),
                 pv.getVerifiedAt(),
                 pv.getNotes(),
-                pv.getDocumentPath()
+                pv.getDocumentPath() == null ? null
+                        : "/api/v1/campuskey/admin/properties/" + pv.getProperty().getId()
+                                + "/verification-document"
         );
     }
 }

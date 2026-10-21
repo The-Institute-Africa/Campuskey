@@ -41,6 +41,9 @@ class PropertyOwnershipTest {
     private PropertyVerificationRepository verificationRepository;
 
     @Mock
+    private VerificationDocumentStorage verificationDocumentStorage;
+
+    @Mock
     private PropertyImageService propertyImageService;
 
     @Mock

@@ -13,7 +13,11 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import Header from "@/components/Layout/Header";
-import { fetchProperties, approveProperty } from "./api/admin.api";
+import {
+  fetchProperties,
+  approveProperty,
+  fetchPropertyVerificationDocument,
+} from "./api/admin.api";
 
 const AdminProperties = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -43,6 +47,25 @@ const AdminProperties = () => {
       toast.success("Property verified successfully!");
     } catch {
       toast.error("Failed to verify property");
+    }
+  };
+
+  const handleViewDocument = async (propertyId) => {
+    const preview = window.open("about:blank", "_blank");
+    if (!preview) {
+      toast.error("Allow pop-ups to view verification documents");
+      return;
+    }
+
+    try {
+      const document = await fetchPropertyVerificationDocument(propertyId);
+      const url = URL.createObjectURL(document);
+      preview.opener = null;
+      preview.location.href = url;
+      window.setTimeout(() => URL.revokeObjectURL(url), 60_000);
+    } catch {
+      preview.close();
+      toast.error("Failed to load verification document");
     }
   };
 
@@ -125,6 +148,7 @@ const AdminProperties = () => {
                 properties={filteredProperties(filter)}
                 getStatusBadge={getStatusBadge}
                 handleVerify={handleVerify}
+                handleViewDocument={handleViewDocument}
               />
             </TabPanel>
           ))}
@@ -136,7 +160,7 @@ const AdminProperties = () => {
 
 // ---------------- TABLE ----------------
 
-const PropertyTable = ({ properties, getStatusBadge, handleVerify }) => (
+const PropertyTable = ({ properties, getStatusBadge, handleVerify, handleViewDocument }) => (
   <div className="overflow-x-auto rounded-lg border bg-card">
     <table className="w-full border-collapse">
       <thead className="bg-muted sticky top-0 z-10">
@@ -180,6 +204,16 @@ const PropertyTable = ({ properties, getStatusBadge, handleVerify }) => (
                 : "—"}
             </td>
             <td className="px-4 py-3 text-right">
+              {property.verification?.documentPath && (
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="mr-2"
+                  onClick={() => handleViewDocument(property.id)}
+                >
+                  View Document
+                </Button>
+              )}
               {property.verification?.status === "PENDING" && (
                 <Button
                   size="sm"

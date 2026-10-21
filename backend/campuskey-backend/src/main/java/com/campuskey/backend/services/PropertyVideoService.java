@@ -12,21 +12,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class PropertyVideoService {
     private final PropertyVideoRepository propertyVideoRepository;
-    private final String uploadDir = "uploads/propertyVideos/";
+    private final PublicMediaStorage mediaStorage;
 
     @Autowired
-    public PropertyVideoService(PropertyVideoRepository propertyVideoRepository){
+    public PropertyVideoService(PropertyVideoRepository propertyVideoRepository, PublicMediaStorage mediaStorage){
         this.propertyVideoRepository = propertyVideoRepository;
+        this.mediaStorage = mediaStorage;
     }
 
     public List<PropertyVideoDto> getAllVideos(){
@@ -48,11 +45,7 @@ public class PropertyVideoService {
     }
 
     public String saveVideo(MultipartFile file) throws IOException {
-        String filename = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-        Path filePath = Paths.get(uploadDir + filename);
-        Files.createDirectories(filePath.getParent());
-        Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-        return "/uploads/propertyVideos/" + filename;
+        return mediaStorage.storeVideo(file);
     }
 
 
