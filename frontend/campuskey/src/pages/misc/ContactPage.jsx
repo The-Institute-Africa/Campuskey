@@ -59,19 +59,19 @@ const ContactPage = () => {
     {
       icon: Phone,
       title: "Phone",
-      details: ["+263 77 459 2474", "+263 71 987 6543"],
+      details: ["+263 78 030 1896", "+27 74 573 0455"],
       description: "Call us Monday to Friday, 8AM - 6PM"
     },
     {
       icon: Mail,
       title: "Email",
-      details: ["info@campuskeyzim.com", "support@campuskeyzim.com"],
+      details: ["info@campuskey.co.zw"],
       description: "We'll respond within 24 hours"
     },
     {
       icon: MapPin,
       title: "Office",
-      details: ["National University of Science and Technology", "Bulawayo, Zimbabwe"],
+      details: ["Bulawayo, Zimbabwe"],
       description: "Visit us during business hours"
     },
     {
@@ -83,7 +83,7 @@ const ContactPage = () => {
   ];
 
   const handleWhatsAppContact = () => {
-    const phoneNumber = "+263774592474"; // Remove + and spaces
+    const phoneNumber = "263780301896";
     const message = "Hi! I'm interested in CampusKey Zimbabwe services.";
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
@@ -284,12 +284,12 @@ const ContactPage = () => {
                       </div>
                     </div>
                     <Button
-                      onClick={() => window.location.href = 'tel:+263774592474'}
+                      onClick={() => window.location.href = 'tel:+263780301896'}
                       variant="outline"
                       className="w-full border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
                     >
                       <Phone className="h-5 w-5 mr-2" />
-                      Call +263 77 459 2474
+                      Call +263 78 030 1896
                     </Button>
                   </CardContent>
                 </Card>
@@ -304,7 +304,7 @@ const ContactPage = () => {
                       </div>
                     </div>
                     <Button
-                      onClick={() => window.location.href = 'mailto:info@campuskeyzim.com'}
+                      onClick={() => window.location.href = 'mailto:info@campuskey.co.zw'}
                       variant="outline"
                       className="w-full border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white"
                     >
@@ -319,7 +319,8 @@ const ContactPage = () => {
                   <p className="text-blue-700 text-sm mb-3">
                     For urgent accommodation issues or safety concerns, call our 24/7 emergency line:
                   </p>
-                  <p className="text-xl font-bold text-blue-800">+263 71 987 6543</p>
+                  <p className="text-xl font-bold text-blue-800">+263 78 030 1896</p>
+                  <p className="text-xl font-bold text-blue-800">+27 74 573 0455</p>
                 </div>
               </motion.div>
             </div>

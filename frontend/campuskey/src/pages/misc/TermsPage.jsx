@@ -250,9 +250,9 @@ const TermsPage = () => {
                       If you have any questions about these Terms and Conditions, please contact us at:
                     </p>
                     <div className="mt-3 space-y-1 text-gray-700">
-                      <p>Email: legal@campuskeyzim.com</p>
-                      <p>Phone: +263 77 459 2474</p>
-                      <p>Address: National University of Science and Technology, Bulawayo, Zimbabwe</p>
+                      <p>Email: info@campuskey.co.zw</p>
+                      <p>Phone: +263 78 030 1896 / +27 74 573 0455</p>
+                      <p>Address: Bulawayo, Zimbabwe</p>
                     </div>
                   </div>
 

@@ -299,10 +299,9 @@ const DisclaimerPage = () => {
                       please contact us:
                     </p>
                     <div className="space-y-1 text-gray-700">
-                      <p>Email: legal@campuskeyzim.com</p>
-                      <p>Phone: +263 77 123 4567</p>
-                      <p>Emergency: +263 71 987 6543</p>
-                      <p>Address: 123 University Avenue, Harare, Zimbabwe</p>
+                      <p>Email: info@campuskey.co.zw</p>
+                      <p>Phone: +263 78 030 1896 / +27 74 573 0455</p>
+                      <p>Address: Bulawayo, Zimbabwe</p>
                     </div>
                   </div>
 

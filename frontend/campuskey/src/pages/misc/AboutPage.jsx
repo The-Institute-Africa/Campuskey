@@ -32,22 +32,22 @@ const AboutPage = () => {
 
   const team = [
     {
-      name: "Tobby Carter",
-      role: "Founder & CEO",
-      image: "Professional headshot of Carter, founder and CEO",
-      description: "Visionary leader driving growth, strategy, and innovation while building and scaling success."
+      name: "Ashly K Mandimutsira",
+      role: "CEO & Founder of CampusKey and Loop",
+      image: "Ashly K Mandimutsira",
+      description: "Leads the vision and growth of CampusKey and Loop."
     },
     {
       name: "Talent Chiradza",
-      role: "Founder and Frontend lead",
-      image: "Professional headshot of David Chikwanha, head of operations",
-      description: "With expertise in modern frontend technologies"
+      role: "Former Founder & Frontend Developer",
+      image: "Talent Chiradza",
+      description: "Contributed to CampusKey as a founder and frontend developer."
     },
     {
-      name: "Ashly K Mandimutsira",
-      role: "Head of Partnership Operations",
-      image: "Professional headshot of Grace Mutasa, student relations manager",
-      description: "Focused on driving seamless partnership operations and exceptional stakeholder experiences."
+      name: "The Institute",
+      role: "Student Organization",
+      image: "The Institute student organization",
+      description: "A student organization supporting student-led ideas and initiatives."
     }
   ];
 
