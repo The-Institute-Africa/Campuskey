@@ -35,12 +35,6 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @GetMapping("public/student")
-    public List<StudentDto> getAllStudents(){
-        return studentService.getAllStudents();
-    }
-
-
     @PostMapping("student/create")
     @Transactional
     public void addStudent(
@@ -54,13 +48,24 @@ public class StudentController {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "A student profile already exists for this account");
         }
 
-        if (studentRepository.existsByStudentNumber(student.getStudentNumber())) {
+        if (student.getStudentName() == null || student.getStudentName().isBlank()
+                || student.getStudentNumber() == null || student.getStudentNumber().isBlank()
+                || student.getAddress() == null || student.getAddress().isBlank()
+                || student.getStudentContact() == null || student.getStudentContact().signum() <= 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Name, student number, contact number, and address are required");
+        }
+
+        if (studentRepository.existsByStudentNumber(student.getStudentNumber().strip())) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Student number is already registered");
         }
 
         User user = userRepository.findByUserName(username)
                 .orElseThrow(() -> new IllegalStateException("User not found"));
 
+        student.setStudentName(student.getStudentName().strip());
+        student.setStudentNumber(student.getStudentNumber().strip());
+        student.setAddress(student.getAddress().strip());
         student.setOwnerUsername(username);
         student.setUser(user);
 

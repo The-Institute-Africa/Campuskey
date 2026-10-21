@@ -253,10 +253,16 @@ public class AuthController {
 
 
         boolean hasStudentProfile = false;
+        boolean studentProfileComplete = false;
 
         if (roles.contains("ROLE_STUDENT")) {
-            hasStudentProfile =
-                    studentRepository.existsByOwnerUsername(user.getUserName());
+            var student = studentRepository.findFirstByOwnerUsernameOrderByIdAsc(user.getUserName());
+            hasStudentProfile = student.isPresent();
+            studentProfileComplete = student.filter(profile ->
+                    profile.getStudentName() != null && !profile.getStudentName().isBlank()
+                            && profile.getStudentNumber() != null && !profile.getStudentNumber().isBlank()
+                            && profile.getStudentContact() != null && profile.getStudentContact().signum() > 0
+                            && profile.getAddress() != null && !profile.getAddress().isBlank()).isPresent();
         }
 
         UserInfoResponse response = new UserInfoResponse(
@@ -272,7 +278,9 @@ public class AuthController {
                 user.isTwoFactorEnabled(),
                 roles,
                 accountStatus,
-                hasStudentProfile
+                hasStudentProfile,
+                studentProfileComplete,
+                user.getAccountState() == null ? "ACTIVE" : user.getAccountState().name()
         );
 
         return ResponseEntity.ok(response);

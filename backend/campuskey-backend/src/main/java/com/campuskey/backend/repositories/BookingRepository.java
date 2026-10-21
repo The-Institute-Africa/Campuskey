@@ -16,4 +16,6 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     Optional<Booking> findByIdAndProperty_Landlord(Long id, Landlord landlord);
 
     Optional<Booking> findByIdAndStudent(Long id, Student student);
+
+    boolean existsByStudent_IdAndProperty_Landlord_Id(Long studentId, Long landlordId);
 }

@@ -2,6 +2,8 @@ package com.campuskey.backend.security.jwt;
 
 
 import com.campuskey.backend.security.services.UserDetailsServiceImpl;
+import com.campuskey.backend.security.services.UserDetailsImpl;
+import com.campuskey.backend.entities.enumerations.AccountState;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -55,12 +57,31 @@ public class AuthTokenFilter extends OncePerRequestFilter {
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
+                if (userDetails instanceof UserDetailsImpl account
+                        && account.getAccountState() != AccountState.ACTIVE
+                        && !isAccountManagementRequest(request)) {
+                    response.setStatus(423);
+                    response.setContentType("application/json");
+                    response.getWriter().write("{\"message\":\"This account is "
+                            + account.getAccountState().name().toLowerCase()
+                            + ". Manage your account profile to continue.\"}");
+                    return;
+                }
             }
         } catch (Exception e) {
             logger.error("Cannot set user authentication: {}", e);
         }
 
         filterChain.doFilter(request, response);
+    }
+
+    private boolean isAccountManagementRequest(HttpServletRequest request) {
+        String path = request.getServletPath();
+        return path.equals("/api/v1/campuskey/profile/me")
+                || path.equals("/api/v1/campuskey/auth/me")
+                || path.equals("/api/v1/campuskey/account/suspend")
+                || path.equals("/api/v1/campuskey/account/reactivate")
+                || path.equals("/api/v1/campuskey/account/delete");
     }
 
     private String parseJwt(HttpServletRequest request) {

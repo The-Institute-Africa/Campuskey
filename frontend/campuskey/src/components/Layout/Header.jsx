@@ -70,6 +70,7 @@ const Header = () => {
       { label: 'Need Help', icon: HelpCircle, action: () => navigate('/help') },
     ],
     LANDLORD: [
+      { label: 'Profile', icon: User, action: () => navigate('/landlord/profile') },
       { label: 'Account settings', icon: User, action: () => navigate('/landlord/account') },
       { label: 'Messages', icon: MessageCircle, action: () => navigate('/landlord/messages') },
       { label: 'Dashboard', icon: LayoutDashboard, action: handleDashboardClick },

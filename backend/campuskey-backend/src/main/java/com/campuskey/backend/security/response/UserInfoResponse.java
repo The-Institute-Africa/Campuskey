@@ -26,9 +26,11 @@ public class UserInfoResponse {
 
     private List<String> roles;
     private String accountStatus;
+    private String accountState;
 
     // 🔹 NEW FIELD
     private boolean hasStudentProfile;
+    private boolean studentProfileComplete;
 
     public UserInfoResponse(
             Long id,
@@ -43,7 +45,9 @@ public class UserInfoResponse {
             boolean isTwoFactorEnabled,
             List<String> roles,
             String accountStatus,
-            boolean hasStudentProfile
+            boolean hasStudentProfile,
+            boolean studentProfileComplete,
+            String accountState
     ) {
         this.id = id;
         this.username = username;
@@ -58,5 +62,7 @@ public class UserInfoResponse {
         this.roles = roles;
         this.accountStatus=accountStatus;
         this.hasStudentProfile = hasStudentProfile;
+        this.studentProfileComplete = studentProfileComplete;
+        this.accountState = accountState;
     }
 }

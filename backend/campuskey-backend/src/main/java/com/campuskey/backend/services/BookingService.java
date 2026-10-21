@@ -41,6 +41,7 @@ public class BookingService {
     public BookingDto create(String username, Long propertyId, BookingRequest request) {
         validateDates(request);
         Student student = findStudent(username);
+        requireCompleteProfile(student);
         Property property = propertyRepository.findById(propertyId)
                 .filter(this::isPubliclyBookable)
                 .orElseThrow(() -> new EntityNotFoundException("Property not found"));
@@ -112,5 +113,15 @@ public class BookingService {
 
     private String clean(String value) {
         return value == null || value.isBlank() ? null : value.strip();
+    }
+
+    private void requireCompleteProfile(Student student) {
+        if (student.getStudentName() == null || student.getStudentName().isBlank()
+                || student.getStudentNumber() == null || student.getStudentNumber().isBlank()
+                || student.getStudentContact() == null || student.getStudentContact().signum() <= 0
+                || student.getAddress() == null || student.getAddress().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                    "Complete your name, student number, contact number, and address in your profile before requesting accommodation");
+        }
     }
 }

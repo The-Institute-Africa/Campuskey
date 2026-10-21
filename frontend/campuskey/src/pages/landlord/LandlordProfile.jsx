@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import Header from '@/components/Layout/Header';
@@ -20,6 +20,8 @@ import { applyLandlord } from './api/landlordApply.api'
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/pages/auth/api/store/auth.store';
 import { CheckProfile } from '@/pages/auth/api/checkProfile.api';
+import { getMyProfile, updateMyProfile } from '@/api/profile.api';
+import ProfileAccountActions from '@/components/ProfileAccountActions';
 
 const LandlordProfile = () => {
   const navigate = useNavigate();
@@ -33,12 +35,39 @@ const LandlordProfile = () => {
   const [idDocument, setIdDocument] = useState(null);
 
   const [loading, setLoading] = useState(false);
+  const [loadingProfile, setLoadingProfile] = useState(true);
+  const [profile, setProfile] = useState(null);
+
+  useEffect(() => {
+    getMyProfile().then((current) => {
+      setProfile(current);
+      setName(current.name || '');
+      setPhone(current.contact?.toString() || '');
+      setAddress(current.address || '');
+      setIdNumber(current.idNumber || '');
+    }).catch(() => {
+      setProfile(null);
+    }).finally(() => setLoadingProfile(false));
+  }, []);
 
   const handleProfileUpdate = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
+      if (profile?.name) {
+        const updated = await updateMyProfile({
+          role: 'LANDLORD',
+          name: name.trim(),
+          contact: phone.trim(),
+          address: address.trim(),
+          idNumber: idNumber.trim(),
+        });
+        setProfile(updated);
+        setUser(await CheckProfile());
+        toast({ title: 'Profile updated', description: 'Your landlord details have been saved.' });
+        return;
+      }
       // Use FormData for File Uploads
       const formData = new FormData();
       formData.append('name', name);
@@ -84,20 +113,24 @@ const LandlordProfile = () => {
               transition={{ duration: 0.5 }}
             >
               <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
-                Create Account Profile
+                {profile?.name ? 'Landlord Profile' : 'Create Account Profile'}
               </h1>
 
               <div className="space-y-8">
-                <Card>
+                {profile?.accountState === 'DELETED' ? (
+                  <Card><CardContent className="pt-6">
+                    <p>This account has been deactivated. Its profile details are no longer available.</p>
+                  </CardContent></Card>
+                ) : <Card>
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <User size={20} /> Personal Information
                     </CardTitle>
-                    <CardDescription>Update your profile photo and details.</CardDescription>
+                    <CardDescription>{profile?.name ? 'View and update your landlord contact details.' : 'Add your personal details and verification documents.'}</CardDescription>
                   </CardHeader>
 
                   <CardContent>
-                    <form onSubmit={handleProfileUpdate} className="space-y-6">
+                    {loadingProfile ? <p role="status">Loading profile…</p> : <form onSubmit={handleProfileUpdate} className="space-y-6">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="space-y-2">
                           <Label htmlFor="name">Full Name</Label>
@@ -120,9 +153,8 @@ const LandlordProfile = () => {
                         <Input id="address" value={address} onChange={(e) => setAddress(e.target.value)} required />
                       </div>
 
-                      {/* ID Document Upload */}
-                      <div className="space-y-2">
-                        <Label htmlFor="idDoc">Verification Document (ID or Passport Scan)</Label>
+                      {!profile?.name && <div className="space-y-2">
+                      <Label htmlFor="idDoc">Verification Document (ID/passport or proof-of-address document)</Label>
                         <div className="border-2 border-dashed rounded-lg p-6 flex flex-col items-center gap-2 bg-gray-50/50">
                           <FileText className="text-gray-400" size={32} />
                           <Input
@@ -133,16 +165,24 @@ const LandlordProfile = () => {
                             onChange={(e) => setIdDocument(e.target.files[0])}
                             required
                           />
-                          <p className="text-xs text-gray-500">PDF, JPG, or PNG (Max 5MB)</p>
+                          <p className="text-xs text-gray-500">PDF, JPG, or PNG (Max 10MB). A ZESA or City Council receipt may support proof of address; it is not proof of ownership.</p>
                         </div>
-                      </div>
+                      </div>}
 
                       <Button type="submit" className="w-full md:w-auto" disabled={loading}>
-                        {loading ? 'Sending Application...' : 'Apply'}
+                        {loading ? 'Saving…' : profile?.name ? 'Update profile' : 'Apply'}
                       </Button>
-                    </form>
+                    </form>}
                   </CardContent>
-                </Card>
+                </Card>}
+                {profile?.name && (
+                  <Card><CardContent className="pt-6">
+                    <ProfileAccountActions
+                      accountState={profile.accountState}
+                      onStateChange={(accountState) => setProfile((current) => ({ ...current, accountState }))}
+                    />
+                  </CardContent></Card>
+                )}
               </div>
             </motion.div>
           </div>

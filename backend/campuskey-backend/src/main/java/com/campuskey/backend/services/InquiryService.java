@@ -39,6 +39,7 @@ public class InquiryService {
     @Transactional
     public InquiryDto create(String username, Long propertyId, InquiryRequest request) {
         Student student = findStudent(username);
+        requireCompleteProfile(student);
         Property property = propertyRepository.findById(propertyId)
                 .filter(this::isPubliclyInquirable)
                 .orElseThrow(() -> new EntityNotFoundException("Property not found"));
@@ -97,5 +98,15 @@ public class InquiryService {
     private boolean isPubliclyInquirable(Property property) {
         return property.getVerification() != null
                 && property.getVerification().getStatus() == PropertyStatus.APPROVED;
+    }
+
+    private void requireCompleteProfile(Student student) {
+        if (student.getStudentName() == null || student.getStudentName().isBlank()
+                || student.getStudentNumber() == null || student.getStudentNumber().isBlank()
+                || student.getStudentContact() == null || student.getStudentContact().signum() <= 0
+                || student.getAddress() == null || student.getAddress().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                    "Complete your name, student number, contact number, and address in your profile before sending inquiries");
+        }
     }
 }

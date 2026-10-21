@@ -68,6 +68,12 @@ For production, activate the `prod` Spring profile. It validates rather than cha
 
 Verification documents are encrypted by the backend with AES-256-GCM using a fresh random nonce and authentication tag per file. On startup, the backend also encrypts existing plaintext documents in the `verification/`, `landlord/verification/`, and `property/verification/` upload directories in place; an encryption or file-permission error fails startup rather than silently leaving a partial migration. Generate a key with `openssl rand -base64 32`, store it as `CAMPUSKEY_DOCUMENT_ENCRYPTION_KEY`, and keep the same key across deployments. Losing or replacing the key makes existing documents unreadable. This application-level encryption protects verification files at rest; it does not encrypt listing photos/videos or database fields.
 
+## Profiles and account lifecycle
+
+Students complete their name, student number, contact number, and address in `/student/profile`; the API rejects inquiry and booking creation until these fields are present. Profile owners can update their own information, suspend/reactivate their account, or deactivate it. Deactivation redacts profile PII and retains inquiry/booking rows. Account lifecycle is stored separately from landlord verification status by the V3 Flyway migration.
+
+Counterpart profile details are available only after an inquiry or booking links the student and landlord. Landlords receive only the student's name and contact number; students receive only the landlord's name and contact number. Public property listings do not include landlord profile contact details. Landlord/property verification accepts PDF, JPEG, and PNG files up to 10 MB; a ZESA or City Council receipt may support proof of address, but is not proof of ownership.
+
 ### Demo data
 
 To preview realistic but fictional listings and exercise student/landlord workflows, start the backend with the `demo` profile and explicitly enable the seeder. It uses a disposable in-memory H2 database, so demo data disappears when the backend stops and no MySQL database is modified. Set local-only JWT/document keys and demo passwords:

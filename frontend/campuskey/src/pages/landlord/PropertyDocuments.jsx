@@ -77,8 +77,7 @@ const handleSubmit = async (e) => {
                   Property Verification Documents
                 </h2>
                 <p className="text-muted-foreground text-sm">
-                  Please upload official property documents for verification
-                  (ownership proof, lease agreements, etc.)
+                  Upload a document to support verification of the property address. A ZESA or City Council receipt may be used as supporting proof of address; it does not prove ownership.
                 </p>
               </div>
 

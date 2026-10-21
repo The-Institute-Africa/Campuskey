@@ -1,6 +1,7 @@
 package com.campuskey.backend.entities;
 
 import com.campuskey.backend.entities.enumerations.AccountStatus;
+import com.campuskey.backend.entities.enumerations.AccountState;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -71,6 +72,10 @@ public class User  {
     @Enumerated(EnumType.STRING)
     @Column(name = "account_status", nullable = false)
     private AccountStatus accountStatus = AccountStatus.PENDING;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "account_state", nullable = false)
+    private AccountState accountState = AccountState.ACTIVE;
 
 
 

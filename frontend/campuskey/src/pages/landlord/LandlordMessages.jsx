@@ -84,6 +84,8 @@ const LandlordMessages = () => {
               <div>
                 <h2 className="font-semibold">{inquiry.studentName}</h2>
                 <p className="text-sm text-muted-foreground">{inquiry.propertyName}</p>
+                {inquiry.studentContact && <p className="text-sm text-muted-foreground">Contact: {inquiry.studentContact}</p>}
+                {inquiry.studentId && <Link className="text-sm underline" to={`/profile/view/student/${inquiry.studentId}`}>View student profile</Link>}
               </div>
               <div className="text-right text-sm text-muted-foreground">
                 <p>{new Date(inquiry.createdAt).toLocaleString()}</p>

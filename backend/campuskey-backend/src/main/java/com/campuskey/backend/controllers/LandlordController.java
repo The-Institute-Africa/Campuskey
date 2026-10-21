@@ -46,10 +46,6 @@ public class LandlordController {
         return landlordService.getLandlords();
     }
 
-    @DeleteMapping("/landlord/delete/{slug}")
-    public void deleteLandlord(@PathVariable Long landlordId) throws IllegalAccessException{
-        landlordService.deleteLandlord(landlordId);
-    }
     @PostMapping("landlord/create")
     public void addLandlord(@RequestBody Landlord landlord ,
                             @AuthenticationPrincipal UserDetails userDetails) throws IllegalAccessException{
@@ -71,9 +67,10 @@ public class LandlordController {
             @RequestParam(required = false) String name,
             @RequestParam (required = false) BigInteger contact,
             @RequestParam (required = false) String idNumber ,
-            @RequestParam (required = false) String address){
+            @RequestParam (required = false) String address,
+            @AuthenticationPrincipal UserDetails userDetails){
 
-        landlordService.updatingLandlord(slug, name,address,idNumber, contact);
+        landlordService.updatingLandlord(userDetails.getUsername(), name,address,idNumber, contact);
     }
 
 

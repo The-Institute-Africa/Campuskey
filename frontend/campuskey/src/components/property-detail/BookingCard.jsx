@@ -54,9 +54,17 @@ const BookingCard = ({ listing }) => {
       setEndDate('');
       setMessage('');
     } catch (error) {
+      const backendMessage = error.response?.data?.message;
+      const requestMessage = backendMessage || error.message || 'Please try again.';
+      if (error.response?.status === 409) {
+        navigate('/student/profile', {
+          state: { message: backendMessage || 'Complete your student profile before sending inquiries or booking requests.' },
+        });
+        return;
+      }
       toast({
         title: 'Request failed',
-        description: error.response?.data?.message || error.message || 'Please try again.',
+        description: requestMessage,
         variant: 'destructive',
       });
     } finally {

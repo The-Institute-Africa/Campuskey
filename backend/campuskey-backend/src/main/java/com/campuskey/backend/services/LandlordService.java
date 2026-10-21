@@ -30,6 +30,9 @@ public class LandlordService {
     }
 
     public void addLandlord (Landlord landlord , String username) throws IllegalAccessException{
+        if (landlordRepository.existsByOwnerUsername(username)) {
+            throw new IllegalAccessException("A landlord profile already exists for this account");
+        }
         Optional<Landlord> landlordOptional = landlordRepository.findByContact(
                 landlord.getContact());
         if(landlordOptional.isPresent()){
@@ -42,8 +45,8 @@ public class LandlordService {
     }
 
     @Transactional
-    public void updatingLandlord(String slug, String name ,String address,String idNumber, BigInteger contact){
-        Landlord landlord = landlordRepository.findByName(slug).orElseThrow(() -> new IllegalStateException(
+    public void updatingLandlord(String username, String name ,String address,String idNumber, BigInteger contact){
+        Landlord landlord = landlordRepository.findByOwnerUsername(username).orElseThrow(() -> new IllegalStateException(
                 "Landlord does not exist"
         ));
         if(name != null && !name.isEmpty() && !Objects.equals(landlord.getName(),name ) ){

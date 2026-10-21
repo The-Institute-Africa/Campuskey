@@ -16,4 +16,6 @@ public interface InquiryRepository extends JpaRepository<Inquiry, Long> {
     Optional<Inquiry> findByIdAndProperty_Landlord(Long id, Landlord landlord);
 
     Optional<Inquiry> findByIdAndStudent(Long id, Student student);
+
+    boolean existsByStudent_IdAndProperty_Landlord_Id(Long studentId, Long landlordId);
 }

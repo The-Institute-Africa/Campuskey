@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { closeInquiry, getStudentInquiries } from '@/api/inquiry.api';
 import { toast } from '@/components/ui/use-toast';
+import { Link } from 'react-router-dom';
 
 const StudentInquiriesPage = () => {
   const [inquiries, setInquiries] = useState([]);
@@ -66,6 +67,7 @@ const StudentInquiriesPage = () => {
               <Card key={inquiry.id} className="space-y-3 p-6">
                 <div className="flex flex-wrap justify-between gap-2">
                   <h2 className="font-semibold">{inquiry.propertyName}</h2>
+                  {inquiry.landlordId && <Link className="text-sm underline" to={`/profile/view/landlord/${inquiry.landlordId}`}>View landlord profile</Link>}
                   <span className="text-sm text-muted-foreground">{inquiry.status}</span>
                 </div>
                 <p className="whitespace-pre-wrap">{inquiry.message}</p>
