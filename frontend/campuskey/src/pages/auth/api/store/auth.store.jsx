@@ -4,19 +4,33 @@ import { login as apiLogin } from "../auth.api"
 
 const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
+const readStoredAuth = () => {
   const storedToken = localStorage.getItem("JWT_TOKEN");
-  const decoded = storedToken ? jwtDecode(storedToken) : null;
+  if (!storedToken) return { token: null, user: null };
 
-  const [token, setToken] = useState(storedToken);
-  const [user, setUser] = useState(
-    decoded
-      ? {
-          username: decoded.sub,
-          roles: Array.isArray(decoded.roles) ? decoded.roles : [],
-        }
-      : null
-  );
+  try {
+    const decoded = jwtDecode(storedToken);
+    if (!decoded.sub || (decoded.exp && decoded.exp * 1000 <= Date.now())) {
+      throw new Error("Stored session is invalid or expired");
+    }
+    return {
+      token: storedToken,
+      user: {
+        username: decoded.sub,
+        roles: Array.isArray(decoded.roles) ? decoded.roles : [],
+      },
+    };
+  } catch {
+    localStorage.removeItem("JWT_TOKEN");
+    localStorage.removeItem("USER");
+    return { token: null, user: null };
+  }
+};
+
+export const AuthProvider = ({ children }) => {
+  const [initialAuth] = useState(readStoredAuth);
+  const [token, setToken] = useState(initialAuth.token);
+  const [user, setUser] = useState(initialAuth.user);
 
  const login = async ({ username, password }) => {
   const result = await apiLogin({ username, password });

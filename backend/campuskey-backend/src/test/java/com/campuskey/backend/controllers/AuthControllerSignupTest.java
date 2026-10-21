@@ -7,9 +7,13 @@ import com.campuskey.backend.entities.enumerations.AppRole;
 import com.campuskey.backend.repositories.RoleRepository;
 import com.campuskey.backend.repositories.StudentRepository;
 import com.campuskey.backend.repositories.UserRepository;
+import com.campuskey.backend.security.jwt.JwtUtils;
+import com.campuskey.backend.security.requests.LoginRequest;
 import com.campuskey.backend.security.requests.SignupRequest;
 import com.campuskey.backend.security.response.MessageResponse;
 import com.campuskey.backend.services.UserService;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,6 +22,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.Optional;
 import java.util.Set;
@@ -46,6 +52,12 @@ class AuthControllerSignupTest {
 
     @Mock
     private StudentRepository studentRepository;
+
+    @Mock
+    private AuthenticationManager authenticationManager;
+
+    @Mock
+    private JwtUtils jwtUtils;
 
     @InjectMocks
     private AuthController authController;
@@ -78,6 +90,19 @@ class AuthControllerSignupTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         verify(userRepository).save(org.mockito.ArgumentMatchers.argThat(user ->
                 user.getRole() == landlordRole && user.getAccountStatus() == AccountStatus.UNVERIFIED));
+    }
+
+    @Test
+    void signinReturnsUnauthorizedForBadCredentials() {
+        LoginRequest request = new LoginRequest();
+        request.setUsername("demo_student");
+        request.setPassword("wrong-password");
+        when(authenticationManager.authenticate(any()))
+                .thenThrow(new BadCredentialsException("Invalid credentials"));
+
+        ResponseEntity<?> response = authController.authenticateUser(request);
+
+        assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
     }
 
     private SignupRequest signupRequest(Set<String> roles) {
