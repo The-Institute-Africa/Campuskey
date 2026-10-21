@@ -298,9 +298,9 @@ const PrivacyPage = () => {
                       If you have any questions about this Privacy Policy or our privacy practices, please contact us:
                     </p>
                     <div className="mt-3 space-y-1 text-gray-700">
-                      <p>Email: privacy@campuskeyzim.com</p>
-                      <p>Phone: +263 77 123 4567</p>
-                      <p>Address: 123 University Avenue, Harare, Zimbabwe</p>
+                      <p>Email: info@campuskey.co.zw</p>
+                      <p>Phone: +263 78 030 1896 / +27 74 573 0455</p>
+                      <p>Address: Bulawayo, Zimbabwe</p>
                     </div>
                   </div>
 

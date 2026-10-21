@@ -354,7 +354,7 @@ const HelpCenterPage = () => {
                     <Button
                       className="w-full bg-green-600 hover:bg-green-700"
                       onClick={() => {
-                        const phoneNumber = "263774592474";
+                        const phoneNumber = "263780301896";
                         const message = "Hi! I need help with Campus Key Zimbabwe.";
                         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
                         window.open(whatsappUrl, '_blank');
@@ -386,10 +386,18 @@ const HelpCenterPage = () => {
                     <Button
                       variant="outline"
                       className="w-full border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
-                      onClick={() => window.location.href = 'tel:+263774592474'}
+                      onClick={() => window.location.href = 'tel:+263780301896'}
                     >
                       <Phone className="h-4 w-4 mr-2" />
-                      Call +263 77 459 2474
+                      Call +263 78 030 1896
+                    </Button>
+                    <Button
+                      variant="outline"
+                      className="mt-2 w-full"
+                      onClick={() => window.location.href = 'tel:+27745730455'}
+                    >
+                      <Phone className="h-4 w-4 mr-2" />
+                      Call +27 74 573 0455
                     </Button>
                   </CardContent>
                 </Card>
