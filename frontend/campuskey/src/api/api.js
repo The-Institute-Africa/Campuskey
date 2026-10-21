@@ -19,7 +19,8 @@ const API = axios.create({
 API.interceptors.request.use(
   async (config) => {
     // ---- JWT ----
-    const token = localStorage.getItem("JWT_TOKEN");
+    const isPublicAuthRequest = config.url?.startsWith("/auth/public/");
+    const token = isPublicAuthRequest ? null : localStorage.getItem("JWT_TOKEN");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
